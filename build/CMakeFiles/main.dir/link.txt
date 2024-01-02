@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++17 -g -Wall -Wextra -Werror -fopenmp -rdynamic CMakeFiles/main.dir/main.cc.o CMakeFiles/main.dir/Model/model.cc.o CMakeFiles/main.dir/Model/parser.cc.o -o main  libmatrix.a 

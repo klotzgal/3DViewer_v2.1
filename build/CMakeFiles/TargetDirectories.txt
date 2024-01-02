@@ -1,0 +1,4 @@
+/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/build/CMakeFiles/matrix.dir
+/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/build/CMakeFiles/main.dir
+/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/build/CMakeFiles/edit_cache.dir
+/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/build/CMakeFiles/rebuild_cache.dir

@@ -1,3 +1,4 @@
+.PHONY: all install uninstall dvi dist test gcov_report valgrind_check style_check format_style fonts clean fclean
 TARGET = 3dViewer
 
 CC = gcc
@@ -13,7 +14,7 @@ else
 	LDLIBS = -lcheck -lm
 endif
 
-all: clean install
+all: clean #install
 
 %.o: %.c
 	mkdir -p obj
@@ -89,8 +90,11 @@ valgrind_check: test
 
 clean:
 	@rm -rf tests/logs/*.log tests/$(TEST_MODUlES) *.dSYM **/*.dSYM report test_coverage.info
+	@cmake --build ../build/ --target clean
 
 fclean: clean
 	@rm -rf ../build ../dist ~/Desktop/$(TARGET).app unit_tests_vg.log
 
-.PHONY: all install uninstall dvi dist test gcov_report valgrind_check style_check format_style fonts clean fclean
+cmake:
+	cd .. && cd build && cmake ../src && make && ./main
+

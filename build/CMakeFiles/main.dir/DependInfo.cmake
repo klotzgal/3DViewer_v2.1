@@ -1,0 +1,22 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Model/model.cc" "CMakeFiles/main.dir/Model/model.cc.o" "gcc" "CMakeFiles/main.dir/Model/model.cc.o.d"
+  "/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Model/parser.cc" "CMakeFiles/main.dir/Model/parser.cc.o" "gcc" "CMakeFiles/main.dir/Model/parser.cc.o.d"
+  "/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/main.cc" "CMakeFiles/main.dir/main.cc.o" "gcc" "CMakeFiles/main.dir/main.cc.o.d"
+  )
+
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/build/CMakeFiles/matrix.dir/DependInfo.cmake"
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")
