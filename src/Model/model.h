@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "../Matrix/s21_matrix_oop.h"
+#include "../Libs/s21_matrix_oop.h"
 #include "parser.h"
 
 class Model {

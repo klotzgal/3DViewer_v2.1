@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "../Libs/omp.h"
+
 class Parser {
  public:
   Parser();

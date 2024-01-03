@@ -93,8 +93,11 @@ clean:
 	@cmake --build ../build/ --target clean
 
 fclean: clean
-	@rm -rf ../build ../dist ~/Desktop/$(TARGET).app unit_tests_vg.log
+	@rm -rf ../build ../dist ~/Desktop/$(TARGET).app unit_tests_vg.log 
 
 cmake:
-	cd .. && cd build && cmake ../src && make && ./main
+ifeq ("", "$(wildcard ../build)")
+	@mkdir ../build
+endif
+	cd .. && cd build && cmake ../src && make && ./bin/main
 
