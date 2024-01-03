@@ -1,0 +1,1192 @@
+==29063== Memcheck, a memory error detector
+==29063== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==29063== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
+==29063== Command: ./../build/bin/main
+==29063== Parent PID: 29061
+==29063== 
+--29063-- 
+--29063-- Valgrind options:
+--29063--    --trace-children=yes
+--29063--    --track-fds=yes
+--29063--    --track-origins=yes
+--29063--    --leak-check=full
+--29063--    --show-leak-kinds=all
+--29063--    --verbose
+--29063--    --log-file=valgrind.txt
+--29063-- Contents of /proc/version:
+--29063--   Linux version 6.2.0-39-generic (buildd@lcy02-amd64-045) (x86_64-linux-gnu-gcc-11 (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #40~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov 16 10:53:04 UTC 2
+--29063-- 
+--29063-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--29063-- Page sizes: currently 4096, max supported 4096
+--29063-- Valgrind library directory: /usr/libexec/valgrind
+--29063-- Reading syms from /home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/build/bin/main
+--29063-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+--29063--   Considering /usr/lib/debug/.build-id/cc/cdd41e22e25f77a8cda3d045c57ffdb01a9793.debug ..
+--29063--   .. build-id is valid
+--29063-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--29063--    object doesn't have a symbol table
+--29063--    object doesn't have a dynamic symbol table
+--29063-- Scheduler: using generic scheduler lock implementation.
+--29063-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==29063== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-29063-by-klotzgal-on-???
+==29063== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-29063-by-klotzgal-on-???
+==29063== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-29063-by-klotzgal-on-???
+==29063== 
+==29063== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==29063== don't want to do, unless you know exactly what you're doing,
+==29063== or are doing some strange experiment):
+==29063==   /usr/bin/vgdb --pid=29063 ...command...
+==29063== 
+==29063== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==29063==   /path/to/gdb ./../build/bin/main
+==29063== and then give GDB the following command
+==29063==   target remote | /usr/bin/vgdb --pid=29063
+==29063== --pid is optional if only one valgrind process is running
+==29063== 
+--29063-- REDIR: 0x402aa40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bcec2 (???)
+--29063-- REDIR: 0x402a810 (ld-linux-x86-64.so.2:index) redirected to 0x580bcedc (???)
+--29063-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--29063--    object doesn't have a symbol table
+--29063-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+--29063--    object doesn't have a symbol table
+==29063== WARNING: new redirection conflicts with existing -- ignoring it
+--29063--     old: 0x0402aa40 (strlen              ) R-> (0000.0) 0x580bcec2 ???
+--29063--     new: 0x0402aa40 (strlen              ) R-> (2007.0) 0x0484ee30 strlen
+--29063-- REDIR: 0x4027220 (ld-linux-x86-64.so.2:strcmp) redirected to 0x484fcd0 (strcmp)
+--29063-- REDIR: 0x402afa0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4853840 (mempcpy)
+--29063-- Reading syms from /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30
+--29063--    object doesn't have a symbol table
+--29063-- Reading syms from /usr/lib/x86_64-linux-gnu/libm.so.6
+--29063--   Considering /usr/lib/debug/.build-id/9f/3c01b284b7fd2427aa8ae047f2720e12a4d396.debug ..
+--29063--   .. build-id is valid
+--29063-- Reading syms from /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+--29063--    object doesn't have a symbol table
+--29063-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
+--29063--   Considering /usr/lib/debug/.build-id/20/3de0ae33b53fee1578b117cb4123e85d0534f0.debug ..
+--29063--   .. build-id is valid
+==29063== WARNING: new redirection conflicts with existing -- ignoring it
+--29063--     old: 0x04c4dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--29063--     new: 0x04c4dc60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==29063== WARNING: new redirection conflicts with existing -- ignoring it
+--29063--     old: 0x04c4dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--29063--     new: 0x04c4dc60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+==29063== WARNING: new redirection conflicts with existing -- ignoring it
+--29063--     old: 0x04c4dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--29063--     new: 0x04c4dc60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==29063== WARNING: new redirection conflicts with existing -- ignoring it
+--29063--     old: 0x04c4dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--29063--     new: 0x04c4dc60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+--29063-- REDIR: 0x4c50720 (libc.so.6:strnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c509e0 (libc.so.6:strpbrk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c502e0 (libc.so.6:strcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c6ecd0 (libc.so.6:wcsnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c516d0 (libc.so.6:memset) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c6d540 (libc.so.6:wcslen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c51c10 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c6d370 (libc.so.6:wcschr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c50260 (libc.so.6:index) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c50960 (libc.so.6:rindex) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c515a0 (libc.so.6:memmove) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+==29063== Preferring higher priority redirection:
+--29063--     old: 0x04d485c0 (__memcpy_avx_unalign) R-> (2018.0) 0x04850f90 __memcpy_avx_unaligned_erms
+--29063--     new: 0x04d485c0 (__memcpy_avx_unalign) R-> (2018.1) 0x04852880 memmove
+--29063-- REDIR: 0x4c6d3f0 (libc.so.6:wcscmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c519e0 (libc.so.6:stpncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c6d9b0 (libc.so.6:wmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c50830 (libc.so.6:strncmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c51a70 (libc.so.6:strcasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c50420 (libc.so.6:strcspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c6d470 (libc.so.6:wcscpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c501d0 (libc.so.6:strcat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c51b60 (libc.so.6:strncasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c51480 (libc.so.6:bcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c59570 (libc.so.6:memrchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c53010 (libc.so.6:strchrnul) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c50390 (libc.so.6:strcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c51b10 (libc.so.6:strcasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c506a0 (libc.so.6:strlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c508d0 (libc.so.6:strncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c51950 (libc.so.6:stpcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c513f0 (libc.so.6:memchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c50b00 (libc.so.6:strspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c517d0 (libc.so.6:mempcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c51ac0 (libc.so.6:strncasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4c52f80 (libc.so.6:rawmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--29063-- REDIR: 0x4d45410 (libc.so.6:__strrchr_avx2) redirected to 0x484e810 (rindex)
+--29063-- REDIR: 0x4c4d0a0 (libc.so.6:malloc) redirected to 0x4848820 (malloc)
+--29063-- REDIR: 0x4d455e0 (libc.so.6:__strlen_avx2) redirected to 0x484ed10 (strlen)
+--29063-- REDIR: 0x4d41880 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x4852010 (bcmp)
+--29063-- REDIR: 0x4d40740 (libc.so.6:__strcmp_avx2) redirected to 0x484fbd0 (strcmp)
+--29063-- REDIR: 0x4d40b80 (libc.so.6:__strncmp_avx2) redirected to 0x484f3e0 (strncmp)
+--29063-- REDIR: 0x4c4d740 (libc.so.6:realloc) redirected to 0x484dc50 (realloc)
+--29063-- REDIR: 0x4d44f80 (libc.so.6:__strchr_avx2) redirected to 0x484e9f0 (index)
+--29063-- REDIR: 0x4d410c0 (libc.so.6:__memchr_avx2) redirected to 0x484fd50 (memchr)
+--29063-- REDIR: 0x4d48580 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4853440 (mempcpy)
+--29063-- REDIR: 0x4c50fc0 (libc.so.6:__GI_strstr) redirected to 0x4853ae0 (__strstr_sse2)
+--29063-- REDIR: 0x4d485c0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4852880 (memmove)
+--29063-- REDIR: 0x4c4d3e0 (libc.so.6:free) redirected to 0x484b210 (free)
+--29063-- REDIR: 0x4d41f44 (libc.so.6:__strcasecmp_l_avx) redirected to 0x484f7e0 (strcasecmp_l)
+--29063-- REDIR: 0x4d477a0 (libc.so.6:__stpcpy_avx2) redirected to 0x4852130 (stpcpy)
+--29063-- REDIR: 0x4d48d80 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x4852770 (memset)
+--29063-- REDIR: 0x4d45760 (libc.so.6:__strnlen_avx2) redirected to 0x484ecb0 (strnlen)
+--29063-- REDIR: 0x4923970 (libstdc++.so.6:operator new(unsigned long)) redirected to 0x4848fa0 (operator new(unsigned long))
+--29063-- REDIR: 0x49239d0 (libstdc++.so.6:operator new[](unsigned long)) redirected to 0x484a280 (operator new[](unsigned long))
+--29063-- REDIR: 0x4d45200 (libc.so.6:__strchrnul_avx2) redirected to 0x4853330 (strchrnul)
+--29063-- REDIR: 0x4921c10 (libstdc++.so.6:operator delete(void*)) redirected to 0x484b840 (operator delete(void*))
+--29063-- REDIR: 0x4921c40 (libstdc++.so.6:operator delete[](void*)) redirected to 0x484ca20 (operator delete[](void*))
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x111D56: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:112)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x11231F: std::vector<int, std::allocator<int> >::_M_check_len(unsigned long, char const*) const (stl_vector.h:1758)
+==29063==    by 0x111F83: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:436)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x111AB8: unsigned long const& std::max<unsigned long>(unsigned long const&, unsigned long const&) (stl_algobase.h:259)
+==29063==    by 0x11235E: std::vector<int, std::allocator<int> >::_M_check_len(unsigned long, char const*) const (stl_vector.h:1761)
+==29063==    by 0x111F83: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:436)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x112379: std::vector<int, std::allocator<int> >::_M_check_len(unsigned long, char const*) const (stl_vector.h:1762)
+==29063==    by 0x111F83: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:436)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x11238B: std::vector<int, std::allocator<int> >::_M_check_len(unsigned long, char const*) const (stl_vector.h:1762)
+==29063==    by 0x111F83: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:436)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x112463: std::_Vector_base<int, std::allocator<int> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111FD8: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:440)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x1127C6: __gnu_cxx::new_allocator<int>::allocate(unsigned long, void const*) (new_allocator.h:111)
+==29063==    by 0x112668: std::allocator_traits<std::allocator<int> >::allocate(std::allocator<int>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x112477: std::_Vector_base<int, std::allocator<int> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111FD8: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:440)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x4848FC0: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1127F1: __gnu_cxx::new_allocator<int>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x112668: std::allocator_traits<std::allocator<int> >::allocate(std::allocator<int>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x112477: std::_Vector_base<int, std::allocator<int> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111FD8: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:440)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Use of uninitialised value of size 8
+==29063==    at 0x11229E: void __gnu_cxx::new_allocator<int>::construct<int, int>(int*, int&&) (new_allocator.h:162)
+==29063==    by 0x111EEF: void std::allocator_traits<std::allocator<int> >::construct<int, int>(std::allocator<int>&, int*, int&&) (alloc_traits.h:516)
+==29063==    by 0x112015: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:449)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x112936: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1010)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x110E99: std::_Vector_base<int, std::allocator<int> >::_M_deallocate(int*, unsigned long) (stl_vector.h:353)
+==29063==    by 0x1120AF: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:500)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x485288A: memmove (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x112956: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1011)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x4852A37: memmove (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x112956: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1011)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x485290B: memmove (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x112956: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1011)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x4852973: memmove (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x112956: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1011)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x48529B3: memmove (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x112956: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1011)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x48529EF: memmove (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x112956: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1011)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+--29063-- REDIR: 0x4921c20 (libstdc++.so.6:operator delete(void*, unsigned long)) redirected to 0x484bb00 (operator delete(void*, unsigned long))
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x485299B: memmove (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x112956: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1011)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x49A3A4E: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x49B2119: std::ostream& std::ostream::_M_insert<long>(long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x110931: Parser::data::Print() (parser.h:46)
+==29063==    by 0x110488: Model::Parse() (model.cc:15)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Use of uninitialised value of size 8
+==29063==    at 0x49A392B: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x49A3A78: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x49B2119: std::ostream& std::ostream::_M_insert<long>(long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x110931: Parser::data::Print() (parser.h:46)
+==29063==    by 0x110488: Model::Parse() (model.cc:15)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x49A393D: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x49A3A78: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x49B2119: std::ostream& std::ostream::_M_insert<long>(long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x110931: Parser::data::Print() (parser.h:46)
+==29063==    by 0x110488: Model::Parse() (model.cc:15)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x49A3AAE: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x49B2119: std::ostream& std::ostream::_M_insert<long>(long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x110931: Parser::data::Print() (parser.h:46)
+==29063==    by 0x110488: Model::Parse() (model.cc:15)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x1109C8: Parser::data::Print() (parser.h:47)
+==29063==    by 0x110488: Model::Parse() (model.cc:15)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== FILE DESCRIPTORS: 8 open (3 std) at exit.
+==29063== Open file descriptor 103: /snap/code/148/usr/share/code/v8_context_snapshot.bin
+==29063==    <inherited from parent>
+==29063== 
+==29063== Open AF_UNIX socket 38: <unknown>
+==29063==    <inherited from parent>
+==29063== 
+==29063== Open file descriptor 37: /snap/code/148/usr/share/code/resources/app/node_modules.asar
+==29063==    <inherited from parent>
+==29063== 
+==29063== Open file descriptor 36: /home/klotzgal/.config/Code/logs/20240103T161509/ptyhost.log
+==29063==    <inherited from parent>
+==29063== 
+==29063== Open file descriptor 3: /home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/valgrind.txt
+==29063==    <inherited from parent>
+==29063== 
+==29063== 
+==29063== HEAP SUMMARY:
+==29063==     in use at exit: 160 bytes in 10 blocks
+==29063==   total heap usage: 1,092 allocs, 1,082 frees, 153,410 bytes allocated
+==29063== 
+==29063== Searching for pointers to 10 not-freed blocks
+==29063== Checked 150,320 bytes
+==29063== 
+==29063== 160 bytes in 10 blocks are definitely lost in loss record 1 of 1
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1127F1: __gnu_cxx::new_allocator<int>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x112668: std::allocator_traits<std::allocator<int> >::allocate(std::allocator<int>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x112477: std::_Vector_base<int, std::allocator<int> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111FD8: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:440)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== LEAK SUMMARY:
+==29063==    definitely lost: 160 bytes in 10 blocks
+==29063==    indirectly lost: 0 bytes in 0 blocks
+==29063==      possibly lost: 0 bytes in 0 blocks
+==29063==    still reachable: 0 bytes in 0 blocks
+==29063==         suppressed: 0 bytes in 0 blocks
+==29063== 
+==29063== ERROR SUMMARY: 541 errors from 24 contexts (suppressed: 0 from 0)
+==29063== 
+==29063== 10 errors in context 1 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x49A3AAE: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x49B2119: std::ostream& std::ostream::_M_insert<long>(long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x110931: Parser::data::Print() (parser.h:46)
+==29063==    by 0x110488: Model::Parse() (model.cc:15)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 10 errors in context 2 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x49A393D: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x49A3A78: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x49B2119: std::ostream& std::ostream::_M_insert<long>(long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x110931: Parser::data::Print() (parser.h:46)
+==29063==    by 0x110488: Model::Parse() (model.cc:15)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 10 errors in context 3 of 24:
+==29063== Use of uninitialised value of size 8
+==29063==    at 0x49A392B: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x49A3A78: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x49B2119: std::ostream& std::ostream::_M_insert<long>(long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x110931: Parser::data::Print() (parser.h:46)
+==29063==    by 0x110488: Model::Parse() (model.cc:15)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 10 errors in context 4 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x49A3A4E: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x49B2119: std::ostream& std::ostream::_M_insert<long>(long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==29063==    by 0x110931: Parser::data::Print() (parser.h:46)
+==29063==    by 0x110488: Model::Parse() (model.cc:15)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 10 errors in context 5 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x485299B: memmove (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x112956: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1011)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 10 errors in context 6 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x48529EF: memmove (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x112956: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1011)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 10 errors in context 7 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x110E99: std::_Vector_base<int, std::allocator<int> >::_M_deallocate(int*, unsigned long) (stl_vector.h:353)
+==29063==    by 0x1120AF: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:500)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 20 errors in context 8 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x48529B3: memmove (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x112956: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1011)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 20 errors in context 9 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x4852973: memmove (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x112956: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1011)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 20 errors in context 10 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x485290B: memmove (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x112956: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1011)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 20 errors in context 11 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x4852A37: memmove (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x112956: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1011)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 20 errors in context 12 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x485288A: memmove (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x112956: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1011)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 30 errors in context 13 of 24:
+==29063== Use of uninitialised value of size 8
+==29063==    at 0x11229E: void __gnu_cxx::new_allocator<int>::construct<int, int>(int*, int&&) (new_allocator.h:162)
+==29063==    by 0x111EEF: void std::allocator_traits<std::allocator<int> >::construct<int, int>(std::allocator<int>&, int*, int&&) (alloc_traits.h:516)
+==29063==    by 0x112015: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:449)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 30 errors in context 14 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x4848FC0: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1127F1: __gnu_cxx::new_allocator<int>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x112668: std::allocator_traits<std::allocator<int> >::allocate(std::allocator<int>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x112477: std::_Vector_base<int, std::allocator<int> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111FD8: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:440)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 30 errors in context 15 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x1127C6: __gnu_cxx::new_allocator<int>::allocate(unsigned long, void const*) (new_allocator.h:111)
+==29063==    by 0x112668: std::allocator_traits<std::allocator<int> >::allocate(std::allocator<int>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x112477: std::_Vector_base<int, std::allocator<int> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111FD8: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:440)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 30 errors in context 16 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x112463: std::_Vector_base<int, std::allocator<int> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111FD8: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:440)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 30 errors in context 17 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x11238B: std::vector<int, std::allocator<int> >::_M_check_len(unsigned long, char const*) const (stl_vector.h:1762)
+==29063==    by 0x111F83: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:436)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 30 errors in context 18 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x112379: std::vector<int, std::allocator<int> >::_M_check_len(unsigned long, char const*) const (stl_vector.h:1762)
+==29063==    by 0x111F83: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:436)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 30 errors in context 19 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x111AB8: unsigned long const& std::max<unsigned long>(unsigned long const&, unsigned long const&) (stl_algobase.h:259)
+==29063==    by 0x11235E: std::vector<int, std::allocator<int> >::_M_check_len(unsigned long, char const*) const (stl_vector.h:1761)
+==29063==    by 0x111F83: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:436)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 30 errors in context 20 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x11231F: std::vector<int, std::allocator<int> >::_M_check_len(unsigned long, char const*) const (stl_vector.h:1758)
+==29063==    by 0x111F83: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:436)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 30 errors in context 21 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x111D56: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:112)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 40 errors in context 22 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x1109C8: Parser::data::Print() (parser.h:47)
+==29063==    by 0x110488: Model::Parse() (model.cc:15)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== 
+==29063== 60 errors in context 23 of 24:
+==29063== Conditional jump or move depends on uninitialised value(s)
+==29063==    at 0x112936: std::enable_if<std::__is_bitwise_relocatable<int, void>::value, int*>::type std::__relocate_a_1<int, int>(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1010)
+==29063==    by 0x112852: int* std::__relocate_a<int*, int*, std::allocator<int> >(int*, int*, int*, std::allocator<int>&) (stl_uninitialized.h:1046)
+==29063==    by 0x11269E: std::vector<int, std::allocator<int> >::_S_do_relocate(int*, int*, int*, std::allocator<int>&, std::integral_constant<bool, true>) (stl_vector.h:456)
+==29063==    by 0x1124B4: std::vector<int, std::allocator<int> >::_S_relocate(int*, int*, int*, std::allocator<int>&) (stl_vector.h:469)
+==29063==    by 0x11204E: void std::vector<int, std::allocator<int> >::_M_realloc_insert<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) (vector.tcc:461)
+==29063==    by 0x111DC3: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) (vector.tcc:121)
+==29063==    by 0x111C5B: std::vector<int, std::allocator<int> >::push_back(int&&) (stl_vector.h:1204)
+==29063==    by 0x111657: Parser::ParseVAndF(std::basic_ifstream<char, std::char_traits<char> >&, Parser::data*) (parser.cc:53)
+==29063==    by 0x111129: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:17)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063==  Uninitialised value was created by a heap allocation
+==29063==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29063==    by 0x1121FB: __gnu_cxx::new_allocator<Parser::data::Facets>::allocate(unsigned long, void const*) (new_allocator.h:127)
+==29063==    by 0x111E7D: std::allocator_traits<std::allocator<Parser::data::Facets> >::allocate(std::allocator<Parser::data::Facets>&, unsigned long) (alloc_traits.h:464)
+==29063==    by 0x111CDB: std::_Vector_base<Parser::data::Facets, std::allocator<Parser::data::Facets> >::_M_allocate(unsigned long) (stl_vector.h:346)
+==29063==    by 0x111B83: std::vector<Parser::data::Facets, std::allocator<Parser::data::Facets> >::reserve(unsigned long) (vector.tcc:78)
+==29063==    by 0x111363: Parser::DataMemoryAllocation(Parser::data*) (parser.cc:34)
+==29063==    by 0x1110BB: Parser::Parse(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Parser::data*) (parser.cc:14)
+==29063==    by 0x11046D: Model::Parse() (model.cc:14)
+==29063==    by 0x10FA96: main (main.cc:12)
+==29063== 
+==29063== ERROR SUMMARY: 541 errors from 24 contexts (suppressed: 0 from 0)

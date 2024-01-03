@@ -23,9 +23,9 @@ SET (CMAKE_ARCHIVE_OUTPUT_DIRECTORY
         "Single Directory for all"
     )
 
-if(CMAKE_HOST_SYSTEM STREQUAL "Linux")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
-endif()
+# if(CMAKE_HOST_SYSTEM STREQUAL "Linux")
+#   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
+# endif()
 
 add_library(matrix STATIC Libs/s21_matrix_oop.cc)
 add_executable(main main.cc Model/model.cc Model/parser.cc)
