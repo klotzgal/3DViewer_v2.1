@@ -16,6 +16,7 @@
 // #include "../../modules/affine_transformations.h"
 // #include "../../modules/model_loading.h"
 // }
+#include "../Model/model.h"
 
 class GlWidget : public QOpenGLWidget, protected QOpenGLFunctions {
  public:
@@ -41,7 +42,7 @@ class GlWidget : public QOpenGLWidget, protected QOpenGLFunctions {
 
   // 3D OBJ DATA
   char *filename;
-  obj_data data = {0, NULL, 0, NULL};
+  // obj_data data = {0, NULL, 0, NULL};
 
   // OPENGL
   void initializeGL() override;
@@ -51,19 +52,20 @@ class GlWidget : public QOpenGLWidget, protected QOpenGLFunctions {
 
   GLfloat normalize_coef;
 
-  // MouseMoveControl
-  void mousePressEvent(QMouseEvent *event) override;
-  void mouseMoveEvent(QMouseEvent *event) override;
-  void wheelEvent(QWheelEvent *event) override;
+  // // MouseMoveControl
+  // void mousePressEvent(QMouseEvent *event) override;
+  // void mouseMoveEvent(QMouseEvent *event) override;
+  // void wheelEvent(QWheelEvent *event) override;
 
  private:
   ~GlWidget() override;
   QPoint cur_pos;
   QPoint new_pos;
   void set_normalize_coef();
-  void render_ui_stats();
-  void build_lines();
+  // void render_ui_stats(); ???
+  // void build_lines();
   void build_points();
+  Model model;
 
  signals:
 };

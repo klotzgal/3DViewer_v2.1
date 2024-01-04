@@ -1,7 +1,7 @@
 #include "s21_matrix_oop.h"
 
 // Конструкторы и деструктор
-S21Matrix::S21Matrix() : rows_(1), cols_(1), matrix_(new double[1]()) {}
+S21Matrix::S21Matrix() : matrix_(new double[1]()), rows_(1), cols_(1) {}
 
 S21Matrix::S21Matrix(int rows, int cols) : rows_(rows), cols_(cols) {
   if (rows < 1 || cols < 1) {
@@ -38,14 +38,14 @@ S21Matrix::S21Matrix(std::initializer_list<double> init) {
 }
 
 S21Matrix::S21Matrix(const S21Matrix& other)
-    : rows_(other.rows_),
-      cols_(other.cols_),
-      matrix_(new double[rows_ * cols_]()) {
+    : matrix_(new double[other.rows_ * other.cols_]()),
+      rows_(other.rows_),
+      cols_(other.cols_) {
   std::copy(other.matrix_, other.matrix_ + rows_ * cols_, matrix_);
 }
 
 S21Matrix::S21Matrix(S21Matrix&& other) noexcept
-    : rows_(other.rows_), cols_(other.cols_), matrix_(other.matrix_) {
+    : matrix_(other.matrix_), rows_(other.rows_), cols_(other.cols_) {
   other.rows_ = other.cols_ = 0;
   other.matrix_ = nullptr;
 }

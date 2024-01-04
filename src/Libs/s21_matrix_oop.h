@@ -52,9 +52,10 @@ class S21Matrix {
   S21Matrix& operator*=(const S21Matrix& other);
   S21Matrix& operator*=(const double num);
 
+  double* matrix_;
+
  private:
   int rows_, cols_;
-  double* matrix_;
 
   // Вспомогательные приватные методы
   void Clear();

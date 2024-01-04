@@ -13,10 +13,10 @@ class Model {
   void setFilename(const std::string &filename) { filename_ = filename; }
   std::string getFilename() const noexcept { return filename_; }
   void Parse();
+  data *data_;
 
  private:
-  data *data_;
-  std::string filename_;
+    std::string filename_;
   Parser parser_;
 };
 
