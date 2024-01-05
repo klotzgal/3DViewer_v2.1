@@ -99,7 +99,7 @@ cmake:
 ifeq ("", "$(wildcard ../build)")
 	@mkdir ../build
 endif
-	cd .. && cd build && cmake ../src && make && ./bin/main
+	cd .. && cd build && cmake ../src/tmp && make && ./bin/main
 
 valgrind:
 	CK_FORK=no valgrind --trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --verbose --log-file=valgrind.txt ./../build/bin/main

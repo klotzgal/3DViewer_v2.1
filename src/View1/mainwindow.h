@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include "glwidget.h"
-//#include <qgifimage.h>
+// #include <qgifimage.h>
 
 #include <QColorDialog>
 #include <QDateTime>
@@ -69,7 +69,7 @@ class MainWindow : public QMainWindow {
 
  private:
   void set_mainwindow_attributes();
-//  void set_fonts();
+  //  void set_fonts();
   void bind_slots();
   void restore_default_values();
 
@@ -80,9 +80,9 @@ class MainWindow : public QMainWindow {
   // void mouseMoveEvent(QMouseEvent *event);
 
   QSettings *settings;
-//  QString gif_name;
-//  QGifImage *gif_frame;
-//  int frames_counter = 0;
+  //  QString gif_name;
+  //  QGifImage *gif_frame;
+  //  int frames_counter = 0;
   QTimer *timer;
 };
 #endif  // MAINWINDOW_H

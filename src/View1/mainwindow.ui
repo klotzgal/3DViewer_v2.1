@@ -1523,7 +1523,7 @@ background-color: rgb(0, 0, 0);
   <customwidget>
    <class>GlWidget</class>
    <extends>QWidget</extends>
-   <header>glwidget.h</header>
+   <header>View1/glwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

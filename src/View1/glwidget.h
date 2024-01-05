@@ -1,9 +1,9 @@
-#ifndef GLWIDGET_H
+﻿#ifndef GLWIDGET_H
 #define GLWIDGET_H
 
 #define GL_SILENCE_DEPRECATION
-#include <GLUT/glut.h>
-#include <OpenGL/gl.h>
+#include <GL/gl.h>
+#include <GL/glut.h>
 
 #include <QMessageBox>
 #include <QOpenGLWidget>
@@ -65,7 +65,7 @@ class GlWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   // void render_ui_stats(); ???
   // void build_lines();
   void build_points();
-  Model model;
+  Model *model;
 
  signals:
 };

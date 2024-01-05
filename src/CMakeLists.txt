@@ -49,9 +49,9 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS OpenGLWidgets)
 set(PROJECT_SOURCES
         main.cpp
         View1/mainwindow.cc
-#        View1/mainwindow.h
+       View1/mainwindow.h
         View1/glwidget.cc
-#        View1/glwidget.h
+        View1/glwidget.h
         View1/mainwindow.ui
         Model/model.cc
         Model/parser.cc
