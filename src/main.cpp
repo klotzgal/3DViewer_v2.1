@@ -1,6 +1,6 @@
 ﻿#include <QApplication>
 
-#include "View1/mainwindow.h"
+#include "View/mainwindow.h"
 
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);

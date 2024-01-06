@@ -4,10 +4,7 @@ Model *Model::instance_ = nullptr;
 
 GlWidget::GlWidget(QWidget *parent) : QOpenGLWidget{parent} {
   model = Model::getInstance();
-  model->setFilename(
-      "/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/cube.obj");
-  //  /Users/klotzgal/Desktop/kl/3DViewer_v2.0/src/Obj/cube.obj
-  //  /home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/cube.obj
+  parse_obj();
 }
 
 GlWidget::~GlWidget() {}
@@ -21,23 +18,15 @@ void GlWidget::paintGL() {
   glClearColor(bg_red, bg_green, bg_blue, 1);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  // glVertexPointer(
-  //     3, GL_DOUBLE, 0,
-  //     model->getVertices().matrix_);  // number of coordinates per vertex,
-  //     type
-  // of data in array, distance between
-  // vertices in array, pointer to array
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   if (this->projection_type == 0) {
-    glFrustum(-1 * normalize_coef, 1 * normalize_coef, -1 * normalize_coef,
-              1 * normalize_coef, normalize_coef, 1000 * normalize_coef);
-    glTranslatef(0, 0, -2 * normalize_coef);
+    glFrustum(-1, 1, -1, 1, 1, 1000);
+    glTranslatef(0, 0, -2);
     glRotatef(30, 1, 0, 0);
   } else {
-    glOrtho(-1 * normalize_coef, 1 * normalize_coef, -1 * normalize_coef,
-            1 * normalize_coef, -1 * normalize_coef, 1000 * normalize_coef);
-    glTranslatef(0, -normalize_coef / 2, 0);
+    glOrtho(-1, 1, -1, 1, -1, 1000);
+    glTranslatef(0, -1 / 2, 0);
   }
   glEnableClientState(GL_VERTEX_ARRAY);  // enable open gl state
                                          // if (this->v_display_method != 0) {
@@ -48,35 +37,31 @@ void GlWidget::paintGL() {
 }
 
 void GlWidget::parse_obj() {
-  // data_destructor(&this->data);
-  // data = {0, NULL, 0, NULL};
-  if (this->filename[0] != '\0') {
-    model->setFilename(this->filename);
-    try {
-      model->Parse();
-    } catch (const std::exception &e) {
-      std::cerr << e.what() << "parse Error" << '\n';
-    }
-    set_normalize_coef();
-    update();
-  } else {
+  model->setFilename(
+      "/Users/klotzgal/Desktop/kl/3DViewer_v2.0/src/Obj/skull.obj");
+  try {
+    model->Parse();
+  } catch (const std::exception &e) {
+    std::cerr << e.what() << "parse Error" << '\n';
     QMessageBox warning = QMessageBox();
     warning.setWindowTitle("Error");
     warning.setText("Please choose .obj file");
     warning.setIcon(QMessageBox::Warning);
     warning.exec();
   }
+  // set_normalize_coef();
+  update();
 }
 
-void GlWidget::set_normalize_coef() {
-  normalize_coef = -10;  // scarecrow
+// void GlWidget::set_normalize_coef() {
+//   normalize_coef = -10;  // scarecrow
 
-  for (size_t i = 0; i < model->getVerticesCount() * 3; i++) {
-    if (abs(model->getVertices().matrix_[i]) > normalize_coef) {
-      normalize_coef = abs(model->getVertices().matrix_[i]);
-    }
-  }
-}
+//   for (size_t i = 0; i < model->getVerticesCount() * 3; i++) {
+//     if (abs(model->getVertices().matrix_[i]) > normalize_coef) {
+//       normalize_coef = abs(model->getVertices().matrix_[i]);
+//     }
+//   }
+// }
 
 // void GlWidget::build_lines() {
 //   if (this->edges_type == 1) {

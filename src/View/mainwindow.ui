@@ -31,7 +31,7 @@
   <customwidget>
    <class>GlWidget</class>
    <extends>QWidget</extends>
-   <header>View1/glwidget.h</header>
+   <header>View/glwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
