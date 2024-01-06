@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+﻿cmake_minimum_required(VERSION 3.5)
 
 project(untitled VERSION 0.1 LANGUAGES CXX)
 
@@ -49,7 +49,7 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS OpenGLWidgets)
 set(PROJECT_SOURCES
         main.cpp
         View1/mainwindow.cc
-       View1/mainwindow.h
+        View1/mainwindow.h
         View1/glwidget.cc
         View1/glwidget.h
         View1/mainwindow.ui

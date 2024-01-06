@@ -74,7 +74,7 @@ void Parser::ParseVAndF(std::ifstream &file, data *data) {
         } else if (vertex > (int)data->vertices_count) {
           vertex = vertex - data->vertices_count;
         }
-        (*data->facets)[f_ind].vertexes.push_back(vertex);
+        (*data->facets)[f_ind].vertexes.push_back(vertex - 1);
         ++((*data->facets)[f_ind].numbers_of_vertexes_in_facets);
       }
       ++f_ind;
