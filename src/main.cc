@@ -1,4 +1,4 @@
-#include "Model/model.h"
+#include "Controller/controller.h"
 
 Model* Model::instance_ = nullptr;
 
@@ -13,11 +13,12 @@ int main() {
   try {
     model->Parse();
     model->Parse();
-    // RotateX rx;
+    //
     // model->ChangeModel(&rx, 90);
   } catch (const std::exception& e) {
     std::cerr << e.what() << " Error" << '\n';
   }
+  Controller c(model);
 
   return 0;
 }

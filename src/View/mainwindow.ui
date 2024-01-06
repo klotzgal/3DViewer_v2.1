@@ -14,14 +14,39 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="GlWidget" name="widget" native="true">
+   <widget class="GlWidget" name="GLWidget" native="true">
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>80</y>
-      <width>561</width>
-      <height>391</height>
+      <y>70</y>
+      <width>600</width>
+      <height>600</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>600</width>
+      <height>600</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1200</width>
+      <height>1200</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="load_model">
+    <property name="geometry">
+     <rect>
+      <x>780</x>
+      <y>160</y>
+      <width>51</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Go</string>
     </property>
    </widget>
   </widget>
@@ -31,7 +56,7 @@
   <customwidget>
    <class>GlWidget</class>
    <extends>QWidget</extends>
-   <header>View/glwidget.h</header>
+   <header>View1/glwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

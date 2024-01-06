@@ -1,17 +1,18 @@
 ﻿#include "glwidget.h"
 
-Model *Model::instance_ = nullptr;
-
-GlWidget::GlWidget(QWidget *parent) : QOpenGLWidget{parent} {
-  model = Model::getInstance();
-  parse_obj();
-}
+GlWidget::GlWidget(QWidget *parent, Controller *controller)
+    : QOpenGLWidget{parent}, controller_(controller) {}
 
 GlWidget::~GlWidget() {}
 
 void GlWidget::initializeGL() {
   initializeOpenGLFunctions();
   glEnable(GL_DEPTH_TEST);  // depth buffer for z coordinate
+}
+
+void GlWidget::resizeGL(int w, int h) {
+  w = h;
+  glViewport(0, 0, w, h);
 }
 
 void GlWidget::paintGL() {
@@ -37,10 +38,10 @@ void GlWidget::paintGL() {
 }
 
 void GlWidget::parse_obj() {
-  model->setFilename(
+  controller_->setFilename(
       "/Users/klotzgal/Desktop/kl/3DViewer_v2.0/src/Obj/skull.obj");
   try {
-    model->Parse();
+    controller_->Parse();
   } catch (const std::exception &e) {
     std::cerr << e.what() << "parse Error" << '\n';
     QMessageBox warning = QMessageBox();
@@ -49,19 +50,8 @@ void GlWidget::parse_obj() {
     warning.setIcon(QMessageBox::Warning);
     warning.exec();
   }
-  // set_normalize_coef();
   update();
 }
-
-// void GlWidget::set_normalize_coef() {
-//   normalize_coef = -10;  // scarecrow
-
-//   for (size_t i = 0; i < model->getVerticesCount() * 3; i++) {
-//     if (abs(model->getVertices().matrix_[i]) > normalize_coef) {
-//       normalize_coef = abs(model->getVertices().matrix_[i]);
-//     }
-//   }
-// }
 
 // void GlWidget::build_lines() {
 //   if (this->edges_type == 1) {
@@ -85,11 +75,11 @@ void GlWidget::build_points() {
   }
   glPointSize(this->vertices_size);
   glColor3f(this->v_red, this->v_green, this->v_blue);
-  // glDrawArrays(GL_POINTS, 0, model->getVerticesCount());
-  for (size_t i = 0; i < model->getVerticesCount(); i++) {
-    GLfloat x = model->getVertices()(i, 0);
-    GLfloat y = model->getVertices()(i, 1);
-    GLfloat z = model->getVertices()(i, 2);
+  // glDrawArrays(GL_POINTS, 0, controller_->getVerticesCount());
+  for (size_t i = 0; i < controller_->getVerticesCount(); i++) {
+    GLfloat x = controller_->getX(i);
+    GLfloat y = controller_->getY(i);
+    GLfloat z = controller_->getZ(i);
     glBegin(GL_POINTS);
     glVertex3f(x, y, z);
     glEnd();
@@ -98,32 +88,3 @@ void GlWidget::build_points() {
     glDisable(GL_POINT_SMOOTH);
   }
 }
-
-// void GlWidget::mouseMoveEvent(QMouseEvent *event) {
-//   new_pos = QPoint(event->globalPosition().toPoint() - cur_pos);
-
-//   if (event->buttons() & Qt::LeftButton) {
-//     move_X(&this->data, new_pos.x() * this->normalize_coef / 5000);
-//     move_Y(&this->data, -new_pos.y() * this->normalize_coef / 5000);
-//     update();
-//   } else if (event->buttons() & Qt::RightButton) {
-//     rotate_X(&this->data, -new_pos.y() * 0.005);
-//     rotate_Y(&this->data, new_pos.x() * 0.005);
-//     update();
-//   }
-// }
-
-// void GlWidget::wheelEvent(QWheelEvent *event) {
-//   QPoint numDegrees = event->angleDelta() / 120;
-//   double step = normalize_coef / 10;
-//   double scale_tmp = scale_val;
-//   if ((int)(scale_val + numDegrees.y() * step) > 0) {
-//     scale_val += numDegrees.y() * step;
-//     scale(&this->data, scale_val / scale_tmp);
-//     update();
-//   }
-// }
-
-// void GlWidget::mousePressEvent(QMouseEvent *event) {
-//   cur_pos = event->globalPosition().toPoint();
-// }

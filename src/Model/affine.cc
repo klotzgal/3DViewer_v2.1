@@ -1,6 +1,6 @@
 #include "affine.h"
 
-void Scale::exec(Parser::data &data, double value) {
+void ScaleM::exec(Parser::data &data, double value) {
   for (size_t i = 0; i < data.vertices_count; i++) {
     (*data.vertices)(i, 0) *= value;
     (*data.vertices)(i, 1) *= value;

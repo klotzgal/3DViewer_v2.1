@@ -17,11 +17,12 @@
 #include <QtOpenGL>
 #include <iostream>
 
-#include "../Model/model.h"
+#include "../Controller/controller.h"
 
 class GlWidget : public QOpenGLWidget, protected QOpenGLFunctions {
  public:
-  explicit GlWidget(QWidget *parent = Q_NULLPTR);
+  explicit GlWidget(QWidget *parent = Q_NULLPTR,
+                    Controller *controller = nullptr);
 
   /* 3D MODEL DATA START */
   double scale_val = 50;
@@ -46,7 +47,9 @@ class GlWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   // obj_data data = {0, NULL, 0, NULL};
 
   // OPENGL
+  void setController(Controller *controller) { controller_ = controller; }
   void initializeGL() override;
+  void resizeGL(int w, int h) override;
   void paintGL() override;
 
   void parse_obj();
@@ -66,7 +69,7 @@ class GlWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   // void render_ui_stats(); ???
   // void build_lines();
   void build_points();
-  Model *model;
+  Controller *controller_;
 
  signals:
 };

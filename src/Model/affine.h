@@ -9,12 +9,11 @@
 
 class IStrategy {
  public:
-  IStrategy() = default;
-  ~IStrategy() = default;
+  virtual ~IStrategy() = default;
   virtual void exec(Parser::data &data, double value) = 0;
 };
 
-class Scale : public IStrategy {
+class ScaleM : public IStrategy {
  public:
   void exec(Parser::data &data, double value) override;
 };

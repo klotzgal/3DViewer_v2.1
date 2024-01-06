@@ -49,12 +49,13 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS OpenGLWidgets)
 set(PROJECT_SOURCES
         main.cpp
         View/mainwindow.cc
-        View/mainwindow.h
         View/glwidget.cc
-        View/glwidget.h
         View/mainwindow.ui
         Model/model.cc
         Model/parser.cc
+        Model/affine.cc
+        Model/parser.cc
+        Controller/controller.cc
 )
 
 add_library(matrix STATIC Libs/s21_matrix_oop.cc)
