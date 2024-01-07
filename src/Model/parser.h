@@ -54,7 +54,8 @@ class Parser {
       std::cout << "facets = " << (*facets).capacity() << std::endl;
       for (size_t i = 0; i < facets_count; i++) {
         std::cout << (*facets)[i].numbers_of_vertexes_in_facets << " ";
-        for (int j = 0; j < (*facets)[i].numbers_of_vertexes_in_facets; j++) {
+        for (int j = 0; j < (*facets)[i].numbers_of_vertexes_in_facets * 2;
+             j++) {
           std::cout << (*facets)[i].vertexes[j] << " ";
         }
         std::cout << std::endl;

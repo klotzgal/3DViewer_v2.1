@@ -75,7 +75,16 @@ void Parser::ParseVAndF(std::ifstream &file, data *data) {
           vertex = vertex - data->vertices_count;
         }
         (*data->facets)[f_ind].vertexes.push_back(vertex - 1);
+        if ((*data->facets)[f_ind].vertexes.size() > 1) {
+          (*data->facets)[f_ind].vertexes.push_back(vertex - 1);
+        }
+
         ++((*data->facets)[f_ind].numbers_of_vertexes_in_facets);
+      }
+      if (!(*data->facets)[f_ind].vertexes.empty()) {
+        (*data->facets)[f_ind]
+            .vertexes[(*data->facets)[f_ind].vertexes.size()] =
+            (*data->facets)[f_ind].vertexes[0];
       }
       ++f_ind;
     }

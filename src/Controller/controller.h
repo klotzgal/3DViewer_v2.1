@@ -24,6 +24,7 @@ class Controller {
   double getX(int i) const { return model_->getX(i); }
   double getY(int i) const { return model_->getY(i); }
   double getZ(int i) const { return model_->getZ(i); }
+  Parser::data::Facets& getFacet(int i) const { return model_->getFacet(i); }
 
  private:
   Model* model_;

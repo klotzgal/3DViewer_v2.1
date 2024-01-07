@@ -33,13 +33,15 @@ void GlWidget::paintGL() {
                                          // if (this->v_display_method != 0) {
   build_points();
   // }
-  // build_lines();
+//  build_lines();
   glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 void GlWidget::parse_obj() {
   controller_->setFilename(
-      "/Users/klotzgal/Desktop/kl/3DViewer_v2.0/src/Obj/skull.obj");
+      "/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/skull.obj");
+  //  /Users/klotzgal/Desktop/kl/3DViewer_v2.0/src/Obj/skull.obj
+  //  /home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/cube.obj
   try {
     controller_->Parse();
   } catch (const std::exception &e) {
@@ -53,21 +55,28 @@ void GlWidget::parse_obj() {
   update();
 }
 
-// void GlWidget::build_lines() {
-//   if (this->edges_type == 1) {
-//     glEnable(GL_LINE_STIPPLE);
-//     glLineStipple(1, 0x00FF);
-//   }
-//   glLineWidth(this->edges_thickness);
-//   glColor3f(this->e_red, this->e_green, this->e_blue);
-//   glDrawElements(GL_LINES, data.vertex_indices_count * 2, GL_UNSIGNED_INT,
-//                  data.vertex_indices_arr);  // multiply by two because we
-//                  draw
-//                                             // lines that close
-//   if (this->edges_type == 1) {
-//     glDisable(GL_LINE_STIPPLE);
-//   }
-// }
+void GlWidget::build_lines() {
+  if (this->edges_type == 1) {
+    glEnable(GL_LINE_STIPPLE);
+    glLineStipple(1, 0x00FF);
+  }
+  glLineWidth(this->edges_thickness);
+  glColor3f(this->e_red, this->e_green, this->e_blue);
+  for (size_t i = 0; i < controller_->getFacetsCount(); i++) {
+    for (int j = 0;
+         j < controller_->getFacet(i).numbers_of_vertexes_in_facets * 2; j++) {
+      glBegin(GL_LINE_LOOP);
+      glVertex3f(controller_->getX(controller_->getFacet(i).vertexes[j]),
+                 controller_->getY(controller_->getFacet(i).vertexes[j]),
+                 controller_->getZ(controller_->getFacet(i).vertexes[j]));
+    }
+    glEnd();
+  }
+  // lines that close
+  if (this->edges_type == 1) {
+    glDisable(GL_LINE_STIPPLE);
+  }
+}
 
 void GlWidget::build_points() {
   if (this->v_display_method == 1) {

@@ -67,7 +67,7 @@ class GlWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   QPoint new_pos;
   void set_normalize_coef();
   // void render_ui_stats(); ???
-  // void build_lines();
+  void build_lines();
   void build_points();
   Controller *controller_;
 
