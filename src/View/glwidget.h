@@ -19,9 +19,9 @@
 
 #include "../Controller/controller.h"
 
-class GlWidget : public QOpenGLWidget, protected QOpenGLFunctions {
+class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
  public:
-  explicit GlWidget(QWidget *parent = Q_NULLPTR,
+  explicit GLWidget(QWidget *parent = Q_NULLPTR,
                     Controller *controller = nullptr);
 
   /* 3D MODEL DATA START */
@@ -52,7 +52,7 @@ class GlWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   void resizeGL(int w, int h) override;
   void paintGL() override;
 
-  void parse_obj();
+  void parseObj();
 
   GLfloat normalize_coef;
 
@@ -62,13 +62,13 @@ class GlWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   // void wheelEvent(QWheelEvent *event) override;
 
  private:
-  ~GlWidget() override;
+  ~GLWidget() override;
   QPoint cur_pos;
   QPoint new_pos;
-  void set_normalize_coef();
   // void render_ui_stats(); ???
-  void build_lines();
-  void build_points();
+  void setProjection();
+  void buildLines();
+  void buildPoints();
   Controller *controller_;
 
  signals:

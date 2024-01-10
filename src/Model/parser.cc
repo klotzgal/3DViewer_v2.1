@@ -5,7 +5,7 @@ Parser::Parser() { std::cout << "Parser constructor" << std::endl; }
 Parser::~Parser() { std::cout << "Parser destructor" << std::endl; }
 
 void Parser::Parse(const std::string filename, data *data) {
-  if (data->vertices != nullptr || data->facets != nullptr) {
+  if (data->vertices != nullptr || data->polygons != nullptr) {
     DataMemoryDeAllocation(data);
   }
   std::ifstream file(filename);
@@ -28,23 +28,23 @@ void Parser::CountVAndF(std::ifstream &file, data *data) {
     if (line[0] == 'v' && line[1] == ' ') {
       data->vertices_count++;
     } else if (line[0] == 'f' && line[1] == ' ') {
-      data->facets_count++;
+      data->polygons_count++;
     }
   }
 }
 
 void Parser::DataMemoryAllocation(data *data) {
   data->vertices = new S21Matrix(data->vertices_count, 3);
-  data->facets = new std::vector<data::Facets>(data->facets_count);
+  data->polygons = new std::vector<data::Polygon>(data->polygons_count);
 }
 
 void Parser::DataMemoryDeAllocation(data *data) {
   delete data->vertices;
-  delete data->facets;
+  delete data->polygons;
   data->vertices_count = 0;
-  data->facets_count = 0;
+  data->polygons_count = 0;
   data->vertices = nullptr;
-  data->facets = nullptr;
+  data->polygons = nullptr;
   data->max = -1;
 }
 
@@ -74,18 +74,18 @@ void Parser::ParseVAndF(std::ifstream &file, data *data) {
         } else if (vertex > (int)data->vertices_count) {
           vertex = vertex - data->vertices_count;
         }
-        (*data->facets)[f_ind].vertexes.push_back(vertex - 1);
-        if ((*data->facets)[f_ind].vertexes.size() > 1) {
-          (*data->facets)[f_ind].vertexes.push_back(vertex - 1);
-        }
+        (*data->polygons)[f_ind].vertexes.push_back(vertex - 1);
+        // if ((*data->polygons)[f_ind].vertexes.size() > 1) {
+        //   (*data->polygons)[f_ind].vertexes.push_back(vertex - 1);
+        // }
 
-        ++((*data->facets)[f_ind].numbers_of_vertexes_in_facets);
+        ++((*data->polygons)[f_ind].numbers_of_vertexes_in_polygons);
       }
-      if (!(*data->facets)[f_ind].vertexes.empty()) {
-        (*data->facets)[f_ind]
-            .vertexes[(*data->facets)[f_ind].vertexes.size()] =
-            (*data->facets)[f_ind].vertexes[0];
-      }
+      // if (!(*data->polygons)[f_ind].vertexes.empty()) {
+      //   (*data->polygons)[f_ind]
+      //       .vertexes[(*data->polygons)[f_ind].vertexes.size()] =
+      //       (*data->polygons)[f_ind].vertexes[0];
+      // }
       ++f_ind;
     }
   }

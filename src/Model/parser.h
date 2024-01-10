@@ -17,46 +17,46 @@ class Parser {
   Parser();
   ~Parser();
   struct data {
-    struct Facets {
+    struct Polygon {
       std::vector<int> vertexes;
-      int numbers_of_vertexes_in_facets = 0;
+      int numbers_of_vertexes_in_polygons = 0;
     };
 
     size_t vertices_count;
-    size_t facets_count;
+    size_t polygons_count;
     S21Matrix *vertices;
-    std::vector<Facets> *facets;
+    std::vector<Polygon> *polygons;
     double max;
     data()
         : vertices_count(0),
-          facets_count(0),
+          polygons_count(0),
           vertices(nullptr),
-          facets(nullptr),
+          polygons(nullptr),
           max(-1) {
       std::cout << "Data constructor" << std::endl;
     }
     ~data() {
       std::cout << "Data constructor" << std::endl;
       delete vertices;
-      delete facets;
+      delete polygons;
       vertices_count = 0;
-      facets_count = 0;
+      polygons_count = 0;
     }
     void Print() {
       std::cout << std::fixed;
       std::cout << "vertices_count = " << vertices_count << std::endl;
-      std::cout << "facets_count = " << facets_count << std::endl;
+      std::cout << "polygons_count = " << polygons_count << std::endl;
       std::cout << "vertices:" << std::endl;
       for (size_t i = 0; i < vertices_count; i++) {
         std::cout << i + 1 << " " << (*vertices)(i, 0) << " "
                   << (*vertices)(i, 1) << " " << (*vertices)(i, 2) << std::endl;
       }
-      std::cout << "facets = " << (*facets).capacity() << std::endl;
-      for (size_t i = 0; i < facets_count; i++) {
-        std::cout << (*facets)[i].numbers_of_vertexes_in_facets << " ";
-        for (int j = 0; j < (*facets)[i].numbers_of_vertexes_in_facets * 2;
+      std::cout << "polygons = " << (*polygons).capacity() << std::endl;
+      for (size_t i = 0; i < polygons_count; i++) {
+        std::cout << (*polygons)[i].numbers_of_vertexes_in_polygons << " ";
+        for (int j = 0; j < (*polygons)[i].numbers_of_vertexes_in_polygons * 2;
              j++) {
-          std::cout << (*facets)[i].vertexes[j] << " ";
+          std::cout << (*polygons)[i].vertexes[j] << " ";
         }
         std::cout << std::endl;
       }

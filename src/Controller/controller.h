@@ -20,11 +20,13 @@ class Controller {
   }
   std::string getFilename() const { return model_->getFilename(); }
   size_t getVerticesCount() const { return model_->getVerticesCount(); }
-  size_t getFacetsCount() const { return model_->getFacetsCount(); }
+  size_t getPolygonsCount() const { return model_->getPolygonsCount(); }
   double getX(int i) const { return model_->getX(i); }
   double getY(int i) const { return model_->getY(i); }
   double getZ(int i) const { return model_->getZ(i); }
-  Parser::data::Facets& getFacet(int i) const { return model_->getFacet(i); }
+  Parser::data::Polygon& getPolygon(int i) const {
+    return model_->getPolygon(i);
+  }
 
  private:
   Model* model_;

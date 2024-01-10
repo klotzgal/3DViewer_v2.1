@@ -32,12 +32,12 @@ class Model {
   data *getData() const noexcept { return data_; }
 
   size_t getVerticesCount() const noexcept { return data_->vertices_count; }
-  size_t getFacetsCount() const noexcept { return data_->facets_count; }
+  size_t getPolygonsCount() const noexcept { return data_->polygons_count; }
   double getX(int i) const noexcept { return (*data_->vertices)(i, 0); }
   double getY(int i) const noexcept { return (*data_->vertices)(i, 1); }
   double getZ(int i) const noexcept { return (*data_->vertices)(i, 2); }
-  Parser::data::Facets &getFacet(int i) const noexcept {
-    return (*data_->facets)[i];
+  Parser::data::Polygon &getPolygon(int i) const noexcept {
+    return (*data_->polygons)[i];
   }
 
  private:
