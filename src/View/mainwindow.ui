@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="GlWidget" name="GLWidget" native="true">
+   <widget class="MyGLWidget" name="GLWidget" native="true">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -54,7 +54,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>GlWidget</class>
+   <class>MyGLWidget</class>
    <extends>QWidget</extends>
    <header>View/glwidget.h</header>
    <container>1</container>

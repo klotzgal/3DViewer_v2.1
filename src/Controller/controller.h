@@ -8,6 +8,8 @@ class Controller {
  public:
   explicit Controller(Model* model) : model_(model) {}
   ~Controller() {}
+  void Print() { model_->Print(); }
+  bool isEmpty() { return model_->isEmpty(); }
 
   void Parse() { model_->Parse(); }
   void Scale(double k);

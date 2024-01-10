@@ -70,7 +70,7 @@ void Parser::ParseVAndF(std::ifstream &file, data *data) {
       while (ss >> token) {
         int vertex = std::stoi(token);
         if (vertex < 0) {
-          vertex = data->vertices_count + vertex + 1;
+          vertex = data->vertices_count + vertex + 2;
         } else if (vertex > (int)data->vertices_count) {
           vertex = vertex - data->vertices_count;
         }
@@ -95,6 +95,10 @@ void Parser::NormalizeVertices(data *data) {
   if (data->max > 0.0) {
     for (size_t i = 0; i < data->vertices_count; i++) {
       for (int j = 0; j < 3; j++) {
+        std::cout << std::fixed;
+        std::cout << i + 1 << " " << std::setprecision(15)
+                  << (*data->vertices)(i, j) << " "
+                  << (*data->vertices)(i, j) / data->max << std::endl;
         (*data->vertices)(i, j) /= data->max;
       }
     }

@@ -11,4 +11,7 @@ MainWindow::MainWindow(QWidget *parent, Controller *controller)
 
 MainWindow::~MainWindow() { delete ui; }
 
-void MainWindow::on_load_model_clicked() { ui->GLWidget->parse_obj(); }
+void MainWindow::on_load_model_clicked() {
+  ui->GLWidget->parseObj();
+  ui->GLWidget->update();
+}

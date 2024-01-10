@@ -21,11 +21,11 @@ class Model {
   std::string getFilename() const noexcept { return filename_; }
   void Parse();
   void Print() { data_->Print(); }
+  bool isEmpty() { return data_->isEmpty(); }
 
   // Strategy
   void ChangeModel(IStrategy *strategy, double value) {
     if (strategy) strategy->exec(*data_, value);
-    data_->Print();
   }
 
   // Getters

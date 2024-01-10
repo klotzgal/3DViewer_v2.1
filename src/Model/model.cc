@@ -11,5 +11,5 @@ Model::~Model() {
 
 void Model::Parse() {
   parser_.Parse(filename_, data_);
-  data_->Print();
+  // data_->Print();
 }

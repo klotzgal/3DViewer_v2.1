@@ -18,8 +18,8 @@ class Parser {
   ~Parser();
   struct data {
     struct Polygon {
-      std::vector<int> vertexes;
-      int numbers_of_vertexes_in_polygons = 0;
+      std::vector<size_t> vertexes;
+      size_t numbers_of_vertexes_in_polygons = 0;
     };
 
     size_t vertices_count;
@@ -42,23 +42,29 @@ class Parser {
       vertices_count = 0;
       polygons_count = 0;
     }
+
+    bool isEmpty() { return vertices_count == 0 || polygons_count == 0; }
+
     void Print() {
       std::cout << std::fixed;
       std::cout << "vertices_count = " << vertices_count << std::endl;
       std::cout << "polygons_count = " << polygons_count << std::endl;
-      std::cout << "vertices:" << std::endl;
-      for (size_t i = 0; i < vertices_count; i++) {
-        std::cout << i + 1 << " " << (*vertices)(i, 0) << " "
-                  << (*vertices)(i, 1) << " " << (*vertices)(i, 2) << std::endl;
-      }
-      std::cout << "polygons = " << (*polygons).capacity() << std::endl;
-      for (size_t i = 0; i < polygons_count; i++) {
-        std::cout << (*polygons)[i].numbers_of_vertexes_in_polygons << " ";
-        for (int j = 0; j < (*polygons)[i].numbers_of_vertexes_in_polygons * 2;
-             j++) {
-          std::cout << (*polygons)[i].vertexes[j] << " ";
+      if (!isEmpty()) {
+        std::cout << "vertices:" << std::endl;
+        for (size_t i = 0; i < vertices_count; i++) {
+          std::cout << i + 1 << " " << std::setprecision(15)
+                    << (*vertices)(i, 0) << " " << (*vertices)(i, 1) << " "
+                    << (*vertices)(i, 2) << std::endl;
         }
-        std::cout << std::endl;
+        std::cout << "polygons = " << (*polygons).capacity() << std::endl;
+        for (size_t i = 0; i < polygons_count; i++) {
+          std::cout << (*polygons)[i].numbers_of_vertexes_in_polygons << " ";
+          for (size_t j = 0; j < (*polygons)[i].numbers_of_vertexes_in_polygons;
+               j++) {
+            std::cout << (*polygons)[i].vertexes[j] << " ";
+          }
+          std::cout << std::endl;
+        }
       }
     }
   };

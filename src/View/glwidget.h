@@ -19,10 +19,10 @@
 
 #include "../Controller/controller.h"
 
-class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
+class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
  public:
-  explicit GLWidget(QWidget *parent = Q_NULLPTR,
-                    Controller *controller = nullptr);
+  explicit MyGLWidget(QWidget *parent = Q_NULLPTR,
+                      Controller *controller = nullptr);
 
   /* 3D MODEL DATA START */
   double scale_val = 50;
@@ -62,7 +62,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   // void wheelEvent(QWheelEvent *event) override;
 
  private:
-  ~GLWidget() override;
+  ~MyGLWidget() override;
   QPoint cur_pos;
   QPoint new_pos;
   // void render_ui_stats(); ???
