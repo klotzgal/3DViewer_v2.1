@@ -5,6 +5,7 @@ Parser::Parser() { std::cout << "Parser constructor" << std::endl; }
 Parser::~Parser() { std::cout << "Parser destructor" << std::endl; }
 
 void Parser::Parse(const std::string filename, data *data) {
+  setlocale(LC_NUMERIC, "C");
   if (data->vertices != nullptr || data->polygons != nullptr) {
     DataMemoryDeAllocation(data);
   }
@@ -58,6 +59,7 @@ void Parser::ParseVAndF(std::ifstream &file, data *data) {
       for (int j = 0; j < 3; j++) {
         ss >> token;
         double cord = std::stod(token);
+        std::cout << token << " " << cord << std::endl;
         if (cord > data->max) {
           data->max = cord;
         }
@@ -95,10 +97,10 @@ void Parser::NormalizeVertices(data *data) {
   if (data->max > 0.0) {
     for (size_t i = 0; i < data->vertices_count; i++) {
       for (int j = 0; j < 3; j++) {
-        std::cout << std::fixed;
-        std::cout << i + 1 << " " << std::setprecision(15)
-                  << (*data->vertices)(i, j) << " "
-                  << (*data->vertices)(i, j) / data->max << std::endl;
+        // std::cout << std::fixed;
+        // std::cout << i + 1 << " " << std::setprecision(15)
+        //           << (*data->vertices)(i, j) << " "
+        //           << (*data->vertices)(i, j) / data->max << std::endl;
         (*data->vertices)(i, j) /= data->max;
       }
     }

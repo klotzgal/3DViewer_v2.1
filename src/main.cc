@@ -5,7 +5,7 @@ Model* Model::instance_ = nullptr;
 int main() {
   Model* model = Model::getInstance();
   model->setFilename(
-      "/Users/klotzgal/Desktop/kl/3DViewer_v2.0/src/Obj/cube.obj");
+      "/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/skull.obj");
   // /Users/klotzgal/Desktop/kl/3DViewer_v2.0/src/Obj/cube.obj
   // /home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/cube.obj
   std::cout << model->getFilename() << std::endl;

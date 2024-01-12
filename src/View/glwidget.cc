@@ -11,7 +11,7 @@ void MyGLWidget::initializeGL() {
 }
 
 void MyGLWidget::resizeGL(int w, int h) {
-  w = h;
+//  w = h;
   glViewport(0, 0, w, h);
 }
 
@@ -83,7 +83,7 @@ void MyGLWidget::buildLines() {
       GLdouble z = controller_->getZ(point);
 
       glVertex3d(x, y, z);
-            qDebug() << i << x << y << z;
+//            qDebug() << i << x << y << z;
     }
     glEnd();
   }
@@ -97,7 +97,7 @@ void MyGLWidget::buildLines() {
 
 void MyGLWidget::parseObj() {
   controller_->setFilename(
-      "/Users/klotzgal/Desktop/kl/3DViewer_v2.0/src/Obj/skull.obj");
+      "/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/skull.obj");
   //  /Users/klotzgal/Desktop/kl/3DViewer_v2.0/src/Obj/skull.obj
   //  /home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/cube.obj
   try {
