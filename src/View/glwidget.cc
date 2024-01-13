@@ -99,13 +99,13 @@ void MyGLWidget::buildLines() {
 }
 
 void MyGLWidget::parseObj() {
-  controller_->setFilename(
-      "/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/skull.obj");
-  //  /Users/klotzgal/Desktop/kl/3DViewer_v2.0/src/Obj/skull.obj
-  //  /home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/cube.obj
+//  controller_->setFilename(
+//      "/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/skull.obj");
+//  //  /Users/klotzgal/Desktop/kl/3DViewer_v2.0/src/Obj/skull.obj
+//  //  /home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/cube.obj
   try {
     controller_->Parse();
-//    controller_->Scale(2);
+//    controller_->Scale(0.5);
   } catch (const std::exception &e) {
     std::cerr << e.what() << "parse Error" << '\n';
     QMessageBox warning = QMessageBox();

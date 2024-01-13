@@ -59,7 +59,6 @@ void Parser::ParseVAndF(std::ifstream &file, data *data) {
       for (int j = 0; j < 3; j++) {
         ss >> token;
         double cord = std::stod(token);
-        std::cout << token << " " << cord << std::endl;
         if (cord > data->max) {
           data->max = cord;
         }
@@ -71,23 +70,16 @@ void Parser::ParseVAndF(std::ifstream &file, data *data) {
       std::string token;
       while (ss >> token) {
         int vertex = std::stoi(token);
+        // std::cout << token << " " << data->vertices_count << " " << vertex;
         if (vertex < 0) {
-          vertex = data->vertices_count + vertex + 2;
+          vertex = data->vertices_count + vertex + 1;
         } else if (vertex > (int)data->vertices_count) {
           vertex = vertex - data->vertices_count;
         }
+        // std::cout << " " << vertex << std::endl;
         (*data->polygons)[f_ind].vertexes.push_back(vertex - 1);
-        // if ((*data->polygons)[f_ind].vertexes.size() > 1) {
-        //   (*data->polygons)[f_ind].vertexes.push_back(vertex - 1);
-        // }
-
         ++((*data->polygons)[f_ind].numbers_of_vertexes_in_polygons);
       }
-      // if (!(*data->polygons)[f_ind].vertexes.empty()) {
-      //   (*data->polygons)[f_ind]
-      //       .vertexes[(*data->polygons)[f_ind].vertexes.size()] =
-      //       (*data->polygons)[f_ind].vertexes[0];
-      // }
       ++f_ind;
     }
   }
@@ -97,10 +89,6 @@ void Parser::NormalizeVertices(data *data) {
   if (data->max > 0.0) {
     for (size_t i = 0; i < data->vertices_count; i++) {
       for (int j = 0; j < 3; j++) {
-        // std::cout << std::fixed;
-        // std::cout << i + 1 << " " << std::setprecision(15)
-        //           << (*data->vertices)(i, j) << " "
-        //           << (*data->vertices)(i, j) / data->max << std::endl;
         (*data->vertices)(i, j) /= data->max;
       }
     }

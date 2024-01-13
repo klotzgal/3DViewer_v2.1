@@ -16,6 +16,7 @@
 #include <QWidget>
 #include <QtOpenGL>
 #include <iostream>
+#include <QFileDialog>
 
 #include "../Controller/controller.h"
 

@@ -5,6 +5,7 @@
 
 #include "glwidget.h"
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -16,14 +17,14 @@ class MainWindow : public QMainWindow {
  public:
   explicit MainWindow(QWidget *parent = nullptr,
                       Controller *controller = nullptr);
-  Ui::MainWindow *ui;
 
   ~MainWindow();
 
- public slots:
+ private slots:
   void on_load_model_clicked();
-
+  void on_open_file_clicked();
  private:
+  Ui::MainWindow *ui;
   Controller *controller_;
 };
 
