@@ -1,7 +1,10 @@
 ﻿#include "glwidget.h"
 
 MyGLWidget::MyGLWidget(QWidget *parent, Controller *controller)
-    : QOpenGLWidget{parent}, controller_(controller) {}
+    : QOpenGLWidget{parent}, controller_(controller) {
+    setMinimumSize(600, 600);
+    setMaximumSize(1200, 1200);
+}
 
 MyGLWidget::~MyGLWidget() {}
 
