@@ -57,10 +57,10 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
 
   GLfloat normalize_coef;
 
-  // // MouseMoveControl
-//  void mousePressEvent(QMouseEvent *event) override;
-//  void mouseMoveEvent(QMouseEvent *event) override;
-//  void wheelEvent(QWheelEvent *event) override;
+  // MouseMoveControl
+  void mousePressEvent(QMouseEvent *event) override;
+  void mouseMoveEvent(QMouseEvent *event) override;
+  void wheelEvent(QWheelEvent *event) override;
 
  private:
   ~MyGLWidget() override;

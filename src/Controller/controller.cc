@@ -5,32 +5,40 @@ void Controller::Scale(double k) {
   model_->ChangeModel(&s, k);
 }
 
-void Controller::Move(char c, double k) {
+void Controller::Move(double x, double y, double z) {
   IStrategy *m = nullptr;
-  if (c == 'x') {
+  if (x) {
     m = new MoveX();
-  } else if (c == 'y') {
-    m = new MoveY();
-  } else if (c == 'z') {
-    m = new MoveZ();
+    model_->ChangeModel(m, x);
+    delete m;
   }
-  model_->ChangeModel(m, k);
-  if (m) {
+  if (y) {
+    m = new MoveY();
+    model_->ChangeModel(m, y);
+    delete m;
+  }
+  if (z) {
+    m = new MoveZ();
+    model_->ChangeModel(m, z);
     delete m;
   }
 }
 
-void Controller::Rotate(char c, double k) {
+void Controller::Rotate(double x, double y, double z) {
   IStrategy *m = nullptr;
-  if (c == 'x') {
+  if (x) {
     m = new RotateX();
-  } else if (c == 'y') {
-    m = new RotateY();
-  } else if (c == 'z') {
-    m = new RotateZ();
+    model_->ChangeModel(m, x);
+    delete m;
   }
-  model_->ChangeModel(m, k);
-  if (m) {
+  if (y) {
+    m = new RotateY();
+    model_->ChangeModel(m, y);
+    delete m;
+  }
+  if (z) {
+    m = new RotateZ();
+    model_->ChangeModel(m, z);
     delete m;
   }
 }

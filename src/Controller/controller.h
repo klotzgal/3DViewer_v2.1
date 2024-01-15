@@ -13,13 +13,10 @@ class Controller {
   void Print() { model_->Print(); }
   bool isEmpty() { return model_->isEmpty(); }
 
-  void Parse() {
-    model_->Parse();
-    model_->Print();
-  }
+  void Parse() { model_->Parse(); }
   void Scale(double k);
-  void Move(char c, double k);
-  void Rotate(char c, double k);
+  void Move(double x, double y, double z);
+  void Rotate(double x, double y, double z);
 
   // Getters and Setters
   void setFilename(const QString& filename) {

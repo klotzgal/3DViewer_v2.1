@@ -39,7 +39,7 @@ void MainWindow::on_rotate_x_valueChanged(int value) {
   GLdouble k = (double)value - ui->GLWidget->rotate_x;
   qDebug() << "k =" << k;
   ui->GLWidget->rotate_x = value;
-  controller_->Rotate('x', k);
+  controller_->Rotate(k, 0, 0);
   ui->GLWidget->update();
 }
 
@@ -47,7 +47,7 @@ void MainWindow::on_rotate_y_valueChanged(int value) {
   GLdouble k = (double)value - ui->GLWidget->rotate_y;
   qDebug() << "k =" << k;
   ui->GLWidget->rotate_y = value;
-  controller_->Rotate('y', k);
+  controller_->Rotate(0, k, 0);
   ui->GLWidget->update();
 }
 
@@ -55,7 +55,7 @@ void MainWindow::on_rotate_z_valueChanged(int value) {
   GLdouble k = (double)value - ui->GLWidget->rotate_z;
   qDebug() << "k =" << k;
   ui->GLWidget->rotate_z = value;
-  controller_->Rotate('z', k);
+  controller_->Rotate(0, 0, k);
   ui->GLWidget->update();
 }
 
@@ -63,7 +63,7 @@ void MainWindow::on_move_x_valueChanged(int value) {
   GLdouble k = ((double)value - ui->GLWidget->move_x) * 0.01;
   qDebug() << "k =" << k;
   ui->GLWidget->move_x = value;
-  controller_->Move('x', k);
+  controller_->Move(k, 0, 0);
   ui->GLWidget->update();
 }
 
@@ -71,7 +71,7 @@ void MainWindow::on_move_y_valueChanged(int value) {
   GLdouble k = ((double)value - ui->GLWidget->move_y) * 0.01;
   qDebug() << "k =" << k;
   ui->GLWidget->move_y = value;
-  controller_->Move('y', k);
+  controller_->Move(0, k, 0);
   ui->GLWidget->update();
 }
 
@@ -79,6 +79,6 @@ void MainWindow::on_move_z_valueChanged(int value) {
   GLdouble k = ((double)value - ui->GLWidget->move_z) * 0.01;
   qDebug() << "k =" << k;
   ui->GLWidget->move_z = value;
-  controller_->Move('z', k);
+  controller_->Move(0, 0, k);
   ui->GLWidget->update();
 }
