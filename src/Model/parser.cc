@@ -18,15 +18,11 @@ void Parser::Parse(const std::string filename, data *data) {
   CountVAndF(file, data);
   DataMemoryAllocation(data);
 
-  try {
-    file.clear();
-    file.seekg(0);
-    ParseVAndF(file, data);
-    NormalizeVertices(data);
-    file.close();
-  } catch (const std::exception &e) {
-    std::cerr << "Parser throw" << '\n';
-  }
+  file.clear();
+  file.seekg(0);
+  ParseVAndF(file, data);
+  NormalizeVertices(data);
+  file.close();
 }
 
 void Parser::CountVAndF(std::ifstream &file, data *data) {

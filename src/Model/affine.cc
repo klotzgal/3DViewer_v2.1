@@ -32,29 +32,29 @@ void MoveZ::exec(Parser::data &data, double value) {
 void RotateX::exec(Parser::data &data, double value) {
   value = value * M_PI / 180;
   for (size_t i = 0; i < data.vertices_count; i++) {
-    (*data.vertices)(i, 1) = (*data.vertices)(i, 1) * cosl(value) +
-                             (*data.vertices)(i, 2) * sinl(value);
-    (*data.vertices)(i, 2) = -(*data.vertices)(i, 1) * sinl(value) +
-                             (*data.vertices)(i, 2) * cosl(value);
+    double Y = (*data.vertices)(i, 1);
+    double Z = (*data.vertices)(i, 2);
+    (*data.vertices)(i, 1) = Y * cosl(value) - Z * sinl(value);
+    (*data.vertices)(i, 2) = Y * sinl(value) + Z * cosl(value);
   }
 }
 
 void RotateY::exec(Parser::data &data, double value) {
   value = value * M_PI / 180;
   for (size_t i = 0; i < data.vertices_count; i++) {
-    (*data.vertices)(i, 0) = (*data.vertices)(i, 0) * cosl(value) +
-                             (*data.vertices)(i, 2) * sinl(value);
-    (*data.vertices)(i, 2) = -(*data.vertices)(i, 0) * sinl(value) +
-                             (*data.vertices)(i, 2) * cosl(value);
+    double X = (*data.vertices)(i, 0);
+    double Z = (*data.vertices)(i, 2);
+    (*data.vertices)(i, 0) = X * cosl(value) + Z * sinl(value);
+    (*data.vertices)(i, 2) = -X * sinl(value) + Z * cosl(value);
   }
 }
 
 void RotateZ::exec(Parser::data &data, double value) {
   value = value * M_PI / 180;
   for (size_t i = 0; i < data.vertices_count; i++) {
-    (*data.vertices)(i, 0) = (*data.vertices)(i, 0) * cosl(value) +
-                             (*data.vertices)(i, 1) * sinl(value);
-    (*data.vertices)(i, 1) = -(*data.vertices)(i, 0) * sinl(value) +
-                             (*data.vertices)(i, 1) * cosl(value);
+    double X = (*data.vertices)(i, 0);
+    double Y = (*data.vertices)(i, 1);
+    (*data.vertices)(i, 0) = X * cosl(value) - Y * sinl(value);
+    (*data.vertices)(i, 1) = X * sinl(value) + Y * cosl(value);
   }
 }
