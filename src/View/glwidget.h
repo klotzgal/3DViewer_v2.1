@@ -10,13 +10,13 @@
 #include <GL/glut.h>
 #endif
 
+#include <QFileDialog>
 #include <QMessageBox>
 #include <QOpenGLWidget>
 #include <QWheelEvent>
 #include <QWidget>
 #include <QtOpenGL>
 #include <iostream>
-#include <QFileDialog>
 
 #include "../Controller/controller.h"
 
@@ -26,21 +26,21 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
                       Controller *controller = nullptr);
 
   /* 3D MODEL DATA START */
-  double scale_val = 50;
-  double rotate_x;
-  double rotate_y;
-  double rotate_z;
-  double translate_x;
-  double translate_y;
-  double translate_z;
-  double vertices_size = 1;
-  double edges_thickness = 1;
-  int projection_type = 0;
-  int v_display_method = 0;
-  int edges_type = 0;
-  double v_red = 1, v_green = 1, v_blue = 1;
-  double e_red = 1, e_green = 1, e_blue = 1;
-  double bg_red = 0, bg_green = 0, bg_blue = 0;
+  GLdouble scale_val = 1;
+  GLdouble rotate_x;
+  GLdouble rotate_y;
+  GLdouble rotate_z;
+  GLdouble move_x;
+  GLdouble move_y;
+  GLdouble move_z;
+  GLdouble vertices_size = 1;
+  GLdouble edges_thickness = 1;
+  GLint projection_type = 0;
+  GLint v_display_method = 0;
+  GLint edges_type = 0;
+  GLdouble v_red = 1, v_green = 1, v_blue = 1;
+  GLdouble e_red = 1, e_green = 1, e_blue = 1;
+  GLdouble bg_red = 0, bg_green = 0, bg_blue = 0;
   /* 3D MODEL DATA END  */
 
   // 3D OBJ DATA
@@ -58,9 +58,9 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   GLfloat normalize_coef;
 
   // // MouseMoveControl
-  // void mousePressEvent(QMouseEvent *event) override;
-  // void mouseMoveEvent(QMouseEvent *event) override;
-  // void wheelEvent(QWheelEvent *event) override;
+//  void mousePressEvent(QMouseEvent *event) override;
+//  void mouseMoveEvent(QMouseEvent *event) override;
+//  void wheelEvent(QWheelEvent *event) override;
 
  private:
   ~MyGLWidget() override;

@@ -18,28 +18,23 @@ class Parser {
   Parser();
   ~Parser();
   struct data {
-    struct Polygon {
-      std::vector<size_t> vertexes;
-      size_t numbers_of_vertexes_in_polygons = 0;
-    };
-
     size_t vertices_count;
     size_t polygons_count;
     S21Matrix *vertices;
-    std::vector<Polygon> *polygons;
+    std::vector<std::vector<size_t>> polygons;
     double max;
     data()
         : vertices_count(0),
           polygons_count(0),
           vertices(nullptr),
-          polygons(nullptr),
+          polygons(0, std::vector<size_t>(0)),
           max(-1) {
       std::cout << "Data constructor" << std::endl;
     }
     ~data() {
       std::cout << "Data constructor" << std::endl;
       delete vertices;
-      delete polygons;
+      polygons.clear();
       vertices_count = 0;
       polygons_count = 0;
     }
@@ -57,12 +52,11 @@ class Parser {
                     << (*vertices)(i, 0) << " " << (*vertices)(i, 1) << " "
                     << (*vertices)(i, 2) << std::endl;
         }
-        std::cout << "polygons = " << (*polygons).capacity() << std::endl;
+        std::cout << "polygons = " << polygons.capacity() << std::endl;
         for (size_t i = 0; i < polygons_count; i++) {
-          std::cout << (*polygons)[i].numbers_of_vertexes_in_polygons << " ";
-          for (size_t j = 0; j < (*polygons)[i].numbers_of_vertexes_in_polygons;
-               j++) {
-            std::cout << (*polygons)[i].vertexes[j] << " ";
+          std::cout << polygons[i].size() << " ";
+          for (size_t j = 0; j < polygons[i].size(); j++) {
+            std::cout << polygons[i][j] << " ";
           }
           std::cout << std::endl;
         }

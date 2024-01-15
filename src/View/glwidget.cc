@@ -2,8 +2,8 @@
 
 MyGLWidget::MyGLWidget(QWidget *parent, Controller *controller)
     : QOpenGLWidget{parent}, controller_(controller) {
-    setMinimumSize(600, 600);
-    setMaximumSize(1200, 1200);
+  setMinimumSize(600, 600);
+  setMaximumSize(1200, 1200);
 }
 
 MyGLWidget::~MyGLWidget() {}
@@ -14,7 +14,7 @@ void MyGLWidget::initializeGL() {
 }
 
 void MyGLWidget::resizeGL(int w, int h) {
-//  w = h;
+  //  w = h;
   glViewport(0, 0, w, h);
 }
 
@@ -24,26 +24,24 @@ void MyGLWidget::paintGL() {
 
   setProjection();
   if (!controller_->isEmpty()) {
-    glEnableClientState(GL_VERTEX_ARRAY);  // enable open gl state
     // if (this->v_display_method != 0) {
     buildPoints();
     // }
     buildLines();
-    glDisableClientState(GL_VERTEX_ARRAY);
   }
 }
 
 void MyGLWidget::setProjection() {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-//  if (this->projection_type == 0) {
-//    glFrustum(-1, 1, -1, 1, 1, 1000);
-//    glTranslatef(0, 0, -2);
-//    glRotatef(30, 1, 0, 0);
-//  } else {
-//    glOrtho(-1, 1, -1, 1, -1, 1000);
-//    glTranslatef(0, -1 / 2, 0);
-//  }
+  //  if (this->projection_type == 0) {
+  //    glFrustum(-1, 1, -1, 1, 1, 1000);
+  //    glTranslatef(0, 0, -2);
+  //    glRotatef(30, 1, 0, 0);
+  //  } else {
+  //    glOrtho(-1, 1, -1, 1, -1, 1000);
+  //    glTranslatef(0, -1 / 2, 0);
+  //  }
 }
 
 void MyGLWidget::buildPoints() {
@@ -78,15 +76,14 @@ void MyGLWidget::buildLines() {
 
   for (size_t i = 0; i < controller_->getPolygonsCount(); ++i) {
     glBegin(GL_LINE_LOOP);
-    for (size_t j = 0;
-         j < controller_->getPolygon(i).numbers_of_vertexes_in_polygons; ++j) {
-      GLint point = controller_->getPolygon(i).vertexes[j];
+    for (size_t j = 0; j < controller_->getPolygon(i).size(); ++j) {
+      GLint point = controller_->getPolygon(i)[j];
       GLdouble x = controller_->getX(point);
       GLdouble y = controller_->getY(point);
       GLdouble z = controller_->getZ(point);
 
       glVertex3d(x, y, z);
-//            qDebug() << i << x << y << z;
+      //            qDebug() << i << x << y << z;
     }
     glEnd();
   }
@@ -99,13 +96,13 @@ void MyGLWidget::buildLines() {
 }
 
 void MyGLWidget::parseObj() {
-//  controller_->setFilename(
-//      "/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/skull.obj");
-//  //  /Users/klotzgal/Desktop/kl/3DViewer_v2.0/src/Obj/skull.obj
-//  //  /home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/cube.obj
+  //  controller_->setFilename(
+  //      "/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/skull.obj");
+  //  //  /Users/klotzgal/Desktop/kl/3DViewer_v2.0/src/Obj/skull.obj
+  //  //  /home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/cube.obj
   try {
     controller_->Parse();
-//    controller_->Scale(0.5);
+    //    controller_->Scale(0.5);
   } catch (const std::exception &e) {
     std::cerr << e.what() << "parse Error" << '\n';
     QMessageBox warning = QMessageBox();
@@ -115,3 +112,5 @@ void MyGLWidget::parseObj() {
     warning.exec();
   }
 }
+
+//void MyGLWidget::mousePressEvent(QMouseEvent *event) {}

@@ -36,9 +36,7 @@ class Model {
   double getX(int i) const noexcept { return (*data_->vertices)(i, 0); }
   double getY(int i) const noexcept { return (*data_->vertices)(i, 1); }
   double getZ(int i) const noexcept { return (*data_->vertices)(i, 2); }
-  Parser::data::Polygon &getPolygon(int i) const noexcept {
-    return (*data_->polygons)[i];
-  }
+  std::vector<size_t> &getPolygon(int i) noexcept { return data_->polygons[i]; }
 
  private:
   std::string filename_;

@@ -1,6 +1,9 @@
 #include "affine.h"
 
 void ScaleM::exec(Parser::data &data, double value) {
+  if (value == 0) {
+    return;
+  }
   for (size_t i = 0; i < data.vertices_count; i++) {
     (*data.vertices)(i, 0) *= value;
     (*data.vertices)(i, 1) *= value;
@@ -39,9 +42,9 @@ void RotateX::exec(Parser::data &data, double value) {
 void RotateY::exec(Parser::data &data, double value) {
   value = value * M_PI / 180;
   for (size_t i = 0; i < data.vertices_count; i++) {
-    (*data.vertices)(i, 0) = (*data.vertices)(i, 0) * cosl(value) -
+    (*data.vertices)(i, 0) = (*data.vertices)(i, 0) * cosl(value) +
                              (*data.vertices)(i, 2) * sinl(value);
-    (*data.vertices)(i, 2) = (*data.vertices)(i, 0) * sinl(value) +
+    (*data.vertices)(i, 2) = -(*data.vertices)(i, 0) * sinl(value) +
                              (*data.vertices)(i, 2) * cosl(value);
   }
 }

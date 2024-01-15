@@ -5,7 +5,6 @@
 
 #include "glwidget.h"
 
-
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -23,6 +22,16 @@ class MainWindow : public QMainWindow {
  private slots:
   void on_load_model_clicked();
   void on_open_file_clicked();
+
+  // Affine
+  void on_scale_valueChanged(int value);
+  void on_rotate_x_valueChanged(int value);
+  void on_rotate_y_valueChanged(int value);
+  void on_rotate_z_valueChanged(int value);
+  void on_move_x_valueChanged(int value);
+  void on_move_y_valueChanged(int value);
+  void on_move_z_valueChanged(int value);
+
  private:
   Ui::MainWindow *ui;
   Controller *controller_;

@@ -31,9 +31,7 @@ class Controller {
   double getX(int i) const { return model_->getX(i); }
   double getY(int i) const { return model_->getY(i); }
   double getZ(int i) const { return model_->getZ(i); }
-  Parser::data::Polygon& getPolygon(int i) const {
-    return model_->getPolygon(i);
-  }
+  std::vector<size_t>& getPolygon(int i) const { return model_->getPolygon(i); }
 
  private:
   Model* model_;

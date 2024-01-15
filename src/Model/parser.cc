@@ -6,7 +6,8 @@ Parser::~Parser() { std::cout << "Parser destructor" << std::endl; }
 
 void Parser::Parse(const std::string filename, data *data) {
   setlocale(LC_NUMERIC, "C");
-  if (data->vertices != nullptr || data->polygons != nullptr) {
+
+  if (data->vertices != nullptr || !data->polygons.empty()) {
     DataMemoryDeAllocation(data);
   }
   std::ifstream file(filename);
@@ -16,11 +17,16 @@ void Parser::Parse(const std::string filename, data *data) {
   }
   CountVAndF(file, data);
   DataMemoryAllocation(data);
-  file.clear();
-  file.seekg(0);
-  ParseVAndF(file, data);
-  NormalizeVertices(data);
-  file.close();
+
+  try {
+    file.clear();
+    file.seekg(0);
+    ParseVAndF(file, data);
+    NormalizeVertices(data);
+    file.close();
+  } catch (const std::exception &e) {
+    std::cerr << "Parser throw" << '\n';
+  }
 }
 
 void Parser::CountVAndF(std::ifstream &file, data *data) {
@@ -36,22 +42,24 @@ void Parser::CountVAndF(std::ifstream &file, data *data) {
 
 void Parser::DataMemoryAllocation(data *data) {
   data->vertices = new S21Matrix(data->vertices_count, 3);
-  data->polygons = new std::vector<data::Polygon>(data->polygons_count);
+  data->polygons.reserve(data->polygons_count);
+  for (size_t i = 0; i < data->polygons_count; i++) {
+    data->polygons.push_back(std::vector<size_t>(0));
+  }
 }
 
 void Parser::DataMemoryDeAllocation(data *data) {
   delete data->vertices;
-  delete data->polygons;
+  data->polygons.clear();
   data->vertices_count = 0;
   data->polygons_count = 0;
   data->vertices = nullptr;
-  data->polygons = nullptr;
   data->max = -1;
 }
 
 void Parser::ParseVAndF(std::ifstream &file, data *data) {
   std::string line;
-  int v_ind = 0, f_ind = 0;
+  int v_ind = 0, p_ind = 0;
   while (std::getline(file, line)) {
     if (line[0] == 'v' && line[1] == ' ') {
       std::stringstream ss(line.substr(2));
@@ -70,17 +78,14 @@ void Parser::ParseVAndF(std::ifstream &file, data *data) {
       std::string token;
       while (ss >> token) {
         int vertex = std::stoi(token);
-        // std::cout << token << " " << data->vertices_count << " " << vertex;
         if (vertex < 0) {
           vertex = data->vertices_count + vertex + 1;
         } else if (vertex > (int)data->vertices_count) {
           vertex = vertex - data->vertices_count;
         }
-        // std::cout << " " << vertex << std::endl;
-        (*data->polygons)[f_ind].vertexes.push_back(vertex - 1);
-        ++((*data->polygons)[f_ind].numbers_of_vertexes_in_polygons);
+        data->polygons[p_ind].push_back(vertex - 1);
       }
-      ++f_ind;
+      ++p_ind;
     }
   }
 }
