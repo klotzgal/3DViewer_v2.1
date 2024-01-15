@@ -1,4 +1,4 @@
-#include "Controller/controller.h"
+#include "Model/model.h"
 
 Model* Model::instance_ = nullptr;
 
@@ -19,11 +19,11 @@ int main() {
   } catch (const std::exception& e) {
     std::cerr << e.what() << " Error" << '\n';
   }
-  Controller c(model);
-  auto x = c.getPolygon(0).data();
-  for (size_t i = 0; i < c.getPolygon(0).size(); ++i) {
-    std::cout << i << " " << (x + i) << std::endl;
-  }
+  // Controller c(model);
+  // auto x = c.getPolygon(0).data();
+  // for (size_t i = 0; i < c.getPolygon(0).size(); ++i) {
+  //   std::cout << i << " " << (x + i) << std::endl;
+  // }
   // c.Print();
   return 0;
 }
