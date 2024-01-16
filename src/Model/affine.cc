@@ -4,11 +4,7 @@ void ScaleM::exec(Parser::data &data, double value) {
   if (value == 0) {
     return;
   }
-  for (size_t i = 0; i < data.vertices_count; i++) {
-    (*data.vertices)(i, 0) *= value;
-    (*data.vertices)(i, 1) *= value;
-    (*data.vertices)(i, 2) *= value;
-  }
+  (*data.vertices) *= value;
 }
 
 void MoveX::exec(Parser::data &data, double value) {

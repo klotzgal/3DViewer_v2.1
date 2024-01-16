@@ -1,11 +1,11 @@
 .PHONY: all install uninstall dvi dist test gcov_report valgrind_check style_check format_style fonts clean fclean
-TARGET = 3dViewer
+TARGET = 3DViewer
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -std=c11 -g
 OS = $(shell uname)
 MODULES = $(wildcard modules/*.c)
-OBJECTS = $(patsubst %.c, %.o, $(MODULES))
+OBJECTS = $(patsubst %.cc, %.o, $(MODULES))
 TEST_MODUlES = test_modules
 
 ifeq ($(OS), Linux)
@@ -22,9 +22,9 @@ all: clean #install
 
 install:
 	@echo "Start installation"
-	@mkdir -p ../build
-	@cd View && cd 3dViewerUI && qmake && make &> /dev/null && make clean &> /dev/null && rm -rf Makefile && mv 3dViewerUI.app ../../../build/$(TARGET).app
-	@cp -R ../build/$(TARGET).app ~/Desktop/$(TARGET).app
+	@mkdir -p ../release-build
+	@cmake -B ../release-build -S . && make -C ../release-build
+	@cp -R ../release-build/bin/$(TARGET)* ~/Desktop
 	@echo "┏=========================================┓"
 	@echo "┃    The installation was successful.     ┃"
 	@echo "┃     The project is located in the       ┃"
@@ -32,7 +32,7 @@ install:
 	@echo "┗=========================================┛"
 
 uninstall:
-	@rm -rf ~/Desktop/$(TARGET).app ../build
+	@rm -rf ~/Desktop/$(TARGET)* ../release-build
 	@echo "Uninstall completed successfully"
 
 dvi:
@@ -40,16 +40,19 @@ dvi:
 
 dist:
 	@mkdir -p ../dist
-	@cp -R ../build/$(TARGET).app ../dist
-	@cp ../README_RUS.md ../dist && cp ../README.md ../dist
-	@cd ../dist && tar cvzf $(TARGET)_v1.0.tgz *
-	@cd ../dist && rm -rf $(TARGET).app README.md README_RUS.md
+	@cp -R ../release-build/bin/$(TARGET)* ../dist
+# @cp ../README_RUS.md ../dist && cp ../README.md ../dist
+	@cd ../dist && tar cvzf $(TARGET)_v2.0.tgz *
+	@cd ../dist && rm -rf $(TARGET)* README.md README_RUS.md
 	@echo "The build was successfully archived"
 
-test: $(OBJECTS)
-	@$(CC) $(CFLAGS) ./tests/unit_tests.c $(LDLIBS) obj/*.o -o tests/$(TEST_MODUlES)
+test:
+ifeq ("", "$(wildcard ../release-build)")
+	@mkdir ../release-build
+	@cmake -B ../release-build -S . && make -C ../release-build
+endif
 	@echo "» Unit test results:"
-	@./tests/$(TEST_MODUlES)
+	@./../release-build/bin/unit_tests
 
 gcov_report: $(OBJECTS)
 	@echo "┏=========================================┓"
@@ -69,7 +72,7 @@ style_check:
 	@echo "┃  Checking your code for Google Style    ┃"
 	@echo "┗=========================================┛"
 	@cp ../materials/linters/.clang-format .
-	@clang-format -n **/*.c **/*.h View/3dViewerUI/*.h View/3dViewerUI/*.cpp
+	@clang-format -n **/*.cc **/*.h 
 	@rm ./.clang-format
 
 format_style:
@@ -77,7 +80,7 @@ format_style:
 	@echo "┃  Formatting your code for Google Style  ┃"
 	@echo "┗=========================================┛"
 	@cp ../materials/linters/.clang-format .
-	@clang-format -i **/*.c **/*.h View/3dViewerUI/*.h View/3dViewerUI/*.cpp
+	@clang-format -i **/*.cc **/*.h
 	@rm ./.clang-format
 
 valgrind_check: test
