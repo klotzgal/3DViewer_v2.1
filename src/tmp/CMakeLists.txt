@@ -31,5 +31,8 @@ add_library(matrix STATIC ../Libs/s21_matrix_oop.cc)
 add_executable(main ../main.cc ../Model/model.cc ../Model/parser.cc ../Model/affine.cc)
 target_link_libraries(main matrix)
 
+include(CTest)
+enable_testing()
+
 add_subdirectory(tests)
 

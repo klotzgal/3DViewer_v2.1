@@ -1,8 +1,11 @@
-find_package(GTest REQUIRED)
+if (BUILD_TESTING)
 
-add_executable(unit_tests test.cc ../../Model/model.cc ../../Model/parser.cc ../../Model/affine.cc)
-# add_library(matrix STATIC ../../Libs/s21_matrix_oop.cc)
+  find_package(GTest REQUIRED)
 
-target_link_libraries(unit_tests matrix GTest::GTest GTest::Main)
+  add_executable(unit_tests test.cc ../../Model/model.cc ../../Model/parser.cc ../../Model/affine.cc)
+  
+  target_link_libraries(unit_tests matrix GTest::GTest GTest::Main)
+  include(GoogleTest)
+  gtest_discover_tests(unit_tests)
 
-add_custom_target(test COMMAND ./bin/unit_tests)
+endif()
