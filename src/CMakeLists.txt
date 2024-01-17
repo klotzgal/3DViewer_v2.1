@@ -101,4 +101,7 @@ if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(3DViewer)
 endif()
 
+include(CTest)
+enable_testing()
+
 add_subdirectory(tests)

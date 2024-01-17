@@ -12,7 +12,7 @@ void Parser::Parse(const std::string filename, data *data) {
   }
   std::ifstream file(filename);
   if (!file.is_open()) {
-    std::cout << "File not found" << std::endl;
+    std::cout << "File \"" << filename << "\" not found" << std::endl;
     return;
   }
   CountVAndF(file, data);

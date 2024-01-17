@@ -28,11 +28,8 @@ class Parser {
           polygons_count(0),
           vertices(nullptr),
           polygons(0, std::vector<size_t>(0)),
-          max(-1) {
-      std::cout << "Data constructor" << std::endl;
-    }
+          max(-1) {}
     ~data() {
-      std::cout << "Data constructor" << std::endl;
       delete vertices;
       polygons.clear();
       vertices_count = 0;

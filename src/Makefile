@@ -52,7 +52,7 @@ ifeq ("", "$(wildcard ../release-build)")
 	@cmake -B ../release-build -S . && make -C ../release-build
 endif
 	@echo "» Unit test results:"
-	@./../release-build/bin/unit_tests
+	@ctest --output-on-failure --test-dir ../release-build
 
 gcov_report: $(OBJECTS)
 	@echo "┏=========================================┓"
@@ -99,10 +99,8 @@ fclean: clean
 	@rm -rf ../build ../dist ~/Desktop/$(TARGET).app unit_tests_vg.log 
 
 cmake:
-ifeq ("", "$(wildcard ../build)")
-	@mkdir ../build
-endif
-	cd .. && cd build && cmake ../src/tmp && make && ./bin/main
+	@mkdir -p ../build
+	@cmake -B ../build -S ..  && make -C ../build && ./../build/bin/main
 
 valgrind:
 	CK_FORK=no valgrind --trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --verbose --log-file=valgrind.txt ./../build/bin/main
