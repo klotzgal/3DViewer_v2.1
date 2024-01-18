@@ -5,32 +5,41 @@
 #include "../Model/model.h"
 
 Model *Model::instance_ = nullptr;
+#ifdef __APPLE__
+namespace fs = std::__fs::filesystem;
+#else
 namespace fs = std::filesystem;
+#endif
 
 class MyTest : public ::testing::Test {
-  // MyTest() {
-  //   if (p.filename() == "3DViewer_v2.0") {
-  //     p = fs::path("src/");
-  //   }
-  //   if (p.filename() == "src") {
-  //     p = fs::path("src/");
-  //   }
-  //   if (p.filename() == "tests") {
-  //     p = fs::path("tests/");
-  //   }
-  // }
+ public:
+  MyTest() {
+    fs::path obj("src/Obj");
+    fs::path cur_path = fs::current_path();
+    auto cur = --(cur_path.end());
+    for (; std::find(obj.begin(), obj.end(), *cur) == obj.end() &&
+           *cur != "3DViewer_v2.0";
+         --cur) {
+      pref /= "..";
+    }
+    if (*cur == "3DViewer_v2.0") {
+      pref /= obj;
+    } else {
+      for (auto it1 = std::find(obj.begin(), obj.end(), *cur); it1 != obj.end();
+           it1++) {
+        pref /= *it1;
+      }
+    }
+  }
 
  protected:
   Model *m = Model::getInstance();
-  // fs::path p = fs::current_path();
+  fs::path pref;
   // std::string prefix = p.string();
 };
 
 TEST_F(MyTest, test) {
-  m->setFilename("../../../src/Obj/cube.obj");
-  fs::path p = fs::current_path();
-  std::cout << "p.string() = " << p.string() << std::endl;
-
+  m->setFilename(pref.string() + "/cube.obj");
   EXPECT_NO_THROW(m->Parse());
   EXPECT_EQ(m->getPolygonsCount(), 10);
   EXPECT_EQ(m->getVerticesCount(), 8);
@@ -52,7 +61,7 @@ TEST_F(MyTest, test) {
 }
 
 TEST_F(MyTest, test2) {
-  m->setFilename("../../../src/Obj/cube_negate.obj");
+  m->setFilename(pref.string() + "/cube_negate.obj");
   EXPECT_NO_THROW(m->Parse());
   EXPECT_EQ(m->getPolygonsCount(), 6);
   EXPECT_EQ(m->getVerticesCount(), 8);

@@ -1,4 +1,8 @@
+#include <filesystem>
+
 #include "Model/model.h"
+
+namespace fs = std::filesystem;
 
 Model* Model::instance_ = nullptr;
 
@@ -19,11 +23,22 @@ int main() {
   } catch (const std::exception& e) {
     std::cerr << e.what() << " Error" << '\n';
   }
-  // Controller c(model);
-  // auto x = c.getPolygon(0).data();
-  // for (size_t i = 0; i < c.getPolygon(0).size(); ++i) {
-  //   std::cout << i << " " << (x + i) << std::endl;
-  // }
-  // c.Print();
+  fs::path pref;
+  fs::path obj("3DViewer_v2.0/src/Obj");
+  fs::path cur_path = fs::current_path();
+  auto dir = cur_path.end();
+  --dir;
+  while (std::find(obj.begin(), obj.end(), *dir) == obj.end()) {
+    --dir;
+    pref /= "..";
+  }
+
+  auto it1 = std::find(obj.begin(), obj.end(), *dir);
+  for (; it1 != obj.end(); it1++) {
+    pref /= *it1;
+  }
+
+  std::cout << pref.string() << std::endl;
+
   return 0;
 }
