@@ -17,6 +17,7 @@ class MyTest : public ::testing::Test {
     fs::path obj("src/Obj");
     fs::path cur_path = fs::current_path();
     auto cur = --(cur_path.end());
+    std::cout << "cur_path = " << cur_path << std::endl;
     for (; std::find(obj.begin(), obj.end(), *cur) == obj.end() &&
            *cur != "3DViewer_v2.0";
          --cur) {
@@ -30,6 +31,7 @@ class MyTest : public ::testing::Test {
         pref /= *it1;
       }
     }
+    std::cout << "pref = " << pref << std::endl;
   }
 
  protected:
