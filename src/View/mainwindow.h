@@ -32,6 +32,9 @@ class MainWindow : public QMainWindow {
   void on_move_y_valueChanged(int value);
   void on_move_z_valueChanged(int value);
 
+  // Style
+  void on_projection_type_currentIndexChanged(int index);
+
  private:
   Ui::MainWindow *ui;
   Controller *controller_;

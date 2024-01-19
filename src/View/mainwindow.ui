@@ -91,11 +91,11 @@
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QFrame" name="frame">
+        <widget class="QFrame" name="manipulate_frame">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>100</y>
+           <y>360</y>
            <width>301</width>
            <height>351</height>
           </rect>
@@ -366,6 +366,67 @@
             <property name="text">
              <string>Go</string>
             </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QTabWidget" name="style_tab">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>140</y>
+           <width>301</width>
+           <height>191</height>
+          </rect>
+         </property>
+         <property name="currentIndex">
+          <number>2</number>
+         </property>
+         <widget class="QWidget" name="tab_3">
+          <attribute name="title">
+           <string>Vertices</string>
+          </attribute>
+         </widget>
+         <widget class="QWidget" name="tab">
+          <attribute name="title">
+           <string>Edges</string>
+          </attribute>
+         </widget>
+         <widget class="QWidget" name="tab_2">
+          <attribute name="title">
+           <string>Background</string>
+          </attribute>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="">
+         <property name="geometry">
+          <rect>
+           <x>16</x>
+           <y>101</y>
+           <width>271</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <widget class="QLabel" name="projection_title">
+            <property name="text">
+             <string>Type of Projection</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="projection_type">
+            <item>
+             <property name="text">
+              <string>Parallel</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Central</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>

@@ -18,16 +18,17 @@ class MyTest : public ::testing::Test {
     fs::path cur_path = fs::current_path();
     auto cur = --(cur_path.end());
     std::cout << "cur_path = " << cur_path << std::endl;
-    for (; std::find(obj.begin(), obj.end(), *cur) == obj.end() &&
-           *cur != "3DViewer_v2.0";
-         --cur) {
+    while (std::find(obj.begin(), obj.end(), *cur) == obj.end() &&
+           *cur != "3DViewer_v2.0") {
+      --cur;
       pref /= "..";
     }
+    std::cout << "cur = " << *cur << std::endl;
     if (*cur == "3DViewer_v2.0") {
       pref /= obj;
     } else {
-      for (auto it1 = std::find(obj.begin(), obj.end(), *cur); it1 != obj.end();
-           it1++) {
+      for (auto it1 = (++std::find(obj.begin(), obj.end(), *cur));
+           it1 != obj.end(); it1++) {
         pref /= *it1;
       }
     }

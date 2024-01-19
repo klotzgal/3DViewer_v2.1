@@ -82,3 +82,13 @@ void MainWindow::on_move_z_valueChanged(int value) {
   controller_->Move(0, 0, k);
   ui->GLWidget->update();
 }
+
+void MainWindow::on_projection_type_currentIndexChanged(int index)
+{
+    if (index == 0) {
+        ui->GLWidget->projection_type = 0;
+    } else if (index == 1) {
+        ui->GLWidget->projection_type = 1;
+    }
+    ui->GLWidget->update();
+}

@@ -34,14 +34,14 @@ void MyGLWidget::paintGL() {
 void MyGLWidget::setProjection() {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  //  if (this->projection_type == 0) {
-  //    glFrustum(-1, 1, -1, 1, 1, 1000);
-  //    glTranslatef(0, 0, -2);
-  //    glRotatef(30, 1, 0, 0);
-  //  } else {
-  //    glOrtho(-1, 1, -1, 1, -1, 1000);
-  //    glTranslatef(0, -1 / 2, 0);
-  //  }
+  if (this->projection_type == 0) {
+    glFrustum(-1, 1, -1, 1, 1, 1000);
+    glTranslatef(0, 0, -2);
+    glRotatef(30, 1, 0, 0);
+  } else {
+    glOrtho(-1, 1, -1, 1, -1, 1000);
+    glTranslatef(0, -1 / 2, 0);
+  }
 }
 
 void MyGLWidget::buildPoints() {
@@ -122,7 +122,7 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *event) {
   cur_pos = event->globalPosition().toPoint();
   qDebug() << delta.x() * 0.5 << delta.y() * 0.5;
   if (event->buttons() & Qt::LeftButton) {
-    controller_->Rotate(delta.y() * 0.5, delta.x() * 0.5, 0);
+    controller_->Rotate(-delta.y() * 0.5, -delta.x() * 0.5, 0);
   } else if (event->buttons() & Qt::RightButton) {
     controller_->Move(-delta.x() * 0.0005, delta.y() * 0.0005, 0);
   }
