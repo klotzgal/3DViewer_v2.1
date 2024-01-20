@@ -14,19 +14,20 @@ void MyGLWidget::initializeGL() {
 }
 
 void MyGLWidget::resizeGL(int w, int h) {
-  //  w = h;
+  setFixedWidth(h);
   glViewport(0, 0, w, h);
 }
 
 void MyGLWidget::paintGL() {
-  glClearColor(bg_red, bg_green, bg_blue, 1);
+  glClearColor(bg_color.redF(), bg_color.greenF(), bg_color.blueF(),
+               bg_color.alphaF());
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   setProjection();
   if (!controller_->isEmpty()) {
-    // if (this->v_display_method != 0) {
-    buildPoints();
-    // }
+    if (this->vert_type != 0) {
+      buildPoints();
+    }
     buildLines();
   }
 }
@@ -45,11 +46,11 @@ void MyGLWidget::setProjection() {
 }
 
 void MyGLWidget::buildPoints() {
-  if (this->v_display_method == 1) {
+  if (vert_type == 1) {
     glEnable(GL_POINT_SMOOTH);
   }
-  glPointSize(this->vertices_size);
-  glColor3f(this->v_red, this->v_green, this->v_blue);
+  glPointSize(vert_size);
+  glColor3f(vert_color.redF(), vert_color.greenF(), vert_color.blueF());
   for (size_t i = 0; i < controller_->getVerticesCount(); i++) {
     GLdouble x = controller_->getX(i);
     GLdouble y = controller_->getY(i);
@@ -58,21 +59,19 @@ void MyGLWidget::buildPoints() {
     glVertex3d(x, y, z);
     glEnd();
   }
-  if (this->v_display_method == 1) {
+  if (this->vert_type == 1) {
     glDisable(GL_POINT_SMOOTH);
   }
 }
 
 void MyGLWidget::buildLines() {
-  // if (this->edges_type == 1) {
-  //   glEnable(GL_LINE_STIPPLE);
-  //   glLineStipple(1, 0x00FF);
-  // }
+  if (this->edges_type == 1) {
+    glEnable(GL_LINE_STIPPLE);
+    glLineStipple(1, 0x00FF);
+  }
 
-  glLineWidth(this->edges_thickness);
-  glColor3f(this->e_red, this->e_green, this->e_blue);
-  //  for (size_t i = 0; i < controller_->getPolygonsCount(); i++) {
-  // controller_->getPolygon(0).numbers_of_vertexes_in_polygons
+  glLineWidth(edges_size);
+  glColor3f(edges_color.redF(), edges_color.greenF(), edges_color.blueF());
 
   for (size_t i = 0; i < controller_->getPolygonsCount(); ++i) {
     glBegin(GL_LINE_LOOP);
@@ -87,22 +86,14 @@ void MyGLWidget::buildLines() {
     }
     glEnd();
   }
-
-  //  }
-  // lines that close
-  // if (this->edges_type == 1) {
-  //   glDisable(GL_LINE_STIPPLE);
-  // }
+  if (this->edges_type == 1) {
+    glDisable(GL_LINE_STIPPLE);
+  }
 }
 
 void MyGLWidget::parseObj() {
-  //  controller_->setFilename(
-  //      "/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/skull.obj");
-  //  //  /Users/klotzgal/Desktop/kl/3DViewer_v2.0/src/Obj/skull.obj
-  //  //  /home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/Obj/cube.obj
   try {
     controller_->Parse();
-    //    controller_->Scale(0.5);
   } catch (const std::exception &e) {
     std::cerr << e.what() << "parse Error" << '\n';
     QMessageBox warning = QMessageBox();

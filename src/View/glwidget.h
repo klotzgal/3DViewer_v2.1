@@ -33,29 +33,25 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   GLdouble move_x;
   GLdouble move_y;
   GLdouble move_z;
-  GLdouble vertices_size = 1;
-  GLdouble edges_thickness = 1;
+
+  GLdouble vert_size = 1;
+  GLdouble edges_size = 1;
   GLint projection_type = 0;
-  GLint v_display_method = 0;
+  GLint vert_type = 0;
   GLint edges_type = 0;
-  GLdouble v_red = 1, v_green = 1, v_blue = 1;
-  GLdouble e_red = 1, e_green = 1, e_blue = 1;
-  GLdouble bg_red = 0, bg_green = 0, bg_blue = 0;
+  QColor bg_color;
+  QColor vert_color;
+  QColor edges_color;
   /* 3D MODEL DATA END  */
 
-  // 3D OBJ DATA
-  char *filename;
-  // obj_data data = {0, NULL, 0, NULL};
+  void setController(Controller *controller) { controller_ = controller; }
 
   // OPENGL
-  void setController(Controller *controller) { controller_ = controller; }
   void initializeGL() override;
   void resizeGL(int w, int h) override;
   void paintGL() override;
 
   void parseObj();
-
-  GLfloat normalize_coef;
 
   // MouseMoveControl
   void mousePressEvent(QMouseEvent *event) override;
