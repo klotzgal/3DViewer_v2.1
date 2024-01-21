@@ -26,6 +26,9 @@ void MainWindow::load_settings() {
   ui->bg_color->setStyleSheet(
       "background-color: rgb(" + QString::number(c.red()) + "," +
       QString::number(c.green()) + "," + QString::number(c.blue()) + ")");
+  setStyleSheet(
+              "background-color: rgb(" + QString::number(c.red()) + "," +
+              QString::number(c.green()) + "," + QString::number(c.blue()) + ")");
   c = settings->value("vert_color", QColor(1, 1, 1)).value<QColor>();
   ui->GLWidget->vert_color = c;
   ui->vert_color->setStyleSheet(
@@ -42,7 +45,7 @@ void MainWindow::load_settings() {
   ui->GLWidget->edges_size = settings->value("edges_size", 1).toDouble();
   ui->edges_size->setValue(ui->GLWidget->edges_size);
   // Type
-  ui->GLWidget->vert_type = settings->value("vert_type", 0).toDouble();
+  ui->GLWidget->vert_type = settings->value("vert_type", 1).toDouble();
   if (ui->GLWidget->vert_type == 0) {
       ui->vert_none->setChecked(true);
   } else if (ui->GLWidget->vert_type == 1) {
@@ -157,10 +160,12 @@ void MainWindow::on_bg_color_clicked() {
       QColorDialog::getColor(Qt::white, ui->bg_tab, "Choose background color");
   if (bg_color.isValid()) {
     ui->GLWidget->bg_color = bg_color;
-    ui->bg_color->setStyleSheet("background-color: rgb(" +
-                                QString::number(bg_color.red()) + "," +
-                                QString::number(bg_color.green()) + "," +
-                                QString::number(bg_color.blue()) + ")");
+    QString style = "background-color: rgb(" +
+            QString::number(bg_color.red()) + "," +
+            QString::number(bg_color.green()) + "," +
+            QString::number(bg_color.blue()) + ")";
+    ui->bg_color->setStyleSheet(style);
+    setStyleSheet(style);
     ui->GLWidget->update();
   }
 }
