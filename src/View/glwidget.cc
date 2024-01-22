@@ -109,22 +109,29 @@ void MyGLWidget::mousePressEvent(QMouseEvent *event) {
 }
 
 void MyGLWidget::mouseMoveEvent(QMouseEvent *event) {
+  if (controller_->isEmpty()) {
+    return;
+  }
   QPoint delta = cur_pos - event->globalPosition().toPoint();
   cur_pos = event->globalPosition().toPoint();
   qDebug() << delta.x() * 0.5 << delta.y() * 0.5;
   if (event->buttons() & Qt::LeftButton) {
     controller_->Rotate(-delta.y() * 0.5, -delta.x() * 0.5, 0);
   } else if (event->buttons() & Qt::RightButton) {
-    controller_->Move(-delta.x() * 0.0005, delta.y() * 0.0005, 0);
+    controller_->Move(-delta.x() * 0.002, delta.y() * 0.002, 0);
   }
   update();
 }
 
 void MyGLWidget::wheelEvent(QWheelEvent *event) {
+  if (controller_->isEmpty()) {
+    return;
+  }
   if (event->angleDelta().y() < 0) {
     controller_->Scale(0.9);
   } else {
     controller_->Scale(1.1);
   }
+
   update();
 }

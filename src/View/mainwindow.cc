@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent, Controller *controller)
   ui->setupUi(this);
   ui->GLWidget->setController(controller_);
   settings = new QSettings("School_21", "3D_Viewer", this);
+  setWindowTitle("3D_Viewer");
   load_settings();
 }
 
@@ -24,21 +25,21 @@ void MainWindow::load_settings() {
   QColor c = settings->value("bg_color", QColor(0, 0, 0)).value<QColor>();
   ui->GLWidget->bg_color = c;
   ui->bg_color->setStyleSheet(
-      "background-color: rgb(" + QString::number(c.red()) + "," +
-      QString::number(c.green()) + "," + QString::number(c.blue()) + ")");
+      "background-color: rgb(" % QString::number(c.red()) % "," %
+      QString::number(c.green()) % "," % QString::number(c.blue()) % ")");
   setStyleSheet(
-              "background-color: rgb(" + QString::number(c.red()) + "," +
-              QString::number(c.green()) + "," + QString::number(c.blue()) + ")");
+              "background-color: rgb(" % QString::number(c.red()) % "," %
+              QString::number(c.green()) % "," % QString::number(c.blue()) % ")");
   c = settings->value("vert_color", QColor(1, 1, 1)).value<QColor>();
   ui->GLWidget->vert_color = c;
   ui->vert_color->setStyleSheet(
-      "background-color: rgb(" + QString::number(c.red()) + "," +
-      QString::number(c.green()) + "," + QString::number(c.blue()) + ")");
+      "background-color: rgb(" % QString::number(c.red()) % "," %
+      QString::number(c.green()) % "," % QString::number(c.blue()) % ")");
   c = settings->value("edges_color", QColor(1, 1, 1)).value<QColor>();
   ui->GLWidget->edges_color = c;
   ui->edges_color->setStyleSheet(
-      "background-color: rgb(" + QString::number(c.red()) + "," +
-      QString::number(c.green()) + "," + QString::number(c.blue()) + ")");
+      "background-color: rgb(" % QString::number(c.red()) % "," %
+      QString::number(c.green()) % "," % QString::number(c.blue()) % ")");
   // Size
   ui->GLWidget->vert_size = settings->value("vert_size", 1).toDouble();
   ui->vert_size->setValue(ui->GLWidget->vert_size);
@@ -85,7 +86,11 @@ void MainWindow::on_open_file_clicked() {
   controller_->setFilename(filename);
   std::cout << controller_->getFilename() << std::endl;
   ui->label->setText(filename);
+  QString name = filename.right(filename.size() - filename.lastIndexOf('/') - 1);
+  ui->filename->setText(name.left(name.lastIndexOf('.')));
   ui->GLWidget->parseObj();
+  ui->vert_count->setText(QString::number(controller_->getVerticesCount()));
+  ui->edges_count->setText(QString::number(controller_->getPolygonsCount()));
   ui->GLWidget->update();
 }
 
@@ -160,10 +165,10 @@ void MainWindow::on_bg_color_clicked() {
       QColorDialog::getColor(Qt::white, ui->bg_tab, "Choose background color");
   if (bg_color.isValid()) {
     ui->GLWidget->bg_color = bg_color;
-    QString style = "background-color: rgb(" +
-            QString::number(bg_color.red()) + "," +
-            QString::number(bg_color.green()) + "," +
-            QString::number(bg_color.blue()) + ")";
+    QString style = "background-color: rgb(" %
+            QString::number(bg_color.red()) % "," %
+            QString::number(bg_color.green()) % "," %
+            QString::number(bg_color.blue()) % ")";
     ui->bg_color->setStyleSheet(style);
     setStyleSheet(style);
     ui->GLWidget->update();
@@ -176,10 +181,10 @@ void MainWindow::on_vert_color_clicked() {
                                              "Choose background color");
   if (vert_color.isValid()) {
     ui->GLWidget->vert_color = vert_color;
-    ui->vert_color->setStyleSheet("background-color: rgb(" +
-                                  QString::number(vert_color.red()) + "," +
-                                  QString::number(vert_color.green()) + "," +
-                                  QString::number(vert_color.blue()) + ")");
+    ui->vert_color->setStyleSheet("background-color: rgb(" %
+                                  QString::number(vert_color.red()) % "," %
+                                  QString::number(vert_color.green()) % "," %
+                                  QString::number(vert_color.blue()) % ")");
     ui->GLWidget->update();
   }
 }
@@ -190,10 +195,10 @@ void MainWindow::on_edges_color_clicked() {
       QColorDialog::getColor(Qt::white, ui->edges_tab, "Choose edges color");
   if (edges_color.isValid()) {
     ui->GLWidget->edges_color = edges_color;
-    ui->edges_color->setStyleSheet("background-color: rgb(" +
-                                   QString::number(edges_color.red()) + "," +
-                                   QString::number(edges_color.green()) + "," +
-                                   QString::number(edges_color.blue()) + ")");
+    ui->edges_color->setStyleSheet("background-color: rgb(" %
+                                   QString::number(edges_color.red()) % "," %
+                                   QString::number(edges_color.green()) % "," %
+                                   QString::number(edges_color.blue()) % ")");
     ui->GLWidget->update();
   }
 }
