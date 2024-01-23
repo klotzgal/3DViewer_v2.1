@@ -48,11 +48,8 @@ jobs:
       - name: Get gtest
         uses: Bacondish2023/setup-googletest@v1
 
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v3
-
-      - name: OpenGL Actions
-        uses: NishkarshRaj/OpenGL_Actions@1.0
+      # - name: Install Qt
+      #   uses: jurplel/install-qt-action@v3
 
       - name: Configure CMake
         # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
