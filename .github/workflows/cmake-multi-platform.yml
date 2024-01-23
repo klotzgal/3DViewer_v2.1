@@ -44,8 +44,15 @@ jobs:
         shell: bash
         run: |
           echo "build-output-dir=build" >> "$GITHUB_OUTPUT"
+
       - name: Get gtest
         uses: Bacondish2023/setup-googletest@v1
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+
+      - name: OpenGL Actions
+        uses: NishkarshRaj/OpenGL_Actions@1.0
 
       - name: Configure CMake
         # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
@@ -55,7 +62,7 @@ jobs:
           -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
           -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-          -S ${{ github.workspace }}
+          -S ${{ github.workspace }}/src/test
 
       - name: Build
         # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).

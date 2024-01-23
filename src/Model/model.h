@@ -19,24 +19,24 @@ class Model {
   ~Model();
   void setFilename(const std::string &filename) { filename_ = filename; }
   std::string getFilename() const noexcept { return filename_; }
-  void Parse();
-  void Print() { data_->Print(); }
+  void parse();
+  void print() { data_->print(); }
   bool isEmpty() { return data_->isEmpty(); }
 
   // Strategy
-  void ChangeModel(IStrategy *strategy, double value) {
+  void changeModel(IStrategy *strategy, double value) {
     if (strategy) strategy->exec(*data_, value);
   }
 
   // Getters
   data *getData() const noexcept { return data_; }
 
-  size_t getVerticesCount() const noexcept { return data_->vertices_count; }
-  size_t getPolygonsCount() const noexcept { return data_->polygons_count; }
-  double getX(int i) const noexcept { return (*data_->vertices)(i, 0); }
-  double getY(int i) const noexcept { return (*data_->vertices)(i, 1); }
-  double getZ(int i) const noexcept { return (*data_->vertices)(i, 2); }
-  std::vector<size_t> &getPolygon(int i) noexcept { return data_->polygons[i]; }
+  size_t getPolygonsCount() const noexcept { return data_->polygons.size(); }
+  double getX(int i) const noexcept { return data_->vertices[i * 3]; }
+  double getY(int i) const noexcept { return data_->vertices[i * 3 + 1]; }
+  double getZ(int i) const noexcept { return data_->vertices[i * 3 + 2]; }
+  std::vector<double> &getVertices() noexcept { return data_->vertices; }
+  std::vector<uint> &getPolygon(int i) noexcept { return data_->polygons[i]; }
 
  private:
   std::string filename_;

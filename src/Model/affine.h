@@ -13,7 +13,7 @@ class IStrategy {
   virtual void exec(Parser::data &data, double value) = 0;
 };
 
-class ScaleM : public IStrategy {
+class Scale : public IStrategy {
  public:
   void exec(Parser::data &data, double value) override;
 };

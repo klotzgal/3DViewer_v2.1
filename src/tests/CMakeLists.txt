@@ -1,6 +1,13 @@
-if (BUILD_TESTING)
+# if (BUILD_TESTING)
 
-  # find_package(GTest REQUIRED)
+cmake_minimum_required(VERSION 3.5)
+
+project(test VERSION 1.0 LANGUAGES CXX)
+SET (CMAKE_RUNTIME_OUTPUT_DIRECTORY
+        ${PROJECT_BINARY_DIR}/bin
+        CACHE PATH
+        "Single Directory for all"
+    )
 
   add_executable(unit_tests test.cc ../Model/model.cc ../Model/parser.cc ../Model/affine.cc)
   
@@ -12,9 +19,13 @@ if (BUILD_TESTING)
   )
   
   FetchContent_MakeAvailable(gtest)
-
-  target_link_libraries(unit_tests matrix GTest::gtest_main)
+  include(CTest)
+  enable_testing() 
+  target_link_libraries(unit_tests GTest::gtest_main)
   include(GoogleTest)
   gtest_discover_tests(unit_tests)
+  add_test(NAME unit_tests COMMAND unit_tests)
+ 
 
-endif()
+# endif()
+

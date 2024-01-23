@@ -11,46 +11,33 @@
 #include <vector>
 
 // #include "../Libs/omp.h"
-#include "../Libs/s21_matrix_oop.h"
+// #include "../Libs/s21_matrix_oop.h"
 
 class Parser {
  public:
   Parser();
   ~Parser();
   struct data {
-    size_t vertices_count;
-    size_t polygons_count;
-    S21Matrix *vertices;
-    std::vector<std::vector<size_t>> polygons;
+    std::vector<double> vertices;
+    std::vector<std::vector<uint>> polygons;
     double max;
-    data()
-        : vertices_count(0),
-          polygons_count(0),
-          vertices(nullptr),
-          polygons(0, std::vector<size_t>(0)),
-          max(-1) {}
-    ~data() {
-      delete vertices;
-      polygons.clear();
-      vertices_count = 0;
-      polygons_count = 0;
-    }
+    data() : vertices(0, 0), polygons(0, std::vector<uint>(0)), max(-1) {}
+    bool isEmpty() { return vertices.size() / 3 == 0 || polygons.size() == 0; }
 
-    bool isEmpty() { return vertices_count == 0 || polygons_count == 0; }
-
-    void Print() {
+    void print() {
       std::cout << std::fixed;
-      std::cout << "vertices_count = " << vertices_count << std::endl;
-      std::cout << "polygons_count = " << polygons_count << std::endl;
+      std::cout << "vertices_count = " << vertices.size() / 3 << std::endl;
+      std::cout << "polygons_count = " << polygons.size() << std::endl;
       if (!isEmpty()) {
         std::cout << "vertices:" << std::endl;
-        for (size_t i = 0; i < vertices_count; i++) {
-          std::cout << i + 1 << " " << std::setprecision(15)
-                    << (*vertices)(i, 0) << " " << (*vertices)(i, 1) << " "
-                    << (*vertices)(i, 2) << std::endl;
+        for (size_t i = 0; i < vertices.size(); i += 3) {
+          std::cout << i / 3 << " " << std::setprecision(15) << vertices[i]
+                    << " " << vertices[i + 1] << " " << vertices[i + 2]
+                    << std::endl;
         }
-        std::cout << "polygons = " << polygons.capacity() << std::endl;
-        for (size_t i = 0; i < polygons_count; i++) {
+        std::cout << "polygons.capacity() = " << polygons.capacity()
+                  << std::endl;
+        for (size_t i = 0; i < polygons.size(); i++) {
           std::cout << polygons[i].size() << " ";
           for (size_t j = 0; j < polygons[i].size(); j++) {
             std::cout << polygons[i][j] << " ";
@@ -61,14 +48,12 @@ class Parser {
     }
   };
 
-  void Parse(const std::string filename, data *data);
+  void parse(const std::string filename, data *data);
 
  private:
-  void CountVAndF(std::ifstream &file, data *data);
-  void ParseVAndF(std::ifstream &file, data *data);
-  void DataMemoryAllocation(data *data);
-  void DataMemoryDeAllocation(data *data);
-  void NormalizeVertices(data *data);
+  void parseVAndF(std::ifstream &file, data *data);
+  void cleanData(data *data);
+  void normalizeVertices(data *data);
 };
 
 #endif  // CPP4_3DVIEWER_V2_0_SRC_MODEL_PARSER_H

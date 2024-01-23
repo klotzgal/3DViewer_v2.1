@@ -24,11 +24,29 @@ void MyGLWidget::paintGL() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   setProjection();
+
   if (!controller_->isEmpty()) {
+
+    glVertexPointer(3, GL_DOUBLE, 0, controller_->getVertices().data());
+    GLdouble **VERT = nullptr;
+    glGetPointerv(GL_VERTEX_ARRAY_POINTER, (GLvoid**)VERT);
+    glEnableClientState(GL_VERTEX_ARRAY);
     if (this->vert_type != 0) {
       buildPoints();
     }
+
+    std::cout << "VERT = " << VERT << std::endl;
+    if (VERT){
+        for (size_t i = 0; i < controller_->getVertices().size(); ++i) {
+            for (size_t j = 0; j < 3; ++j){
+                std::cout << VERT[j][i] << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
+    qDebug() << glGetError();
     buildLines();
+    glDisableClientState(GL_VERTEX_ARRAY);
   }
 }
 
@@ -37,10 +55,10 @@ void MyGLWidget::setProjection() {
   glLoadIdentity();
   if (this->projection_type == 0) {
     glFrustum(-1, 1, -1, 1, 1, 1000);
-    glTranslatef(0, 0, -2);
+    glTranslatef(0, 0, -4);
     glRotatef(30, 1, 0, 0);
   } else {
-    glOrtho(-1, 1, -1, 1, -1, 1000);
+    glOrtho(-1, 1, -1, 1, -5, 1000);
     glTranslatef(0, -1 / 2, 0);
   }
 }
@@ -51,14 +69,9 @@ void MyGLWidget::buildPoints() {
   }
   glPointSize(vert_size);
   glColor3f(vert_color.redF(), vert_color.greenF(), vert_color.blueF());
-  for (size_t i = 0; i < controller_->getVerticesCount(); i++) {
-    GLdouble x = controller_->getX(i);
-    GLdouble y = controller_->getY(i);
-    GLdouble z = controller_->getZ(i);
-    glBegin(GL_POINTS);
-    glVertex3d(x, y, z);
-    glEnd();
-  }
+
+  glDrawArrays(GL_POINTS, 0, controller_->getVertices().size() / 3);
+
   if (this->vert_type == 1) {
     glDisable(GL_POINT_SMOOTH);
   }
@@ -74,18 +87,10 @@ void MyGLWidget::buildLines() {
   glColor3f(edges_color.redF(), edges_color.greenF(), edges_color.blueF());
 
   for (size_t i = 0; i < controller_->getPolygonsCount(); ++i) {
-    glBegin(GL_LINE_LOOP);
-    for (size_t j = 0; j < controller_->getPolygon(i).size(); ++j) {
-      GLint point = controller_->getPolygon(i)[j];
-      GLdouble x = controller_->getX(point);
-      GLdouble y = controller_->getY(point);
-      GLdouble z = controller_->getZ(point);
-
-      glVertex3d(x, y, z);
-      //            qDebug() << i << x << y << z;
-    }
-    glEnd();
+    glDrawElements(GL_LINE_LOOP, controller_->getPolygon(i).size(),
+                   GL_UNSIGNED_INT, controller_->getPolygon(i).data());
   }
+
   if (this->edges_type == 1) {
     glDisable(GL_LINE_STIPPLE);
   }
@@ -93,7 +98,8 @@ void MyGLWidget::buildLines() {
 
 void MyGLWidget::parseObj() {
   try {
-    controller_->Parse();
+    controller_->parse();
+    controller_->print();
   } catch (const std::exception &e) {
     std::cerr << e.what() << "parse Error" << '\n';
     QMessageBox warning = QMessageBox();
@@ -116,9 +122,9 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *event) {
   cur_pos = event->globalPosition().toPoint();
   qDebug() << delta.x() * 0.5 << delta.y() * 0.5;
   if (event->buttons() & Qt::LeftButton) {
-    controller_->Rotate(-delta.y() * 0.5, -delta.x() * 0.5, 0);
+    controller_->rotate(-delta.y() * 0.5, delta.x() * 0.5, 0);
   } else if (event->buttons() & Qt::RightButton) {
-    controller_->Move(-delta.x() * 0.002, delta.y() * 0.002, 0);
+    controller_->move(-delta.x() * 0.002, delta.y() * 0.002, 0);
   }
   update();
 }
@@ -128,9 +134,9 @@ void MyGLWidget::wheelEvent(QWheelEvent *event) {
     return;
   }
   if (event->angleDelta().y() < 0) {
-    controller_->Scale(0.9);
+    controller_->scale(0.9);
   } else {
-    controller_->Scale(1.1);
+    controller_->scale(1.1);
   }
 
   update();

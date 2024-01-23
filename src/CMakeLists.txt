@@ -32,7 +32,7 @@ SET (CMAKE_ARCHIVE_OUTPUT_DIRECTORY
     )
 
     # find_package(OpenGL REQUIRED)
-    find_package(GLUT REQUIRED)
+    # find_package(GLUT REQUIRED)
     # find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets OpenGL REQUIRED)
     
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
@@ -55,8 +55,6 @@ set(PROJECT_SOURCES
         Model/parser.cc
         Controller/controller.cc
 )
-
-add_library(matrix STATIC Libs/s21_matrix_oop.cc)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(3DViewer
@@ -85,8 +83,7 @@ target_link_libraries(3DViewer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::OpenGL
     Qt${QT_VERSION_MAJOR}::OpenGLWidgets
     ${OPENGL_LIBRARIES}
-    ${GLUT_LIBRARY}
-    matrix
+    # ${GLUT_LIBRARY}
     )
 
 set_target_properties(3DViewer PROPERTIES

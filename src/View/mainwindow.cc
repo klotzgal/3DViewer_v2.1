@@ -12,8 +12,7 @@ MainWindow::MainWindow(QWidget *parent, Controller *controller)
   load_settings();
 }
 
-MainWindow::~MainWindow() {
-  save_settings();
+MainWindow::~MainWindow() { save_settings();
   delete settings;
   delete ui;
 }
@@ -22,14 +21,16 @@ void MainWindow::load_settings() {
   // Projection
   ui->GLWidget->projection_type = settings->value("projection_type", 0).toInt();
   // Colors
-  QColor c = settings->value("bg_color", QColor(0, 0, 0)).value<QColor>();
+  QColor color = QColor("#1E0F3D");
+  QColor c = settings->value("bg_color", color).value<QColor>();
+  qDebug() << color.name() << color.HexArgb;
   ui->GLWidget->bg_color = c;
   ui->bg_color->setStyleSheet(
       "background-color: rgb(" % QString::number(c.red()) % "," %
       QString::number(c.green()) % "," % QString::number(c.blue()) % ")");
-  setStyleSheet(
-              "background-color: rgb(" % QString::number(c.red()) % "," %
-              QString::number(c.green()) % "," % QString::number(c.blue()) % ")");
+  setStyleSheet("background-color: rgb(" % QString::number(c.red()) % "," %
+                QString::number(c.green()) % "," % QString::number(c.blue()) %
+                ")");
   c = settings->value("vert_color", QColor(1, 1, 1)).value<QColor>();
   ui->GLWidget->vert_color = c;
   ui->vert_color->setStyleSheet(
@@ -48,17 +49,17 @@ void MainWindow::load_settings() {
   // Type
   ui->GLWidget->vert_type = settings->value("vert_type", 1).toDouble();
   if (ui->GLWidget->vert_type == 0) {
-      ui->vert_none->setChecked(true);
+    ui->vert_none->setChecked(true);
   } else if (ui->GLWidget->vert_type == 1) {
-      ui->vert_circle->setChecked(true);
-  } else if (ui->GLWidget->vert_type == 2){
-      ui->vert_square->setChecked(true);
+    ui->vert_circle->setChecked(true);
+  } else if (ui->GLWidget->vert_type == 2) {
+    ui->vert_square->setChecked(true);
   }
   ui->GLWidget->edges_type = settings->value("edges_type", 0).toDouble();
   if (ui->GLWidget->edges_type == 0) {
-      ui->edges_solid->setChecked(true);
+    ui->edges_solid->setChecked(true);
   } else if (ui->GLWidget->edges_type == 1) {
-      ui->edges_dashed->setChecked(true);
+    ui->edges_dashed->setChecked(true);
   }
 }
 
@@ -86,67 +87,69 @@ void MainWindow::on_open_file_clicked() {
   controller_->setFilename(filename);
   std::cout << controller_->getFilename() << std::endl;
   ui->label->setText(filename);
-  QString name = filename.right(filename.size() - filename.lastIndexOf('/') - 1);
+  QString name =
+      filename.right(filename.size() - filename.lastIndexOf('/') - 1);
   ui->filename->setText(name.left(name.lastIndexOf('.')));
   ui->GLWidget->parseObj();
-  ui->vert_count->setText(QString::number(controller_->getVerticesCount()));
+  ui->vert_count->setText(
+      QString::number(controller_->getVertices().size() / 3));
   ui->edges_count->setText(QString::number(controller_->getPolygonsCount()));
   ui->GLWidget->update();
 }
 
 void MainWindow::on_scale_valueChanged(int value) {
   GLdouble k = (double)value / ui->GLWidget->scale_val;
-  qDebug() << "k =" << k;
+  //  qDebug() << "k =" << k;
   ui->GLWidget->scale_val = value;
-  controller_->Scale(k);
+  controller_->scale(k);
   ui->GLWidget->update();
 }
 
 void MainWindow::on_rotate_x_valueChanged(int value) {
   GLdouble k = (double)value - ui->GLWidget->rotate_x;
-  qDebug() << "k =" << k;
+  //  qDebug() << "k =" << k;
   ui->GLWidget->rotate_x = value;
-  controller_->Rotate(k, 0, 0);
+  controller_->rotate(k, 0, 0);
   ui->GLWidget->update();
 }
 
 void MainWindow::on_rotate_y_valueChanged(int value) {
   GLdouble k = (double)value - ui->GLWidget->rotate_y;
-  qDebug() << "k =" << k;
+  //  qDebug() << "k =" << k;
   ui->GLWidget->rotate_y = value;
-  controller_->Rotate(0, k, 0);
+  controller_->rotate(0, k, 0);
   ui->GLWidget->update();
 }
 
 void MainWindow::on_rotate_z_valueChanged(int value) {
   GLdouble k = (double)value - ui->GLWidget->rotate_z;
-  qDebug() << "k =" << k;
+  //  qDebug() << "k =" << k;
   ui->GLWidget->rotate_z = value;
-  controller_->Rotate(0, 0, k);
+  controller_->rotate(0, 0, k);
   ui->GLWidget->update();
 }
 
 void MainWindow::on_move_x_valueChanged(int value) {
   GLdouble k = ((double)value - ui->GLWidget->move_x) * 0.01;
-  qDebug() << "k =" << k;
+  //  qDebug() << "k =" << k;
   ui->GLWidget->move_x = value;
-  controller_->Move(k, 0, 0);
+  controller_->move(k, 0, 0);
   ui->GLWidget->update();
 }
 
 void MainWindow::on_move_y_valueChanged(int value) {
   GLdouble k = ((double)value - ui->GLWidget->move_y) * 0.01;
-  qDebug() << "k =" << k;
+  //  qDebug() << "k =" << k;
   ui->GLWidget->move_y = value;
-  controller_->Move(0, k, 0);
+  controller_->move(0, k, 0);
   ui->GLWidget->update();
 }
 
 void MainWindow::on_move_z_valueChanged(int value) {
   GLdouble k = ((double)value - ui->GLWidget->move_z) * 0.01;
-  qDebug() << "k =" << k;
+  //  qDebug() << "k =" << k;
   ui->GLWidget->move_z = value;
-  controller_->Move(0, 0, k);
+  controller_->move(0, 0, k);
   ui->GLWidget->update();
 }
 
@@ -165,10 +168,9 @@ void MainWindow::on_bg_color_clicked() {
       QColorDialog::getColor(Qt::white, ui->bg_tab, "Choose background color");
   if (bg_color.isValid()) {
     ui->GLWidget->bg_color = bg_color;
-    QString style = "background-color: rgb(" %
-            QString::number(bg_color.red()) % "," %
-            QString::number(bg_color.green()) % "," %
-            QString::number(bg_color.blue()) % ")";
+    QString style = "background-color: rgb(" % QString::number(bg_color.red()) %
+                    "," % QString::number(bg_color.green()) % "," %
+                    QString::number(bg_color.blue()) % ")";
     ui->bg_color->setStyleSheet(style);
     setStyleSheet(style);
     ui->GLWidget->update();

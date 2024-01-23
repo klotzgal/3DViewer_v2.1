@@ -10,25 +10,26 @@ class Controller {
  public:
   explicit Controller(Model* model) : model_(model) {}
   ~Controller() {}
-  void Print() { model_->Print(); }
+  void print() { model_->print(); }
   bool isEmpty() { return model_->isEmpty(); }
 
-  void Parse() { model_->Parse(); }
-  void Scale(double k);
-  void Move(double x, double y, double z);
-  void Rotate(double x, double y, double z);
+  void parse() { model_->parse(); }
+  void scale(double k);
+  void move(double x, double y, double z);
+  void rotate(double x, double y, double z);
 
   // Getters and Setters
   void setFilename(const QString& filename) {
     model_->setFilename(filename.toStdString());
   }
   std::string getFilename() const { return model_->getFilename(); }
-  size_t getVerticesCount() const { return model_->getVerticesCount(); }
+  Model::data* getData() const { return model_->getData(); }
   size_t getPolygonsCount() const { return model_->getPolygonsCount(); }
   double getX(int i) const { return model_->getX(i); }
   double getY(int i) const { return model_->getY(i); }
   double getZ(int i) const { return model_->getZ(i); }
-  std::vector<size_t>& getPolygon(int i) const { return model_->getPolygon(i); }
+  std::vector<double>& getVertices() { return model_->getVertices(); }
+  std::vector<uint>& getPolygon(int i) const { return model_->getPolygon(i); }
 
  private:
   Model* model_;
