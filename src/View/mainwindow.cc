@@ -8,11 +8,12 @@ MainWindow::MainWindow(QWidget *parent, Controller *controller)
   ui->setupUi(this);
   ui->GLWidget->setController(controller_);
   settings = new QSettings("School_21", "3D_Viewer", this);
-  setWindowTitle("3D_Viewer");
+//  setWindowFlags(Qt::FramelessWindowHint);
   load_settings();
 }
 
-MainWindow::~MainWindow() { save_settings();
+MainWindow::~MainWindow() {
+  save_settings();
   delete settings;
   delete ui;
 }
@@ -28,9 +29,9 @@ void MainWindow::load_settings() {
   ui->bg_color->setStyleSheet(
       "background-color: rgb(" % QString::number(c.red()) % "," %
       QString::number(c.green()) % "," % QString::number(c.blue()) % ")");
-  setStyleSheet("background-color: rgb(" % QString::number(c.red()) % "," %
-                QString::number(c.green()) % "," % QString::number(c.blue()) %
-                ")");
+//  setStyleSheet("background-color: rgb(" % QString::number(c.red()) % "," %
+//                QString::number(c.green()) % "," % QString::number(c.blue()) %
+//                ")");
   c = settings->value("vert_color", QColor(1, 1, 1)).value<QColor>();
   ui->GLWidget->vert_color = c;
   ui->vert_color->setStyleSheet(
@@ -172,7 +173,7 @@ void MainWindow::on_bg_color_clicked() {
                     "," % QString::number(bg_color.green()) % "," %
                     QString::number(bg_color.blue()) % ")";
     ui->bg_color->setStyleSheet(style);
-    setStyleSheet(style);
+//    setStyleSheet(style);
     ui->GLWidget->update();
   }
 }

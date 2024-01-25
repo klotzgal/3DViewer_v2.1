@@ -2,8 +2,8 @@
 
 MyGLWidget::MyGLWidget(QWidget *parent, Controller *controller)
     : QOpenGLWidget{parent}, controller_(controller) {
-  setMinimumSize(600, 600);
-  setMaximumSize(1200, 1200);
+//  setMinimumSize(600, 600);
+//  setMaximumSize(1200, 1200);
 }
 
 MyGLWidget::~MyGLWidget() {}
@@ -14,7 +14,7 @@ void MyGLWidget::initializeGL() {
 }
 
 void MyGLWidget::resizeGL(int w, int h) {
-  setFixedWidth(h);
+//  setFixedWidth(h);
   glViewport(0, 0, w, h);
 }
 
@@ -28,23 +28,10 @@ void MyGLWidget::paintGL() {
   if (!controller_->isEmpty()) {
 
     glVertexPointer(3, GL_DOUBLE, 0, controller_->getVertices().data());
-    GLdouble **VERT = nullptr;
-    glGetPointerv(GL_VERTEX_ARRAY_POINTER, (GLvoid**)VERT);
     glEnableClientState(GL_VERTEX_ARRAY);
     if (this->vert_type != 0) {
       buildPoints();
     }
-
-    std::cout << "VERT = " << VERT << std::endl;
-    if (VERT){
-        for (size_t i = 0; i < controller_->getVertices().size(); ++i) {
-            for (size_t j = 0; j < 3; ++j){
-                std::cout << VERT[j][i] << " ";
-            }
-            std::cout << std::endl;
-        }
-    }
-    qDebug() << glGetError();
     buildLines();
     glDisableClientState(GL_VERTEX_ARRAY);
   }
@@ -53,12 +40,13 @@ void MyGLWidget::paintGL() {
 void MyGLWidget::setProjection() {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
+  GLdouble k = (double)width() / height();
   if (this->projection_type == 0) {
-    glFrustum(-1, 1, -1, 1, 1, 1000);
+    glFrustum(-k, k, -1, 1, 1, 1000);
     glTranslatef(0, 0, -4);
     glRotatef(30, 1, 0, 0);
   } else {
-    glOrtho(-1, 1, -1, 1, -5, 1000);
+    glOrtho(-k, k, -1, 1, -5, 1000);
     glTranslatef(0, -1 / 2, 0);
   }
 }
