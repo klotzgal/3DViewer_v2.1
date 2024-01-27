@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QSettings>
 
+#include "../Libs/gifimage/qgifimage.h"
 #include "glwidget.h"
 
 QT_BEGIN_NAMESPACE
@@ -24,6 +25,7 @@ class MainWindow : public QMainWindow {
  private slots:
   void on_render_model_clicked();
   void on_open_file_clicked();
+  void on_foto_clicked();
 
   // Affine
   void on_scale_valueChanged(int value);

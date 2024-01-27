@@ -43,7 +43,7 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>16777215</width>
+          <width>300</width>
           <height>16777215</height>
          </size>
         </property>
@@ -156,8 +156,11 @@ border-radius: 20%;</string>
                   <height>40</height>
                  </size>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true">border-image: url(:/res/open.svg);</string>
+                </property>
                 <property name="text">
-                 <string>Open</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -182,7 +185,7 @@ border-radius: 20%;</string>
          <item>
           <widget class="QFrame" name="filename_frame">
            <property name="styleSheet">
-            <string notr="true">QFrame {
+            <string notr="true">QFrame#filename_frame {
 	border: 1px solid rgb(255, 255, 255);
 }</string>
            </property>
@@ -285,7 +288,13 @@ border-radius: 20%;</string>
           </widget>
          </item>
          <item>
-          <widget class="QFrame" name="frame_3">
+          <widget class="QFrame" name="record_frame">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>100</height>
+            </size>
+           </property>
            <property name="styleSheet">
             <string notr="true">QFrame {	border: 1px solid rgb(255, 255, 255);}</string>
            </property>
@@ -297,33 +306,53 @@ border-radius: 20%;</string>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_19">
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="foto">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="styleSheet">
+               <string notr="true">border-image: url(:/res/photo_ico.svg);</string>
+              </property>
               <property name="text">
-               <string>PushButton</string>
+               <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_2">
+             <widget class="QPushButton" name="gif">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="styleSheet">
+               <string notr="true">  border-image: url(:/res/gif_ico.svg);
+</string>
+              </property>
               <property name="text">
-               <string>PushButton</string>
+               <string/>
               </property>
              </widget>
             </item>
            </layout>
           </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </widget>
@@ -1141,6 +1170,19 @@ border: 1px solid rgb(255, 255, 255);
             </item>
            </layout>
           </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </widget>

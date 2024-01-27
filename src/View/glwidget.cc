@@ -2,8 +2,8 @@
 
 MyGLWidget::MyGLWidget(QWidget *parent, Controller *controller)
     : QOpenGLWidget{parent}, controller_(controller) {
-//  setMinimumSize(600, 600);
-//  setMaximumSize(1200, 1200);
+  //  setMinimumSize(600, 600);
+  //  setMaximumSize(1200, 1200);
 }
 
 MyGLWidget::~MyGLWidget() {}
@@ -14,7 +14,7 @@ void MyGLWidget::initializeGL() {
 }
 
 void MyGLWidget::resizeGL(int w, int h) {
-//  setFixedWidth(h);
+  //  setFixedWidth(h);
   glViewport(0, 0, w, h);
 }
 
@@ -26,15 +26,23 @@ void MyGLWidget::paintGL() {
   setProjection();
 
   if (!controller_->isEmpty()) {
-
     glVertexPointer(3, GL_DOUBLE, 0, controller_->getVertices().data());
+//    GLdouble colors[] = {0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1,
+//                       1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0};
+//    glColorPointer(3, GL_DOUBLE, 0, &colors);
     glEnableClientState(GL_VERTEX_ARRAY);
+//    glEnableClientState(GL_COLOR_ARRAY);
     if (this->vert_type != 0) {
       buildPoints();
     }
     buildLines();
     glDisableClientState(GL_VERTEX_ARRAY);
+//    glDisableClientState(GL_COLOR_ARRAY);
   }
+//  int nrAttributes;
+//  glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
+//  std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes
+//            << std::endl;
 }
 
 void MyGLWidget::setProjection() {
@@ -75,7 +83,7 @@ void MyGLWidget::buildLines() {
   glColor3f(edges_color.redF(), edges_color.greenF(), edges_color.blueF());
 
   for (size_t i = 0; i < controller_->getPolygonsCount(); ++i) {
-    glDrawElements(GL_LINE_LOOP, controller_->getPolygon(i).size(),
+    glDrawElements(GL_POLYGON, controller_->getPolygon(i).size(),
                    GL_UNSIGNED_INT, controller_->getPolygon(i).data());
   }
 
@@ -110,7 +118,7 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *event) {
   cur_pos = event->globalPosition().toPoint();
   qDebug() << delta.x() * 0.5 << delta.y() * 0.5;
   if (event->buttons() & Qt::LeftButton) {
-    controller_->rotate(-delta.y() * 0.5, delta.x() * 0.5, 0);
+    controller_->rotate(delta.y() * 0.5, -delta.x() * 0.5, 0);
   } else if (event->buttons() & Qt::RightButton) {
     controller_->move(-delta.x() * 0.002, delta.y() * 0.002, 0);
   }

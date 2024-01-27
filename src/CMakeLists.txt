@@ -49,12 +49,15 @@ set(PROJECT_SOURCES
         View/mainwindow.cc
         View/glwidget.cc
         View/mainwindow.ui
+        View/res/res.qrc
         Model/model.cc
         Model/parser.cc
         Model/affine.cc
         Model/parser.cc
         Controller/controller.cc
 )
+
+add_library(gifimage STATIC Libs/gifimage/qgifimage.cpp)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(3DViewer
@@ -83,6 +86,7 @@ target_link_libraries(3DViewer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::OpenGL
     Qt${QT_VERSION_MAJOR}::OpenGLWidgets
     ${OPENGL_LIBRARIES}
+    gifimage
     # ${GLUT_LIBRARY}
     )
 

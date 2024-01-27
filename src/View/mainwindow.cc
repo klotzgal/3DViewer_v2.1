@@ -6,9 +6,19 @@
 MainWindow::MainWindow(QWidget *parent, Controller *controller)
     : QMainWindow{parent}, ui(new Ui::MainWindow), controller_(controller) {
   ui->setupUi(this);
+//  QPixmap bkgnd(":/res/gif.png");
+//  bkgnd = bkgnd.scaled(ui->gif->size(), Qt::IgnoreAspectRatio);
+//  QPalette palette;
+//  palette.setBrush(QPalette::Window, bkgnd);
+//  ui->gif->setPalette(palette);
+
   ui->GLWidget->setController(controller_);
   settings = new QSettings("School_21", "3D_Viewer", this);
 //  setWindowFlags(Qt::FramelessWindowHint);
+
+
+
+
   load_settings();
 }
 
@@ -94,7 +104,11 @@ void MainWindow::on_open_file_clicked() {
   ui->GLWidget->parseObj();
   ui->vert_count->setText(
       QString::number(controller_->getVertices().size() / 3));
-  ui->edges_count->setText(QString::number(controller_->getPolygonsCount()));
+  double edges_count = 0;
+  for (size_t i = 0; i < controller_->getPolygonsCount(); ++i) {
+      edges_count += controller_->getPolygon(i).size();
+  }
+  ui->edges_count->setText(QString::number(edges_count));
   ui->GLWidget->update();
 }
 
@@ -242,4 +256,18 @@ void MainWindow::on_edges_solid_clicked() {
 void MainWindow::on_edges_dashed_clicked() {
   ui->GLWidget->edges_type = 1;
   ui->GLWidget->update();
+}
+
+void MainWindow::on_foto_clicked() {
+    QFileDialog dialog(this);
+    QDateTime current_date = QDateTime::currentDateTime();
+    QString name_pattern = "ScreenShot" % current_date.toString("yyyy-MM-dd hh.mm.ss") % ".jpeg";
+    QString image_name = dialog.getSaveFileName(this, tr("Save a screenshot"), name_pattern, tr("image (*.jpeg *.bmp)"));
+    if (image_name.length() > 0) {
+        QImage img = ui->GLWidget->grabFramebuffer();
+        img.save(image_name);
+        QMessageBox message;
+        message.information(0, "", "Screenshot saved successfully");
+    }
+
 }
