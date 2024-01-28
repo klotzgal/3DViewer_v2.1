@@ -26,6 +26,7 @@ class MainWindow : public QMainWindow {
   void on_render_model_clicked();
   void on_open_file_clicked();
   void on_foto_clicked();
+  void on_gif_clicked();
 
   // Affine
   void on_scale_valueChanged(int value);

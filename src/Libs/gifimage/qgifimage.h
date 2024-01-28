@@ -44,7 +44,7 @@ public:
     QVector<QRgb> globalColorTable() const;
     QColor backgroundColor() const;
     void setGlobalColorTable(const QVector<QRgb> &colors, const QColor &bgColor = QColor());
-    int defaultDelay() ;
+    int defaultDelay() const;
     void setDefaultDelay(int internal);
     QColor defaultTransparentColor() const;
     void setDefaultTransparentColor(const QColor &color);

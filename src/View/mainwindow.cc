@@ -271,3 +271,8 @@ void MainWindow::on_foto_clicked() {
     }
 
 }
+
+void MainWindow::on_gif_clicked()
+{
+
+}

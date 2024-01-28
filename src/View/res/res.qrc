@@ -1,8 +1,5 @@
 <RCC>
     <qresource prefix="/res">
-        <file>open_file.png</file>
-        <file>foto.png</file>
-        <file>gif.png</file>
         <file>gif_ico.svg</file>
         <file>open.svg</file>
         <file>photo_ico.svg</file>
