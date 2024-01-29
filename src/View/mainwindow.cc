@@ -6,59 +6,65 @@
 MainWindow::MainWindow(QWidget *parent, Controller *controller)
     : QMainWindow{parent}, ui(new Ui::MainWindow), controller_(controller) {
   ui->setupUi(this);
-//  QPixmap bkgnd(":/res/gif.png");
-//  bkgnd = bkgnd.scaled(ui->gif->size(), Qt::IgnoreAspectRatio);
-//  QPalette palette;
-//  palette.setBrush(QPalette::Window, bkgnd);
-//  ui->gif->setPalette(palette);
+  //  QPixmap bkgnd(":/res/gif.png");
+  //  bkgnd = bkgnd.scaled(ui->gif->size(), Qt::IgnoreAspectRatio);
+  //  QPalette palette;
+  //  palette.setBrush(QPalette::Window, bkgnd);
+  //  ui->gif->setPalette(palette);
 
   ui->GLWidget->setController(controller_);
-  settings = new QSettings("School_21", "3D_Viewer", this);
-//  setWindowFlags(Qt::FramelessWindowHint);
+  settings_ = new QSettings("School_21", "3D_Viewer", this);
+  //  setWindowFlags(Qt::FramelessWindowHint);
 
-
-
-
+  timer_ = new QTimer(0);
+  connect(timer_, SIGNAL(timeout()), this, SLOT(make_gif()));
   load_settings();
 }
 
 MainWindow::~MainWindow() {
   save_settings();
-  delete settings;
+  delete timer_;
+  if (gif_ != nullptr) {
+    delete gif_;
+  }
+  delete settings_;
   delete ui;
 }
 
 void MainWindow::load_settings() {
   // Projection
-  ui->GLWidget->projection_type = settings->value("projection_type", 0).toInt();
+  ui->GLWidget->projection_type =
+      settings_->value("projection_type", 0).toInt();
+  ui->projection_type->setCurrentIndex(ui->GLWidget->projection_type);
   // Colors
   QColor color = QColor("#1E0F3D");
-  QColor c = settings->value("bg_color", color).value<QColor>();
+  QColor c = settings_->value("bg_color", color).value<QColor>();
   qDebug() << color.name() << color.HexArgb;
   ui->GLWidget->bg_color = c;
   ui->bg_color->setStyleSheet(
       "background-color: rgb(" % QString::number(c.red()) % "," %
       QString::number(c.green()) % "," % QString::number(c.blue()) % ")");
-//  setStyleSheet("background-color: rgb(" % QString::number(c.red()) % "," %
-//                QString::number(c.green()) % "," % QString::number(c.blue()) %
-//                ")");
-  c = settings->value("vert_color", QColor(1, 1, 1)).value<QColor>();
+  //  setStyleSheet("background-color: rgb(" % QString::number(c.red()) % "," %
+  //                QString::number(c.green()) % "," % QString::number(c.blue())
+  //                %
+  //                ")");
+  c = settings_->value("vert_color", QColor(1, 1, 1)).value<QColor>();
   ui->GLWidget->vert_color = c;
   ui->vert_color->setStyleSheet(
       "background-color: rgb(" % QString::number(c.red()) % "," %
       QString::number(c.green()) % "," % QString::number(c.blue()) % ")");
-  c = settings->value("edges_color", QColor(1, 1, 1)).value<QColor>();
+  c = settings_->value("edges_color", QColor(1, 1, 1)).value<QColor>();
   ui->GLWidget->edges_color = c;
   ui->edges_color->setStyleSheet(
       "background-color: rgb(" % QString::number(c.red()) % "," %
       QString::number(c.green()) % "," % QString::number(c.blue()) % ")");
   // Size
-  ui->GLWidget->vert_size = settings->value("vert_size", 1).toDouble();
+  ui->GLWidget->vert_size = settings_->value("vert_size", 1).toDouble();
   ui->vert_size->setValue(ui->GLWidget->vert_size);
-  ui->GLWidget->edges_size = settings->value("edges_size", 1).toDouble();
+  ui->GLWidget->edges_size = settings_->value("edges_size", 1).toDouble();
   ui->edges_size->setValue(ui->GLWidget->edges_size);
   // Type
-  ui->GLWidget->vert_type = settings->value("vert_type", 1).toDouble();
+  ui->GLWidget->vert_type = settings_->value("vert_type", 1).toDouble();
   if (ui->GLWidget->vert_type == 0) {
     ui->vert_none->setChecked(true);
   } else if (ui->GLWidget->vert_type == 1) {
@@ -66,7 +72,7 @@ void MainWindow::load_settings() {
   } else if (ui->GLWidget->vert_type == 2) {
     ui->vert_square->setChecked(true);
   }
-  ui->GLWidget->edges_type = settings->value("edges_type", 0).toDouble();
+  ui->GLWidget->edges_type = settings_->value("edges_type", 0).toDouble();
   if (ui->GLWidget->edges_type == 0) {
     ui->edges_solid->setChecked(true);
   } else if (ui->GLWidget->edges_type == 1) {
@@ -75,14 +81,14 @@ void MainWindow::load_settings() {
 }
 
 void MainWindow::save_settings() {
-  settings->setValue("projection_type", ui->GLWidget->projection_type);
-  settings->setValue("bg_color", ui->GLWidget->bg_color);
-  settings->setValue("vert_color", ui->GLWidget->vert_color);
-  settings->setValue("edges_color", ui->GLWidget->edges_color);
-  settings->setValue("vert_size", ui->GLWidget->vert_size);
-  settings->setValue("edges_size", ui->GLWidget->edges_size);
-  settings->setValue("vert_type", ui->GLWidget->vert_type);
-  settings->setValue("edges_type", ui->GLWidget->edges_type);
+  settings_->setValue("projection_type", ui->GLWidget->projection_type);
+  settings_->setValue("bg_color", ui->GLWidget->bg_color);
+  settings_->setValue("vert_color", ui->GLWidget->vert_color);
+  settings_->setValue("edges_color", ui->GLWidget->edges_color);
+  settings_->setValue("vert_size", ui->GLWidget->vert_size);
+  settings_->setValue("edges_size", ui->GLWidget->edges_size);
+  settings_->setValue("vert_type", ui->GLWidget->vert_type);
+  settings_->setValue("edges_type", ui->GLWidget->edges_type);
 }
 
 void MainWindow::on_render_model_clicked() {
@@ -106,7 +112,7 @@ void MainWindow::on_open_file_clicked() {
       QString::number(controller_->getVertices().size() / 3));
   double edges_count = 0;
   for (size_t i = 0; i < controller_->getPolygonsCount(); ++i) {
-      edges_count += controller_->getPolygon(i).size();
+    edges_count += controller_->getPolygon(i).size();
   }
   ui->edges_count->setText(QString::number(edges_count));
   ui->GLWidget->update();
@@ -187,7 +193,7 @@ void MainWindow::on_bg_color_clicked() {
                     "," % QString::number(bg_color.green()) % "," %
                     QString::number(bg_color.blue()) % ")";
     ui->bg_color->setStyleSheet(style);
-//    setStyleSheet(style);
+    //    setStyleSheet(style);
     ui->GLWidget->update();
   }
 }
@@ -259,20 +265,53 @@ void MainWindow::on_edges_dashed_clicked() {
 }
 
 void MainWindow::on_foto_clicked() {
-    QFileDialog dialog(this);
-    QDateTime current_date = QDateTime::currentDateTime();
-    QString name_pattern = "ScreenShot" % current_date.toString("yyyy-MM-dd hh.mm.ss") % ".jpeg";
-    QString image_name = dialog.getSaveFileName(this, tr("Save a screenshot"), name_pattern, tr("image (*.jpeg *.bmp)"));
-    if (image_name.length() > 0) {
-        QImage img = ui->GLWidget->grabFramebuffer();
-        img.save(image_name);
-        QMessageBox message;
-        message.information(0, "", "Screenshot saved successfully");
-    }
-
+  QFileDialog dialog(this);
+  QDateTime current_date = QDateTime::currentDateTime();
+  QString name_pattern =
+      "ScreenShot" % current_date.toString("yyyy-MM-dd hh.mm.ss") % ".jpeg";
+  QString image_name = dialog.getSaveFileName(
+      this, tr("Save a screenshot"), name_pattern, tr("image (*.jpeg *.bmp)"));
+  if (image_name.length() > 0) {
+    QImage img = ui->GLWidget->grabFramebuffer();
+    img.save(image_name);
+    QMessageBox message;
+    message.information(0, "", "Screenshot saved successfully");
+  }
 }
 
-void MainWindow::on_gif_clicked()
-{
+void MainWindow::on_gif_clicked() {
+  QFileDialog dialog(this);
+  QDateTime current_date = QDateTime::currentDateTime();
+  QString name_pattern =
+      "Gif" % current_date.toString("yyyy-MM-dd hh.mm.ss") % ".gif";
+  gif_name_ = dialog.getSaveFileName(this, tr("Save a gif"), name_pattern,
+                                     tr("image (*.gif)"));
+  if (gif_name_.length() > 0) {
+    ui->gif->setDisabled(true);
+    gif_ = new QGifImage;
+    gif_->setDefaultDelay(10);
+    timer_->setInterval(100);
+    timer_->start();
+  }
+}
 
+void MainWindow::make_gif() {
+  QImage img = ui->GLWidget->grabFramebuffer();
+  img = img.scaled(QSize(640, 480));
+  gif_->addFrame(img);
+  if (frames_counter_ == 50) {
+    timer_->stop();
+    gif_->save(gif_name_);
+    frames_counter_ = 0;
+    QMessageBox message;
+    message.information(0, "", "Gif saved successfully");
+    delete gif_;
+    gif_ = nullptr;
+    ui->gif->setText("");
+    ui->gif->setEnabled(true);
+  }
+  ++frames_counter_;
+  if (!ui->gif->isEnabled()) {
+    ui->gif->setText(QString::number(frames_counter_ / 10) % "s");
+  }
 }

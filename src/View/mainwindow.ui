@@ -308,10 +308,16 @@ border-radius: 20%;</string>
             <item>
              <widget class="QPushButton" name="foto">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>115</width>
+                <height>115</height>
+               </size>
               </property>
               <property name="styleSheet">
                <string notr="true">border-image: url(:/res/photo_ico.svg);</string>
@@ -324,13 +330,25 @@ border-radius: 20%;</string>
             <item>
              <widget class="QPushButton" name="gif">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>100</horstretch>
+                <verstretch>50</verstretch>
                </sizepolicy>
               </property>
+              <property name="minimumSize">
+               <size>
+                <width>115</width>
+                <height>115</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>50</pointsize>
+               </font>
+              </property>
               <property name="styleSheet">
-               <string notr="true">  border-image: url(:/res/gif_ico.svg);
+               <string notr="true"> border-image: url(:/res/gif_ico.svg);
+color: rgb(196, 41, 31);
 </string>
               </property>
               <property name="text">

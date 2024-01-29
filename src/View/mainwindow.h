@@ -56,10 +56,17 @@ class MainWindow : public QMainWindow {
   void on_edges_solid_clicked();
   void on_edges_dashed_clicked();
 
+  // Gif
+  void make_gif();
+
  private:
   Ui::MainWindow *ui;
   Controller *controller_;
-  QSettings *settings;
+  QSettings *settings_;
+  QString gif_name_;
+  QGifImage *gif_;
+  QTimer *timer_;
+  int frames_counter_ = 0;
 
   // Settings
   void load_settings();
