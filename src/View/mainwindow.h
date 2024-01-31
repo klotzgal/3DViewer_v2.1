@@ -4,9 +4,12 @@
 #include <QColorDialog>
 #include <QMainWindow>
 #include <QSettings>
+#include <QPainter>
+#include <QStyleOption>
 
 #include "../Libs/gifimage/qgifimage.h"
 #include "glwidget.h"
+#include "stylehelper.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -59,6 +62,9 @@ class MainWindow : public QMainWindow {
   // Gif
   void make_gif();
 
+ protected:
+  void paintEvent(QPaintEvent *event);
+
  private:
   Ui::MainWindow *ui;
   Controller *controller_;
@@ -69,8 +75,9 @@ class MainWindow : public QMainWindow {
   int frames_counter_ = 0;
 
   // Settings
-  void load_settings();
-  void save_settings();
+  void loadSettings();
+  void saveSettings();
+  void setStyle();
 };
 
 #endif  // MAINWINDOW_H

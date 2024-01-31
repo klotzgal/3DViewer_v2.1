@@ -51,6 +51,7 @@ set(PROJECT_SOURCES
         main.cpp
         View/mainwindow.cc
         View/glwidget.cc
+        View/stylehelper.cc
         View/mainwindow.ui
         View/res/res.qrc
         Model/model.cc

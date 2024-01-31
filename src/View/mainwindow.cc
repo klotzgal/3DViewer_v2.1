@@ -6,23 +6,17 @@
 MainWindow::MainWindow(QWidget *parent, Controller *controller)
     : QMainWindow{parent}, ui(new Ui::MainWindow), controller_(controller) {
   ui->setupUi(this);
-  //  QPixmap bkgnd(":/res/gif.png");
-  //  bkgnd = bkgnd.scaled(ui->gif->size(), Qt::IgnoreAspectRatio);
-  //  QPalette palette;
-  //  palette.setBrush(QPalette::Window, bkgnd);
-  //  ui->gif->setPalette(palette);
-
   ui->GLWidget->setController(controller_);
   settings_ = new QSettings("School_21", "3D_Viewer", this);
   //  setWindowFlags(Qt::FramelessWindowHint);
-
   timer_ = new QTimer(0);
   connect(timer_, SIGNAL(timeout()), this, SLOT(make_gif()));
-  load_settings();
+  setStyle();
+  loadSettings();
 }
 
 MainWindow::~MainWindow() {
-  save_settings();
+  saveSettings();
   delete timer_;
   if (gif_ != nullptr) {
     delete gif_;
@@ -31,7 +25,7 @@ MainWindow::~MainWindow() {
   delete ui;
 }
 
-void MainWindow::load_settings() {
+void MainWindow::loadSettings() {
   // Projection
   ui->GLWidget->projection_type =
       settings_->value("projection_type", 0).toInt();
@@ -44,10 +38,6 @@ void MainWindow::load_settings() {
   ui->bg_color->setStyleSheet(
       "background-color: rgb(" % QString::number(c.red()) % "," %
       QString::number(c.green()) % "," % QString::number(c.blue()) % ")");
-  //  setStyleSheet("background-color: rgb(" % QString::number(c.red()) % "," %
-  //                QString::number(c.green()) % "," % QString::number(c.blue())
-  //                %
-  //                ")");
   c = settings_->value("vert_color", QColor(1, 1, 1)).value<QColor>();
   ui->GLWidget->vert_color = c;
   ui->vert_color->setStyleSheet(
@@ -80,7 +70,7 @@ void MainWindow::load_settings() {
   }
 }
 
-void MainWindow::save_settings() {
+void MainWindow::saveSettings() {
   settings_->setValue("projection_type", ui->GLWidget->projection_type);
   settings_->setValue("bg_color", ui->GLWidget->bg_color);
   settings_->setValue("vert_color", ui->GLWidget->vert_color);
@@ -89,6 +79,39 @@ void MainWindow::save_settings() {
   settings_->setValue("edges_size", ui->GLWidget->edges_size);
   settings_->setValue("vert_type", ui->GLWidget->vert_type);
   settings_->setValue("edges_type", ui->GLWidget->edges_type);
+}
+
+void MainWindow::paintEvent(QPaintEvent *event) {
+    QStyleOption opt;
+    opt.initFrom(this);
+    QPainter p(this);
+    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+    QWidget::paintEvent(event);
+}
+
+void MainWindow::setStyle() {
+    setWindowFlags(Qt::WindowType::FramelessWindowHint);
+//    setAttribute(Qt::WA_TranslucentBackground);
+//    setAutoFillBackground(true);
+    setStyleSheet("background-color: qlineargradient(spread:pad, x1:1, y1:0.613636, x2:1, y2:0, stop:0 rgba(11, 14, 17, 255), stop:1 rgba(15, 20, 25, 255));");
+    ui->centralwidget->setStyleSheet(StyleHelper::getCentralWidgetStyle());
+
+    ui->gif->setStyleSheet(StyleHelper::getButtonStyle() % "color: rgb(196, 41, 31);" % "border-image: url(:/res/gif_ico.svg);");
+    ui->foto->setStyleSheet(StyleHelper::getButtonStyle() % "border-image: url(:/res/photo_ico.svg);");
+    ui->open_file->setStyleSheet(StyleHelper::getButtonStyle() % "border-image: url(:/res/open.svg);");
+    ui->render_model->setStyleSheet(StyleHelper::getButtonStyle());
+
+//    ui->filename_frame->setStyleSheet(StyleHelper::getFrameStyle());
+//    ui->vert_frame->setStyleSheet(StyleHelper::getFrameStyle());
+//    ui->edges_frame->setStyleSheet(StyleHelper::getFrameStyle());
+    ui->record_frame->setStyleSheet(StyleHelper::getFrameStyle());
+    ui->open_file_frame->setStyleSheet(StyleHelper::getFrameStyle());
+
+    ui->projection_frame->setStyleSheet(StyleHelper::getFrameStyle());
+    ui->style_frame->setStyleSheet(StyleHelper::getFrameStyle());
+    ui->bg_style_frame->setStyleSheet(StyleHelper::getFrameStyle());
+    ui->manipulation_frame->setStyleSheet(StyleHelper::getFrameStyle());
+
 }
 
 void MainWindow::on_render_model_clicked() {
@@ -315,3 +338,4 @@ void MainWindow::make_gif() {
     ui->gif->setText(QString::number(frames_counter_ / 10) % "s");
   }
 }
+

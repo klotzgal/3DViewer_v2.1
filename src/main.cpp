@@ -1,5 +1,6 @@
 ﻿#include <QApplication>
 
+#include <QStyle>
 #include "View/mainwindow.h"
 
 Model *Model::instance_ = nullptr;

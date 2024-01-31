@@ -20,7 +20,7 @@ void MyGLWidget::resizeGL(int w, int h) {
 
 void MyGLWidget::paintGL() {
   glClearColor(bg_color.redF(), bg_color.greenF(), bg_color.blueF(),
-               bg_color.alphaF());
+               1);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   setProjection();
@@ -64,7 +64,7 @@ void MyGLWidget::buildPoints() {
     glEnable(GL_POINT_SMOOTH);
   }
   glPointSize(vert_size);
-  glColor3f(vert_color.redF(), vert_color.greenF(), vert_color.blueF());
+  glColor4f(vert_color.redF(), vert_color.greenF(), vert_color.blueF(), 1);
 
   glDrawArrays(GL_POINTS, 0, controller_->getVertices().size() / 3);
 
@@ -80,7 +80,7 @@ void MyGLWidget::buildLines() {
   }
 
   glLineWidth(edges_size);
-  glColor3f(edges_color.redF(), edges_color.greenF(), edges_color.blueF());
+  glColor4f(edges_color.redF(), edges_color.greenF(), edges_color.blueF(), 1);
 
   for (size_t i = 0; i < controller_->getPolygonsCount(); ++i) {
     glDrawElements(GL_POLYGON, controller_->getPolygon(i).size(),
