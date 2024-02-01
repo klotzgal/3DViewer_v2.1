@@ -61,8 +61,9 @@ void MyGLWidget::setLightning() {
   glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
   glEnable(GL_COLOR_MATERIAL);
+  glEnable(GL_NORMALIZE);
 
-  GLfloat light_pos[] = {0, 1, 0, 0};
+  GLfloat light_pos[] = {-5, 2, 0, 0};
   glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
 }
 
