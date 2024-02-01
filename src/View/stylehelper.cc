@@ -9,11 +9,10 @@ QString StyleHelper::getButtonStyle() {
 QString StyleHelper::getFrameStyle() {
   return "QFrame {"
          "   border: 1px solid rgb(0, 0, 0);"
-         "   background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:1, "
-         "y2:0, stop:0 rgba(73, 86, 100, 255), stop:1 rgba(57, 66, 76, 255));"
-         //          "   background-color: qlineargradient(spread:pad, x1:1,
-         //          y1:1, x2:1, " "y2:0, stop:0 rgba(22, 41, 50, 255), stop:1
-         //          rgba(17, 33, 40, 255));"
+         "   background-color: rgb(125, 146, 165);"
+         "   border-radius: 0px;"
+         "   border-top-left-radius: 20px;"
+         "   border-top-right-radius: 20px;"
          "}"
          "QLabel {"
          "   background: transparent;"
@@ -23,10 +22,10 @@ QString StyleHelper::getFrameStyle() {
 
 QString StyleHelper::getCentralWidgetStyle() {
   return "QFrame {"
-         "   background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:1, "
-         "y2:0, stop:0 rgba(17, 33, 40, 255), stop:1 rgba(22, 41, 50, 255));"
+         "color: rgb(255, 255, 255);"
+         "background-color: rgb(37, 48, 53);"
          "   border: 1px solid rgb(0, 0, 0);"
-         "   border-radius: 20%;"
+         "   border-radius: 20px;"
          "}"
          "QLabel {"
          "    background: transparent;"

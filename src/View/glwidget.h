@@ -62,8 +62,9 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   ~MyGLWidget() override;
   QPoint cur_pos;
   QPoint new_pos;
-  // void render_ui_stats(); ???
+
   void setProjection();
+  void setLightning();
   void buildLines();
   void buildPoints();
   Controller *controller_;

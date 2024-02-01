@@ -90,7 +90,7 @@ void MainWindow::paintEvent(QPaintEvent *event) {
 }
 
 void MainWindow::setStyle() {
-    setWindowFlags(Qt::WindowType::FramelessWindowHint);
+//    setWindowFlags(Qt::WindowType::FramelessWindowHint);
 //    setAttribute(Qt::WA_TranslucentBackground);
 //    setAutoFillBackground(true);
     setStyleSheet("background-color: qlineargradient(spread:pad, x1:1, y1:0.613636, x2:1, y2:0, stop:0 rgba(11, 14, 17, 255), stop:1 rgba(15, 20, 25, 255));");
@@ -101,9 +101,7 @@ void MainWindow::setStyle() {
     ui->open_file->setStyleSheet(StyleHelper::getButtonStyle() % "border-image: url(:/res/open.svg);");
     ui->render_model->setStyleSheet(StyleHelper::getButtonStyle());
 
-//    ui->filename_frame->setStyleSheet(StyleHelper::getFrameStyle());
-//    ui->vert_frame->setStyleSheet(StyleHelper::getFrameStyle());
-//    ui->edges_frame->setStyleSheet(StyleHelper::getFrameStyle());
+
     ui->record_frame->setStyleSheet(StyleHelper::getFrameStyle());
     ui->open_file_frame->setStyleSheet(StyleHelper::getFrameStyle());
 

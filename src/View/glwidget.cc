@@ -2,8 +2,6 @@
 
 MyGLWidget::MyGLWidget(QWidget *parent, Controller *controller)
     : QOpenGLWidget{parent}, controller_(controller) {
-  //  setMinimumSize(600, 600);
-  //  setMaximumSize(1200, 1200);
 }
 
 MyGLWidget::~MyGLWidget() {}
@@ -14,7 +12,6 @@ void MyGLWidget::initializeGL() {
 }
 
 void MyGLWidget::resizeGL(int w, int h) {
-  //  setFixedWidth(h);
   glViewport(0, 0, w, h);
 }
 
@@ -24,25 +21,18 @@ void MyGLWidget::paintGL() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   setProjection();
+  setLightning();
 
   if (!controller_->isEmpty()) {
     glVertexPointer(3, GL_DOUBLE, 0, controller_->getVertices().data());
-//    GLdouble colors[] = {0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1,
-//                       1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0};
-//    glColorPointer(3, GL_DOUBLE, 0, &colors);
     glEnableClientState(GL_VERTEX_ARRAY);
-//    glEnableClientState(GL_COLOR_ARRAY);
     if (this->vert_type != 0) {
       buildPoints();
     }
     buildLines();
     glDisableClientState(GL_VERTEX_ARRAY);
-//    glDisableClientState(GL_COLOR_ARRAY);
   }
-//  int nrAttributes;
-//  glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
-//  std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes
-//            << std::endl;
+
 }
 
 void MyGLWidget::setProjection() {
@@ -57,6 +47,17 @@ void MyGLWidget::setProjection() {
     glOrtho(-k, k, -1, 1, -5, 1000);
     glTranslatef(0, -1 / 2, 0);
   }
+}
+
+void MyGLWidget::setLightning() {
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+  glEnable(GL_LIGHTING);
+  glEnable(GL_LIGHT0);
+  glEnable(GL_COLOR_MATERIAL);
+
+  GLfloat light_pos[] = {0, 1, 0, 0};
+  glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
 }
 
 void MyGLWidget::buildPoints() {
