@@ -12,6 +12,7 @@ class Controller {
   ~Controller() {}
   void print() { model_->print(); }
   bool isEmpty() { return model_->isEmpty(); }
+  bool isHaveNormals() { return model_->isHaveNormals(); }
 
   void parse() { model_->parse(); }
   void scale(double k);
@@ -29,7 +30,11 @@ class Controller {
   double getY(int i) const { return model_->getY(i); }
   double getZ(int i) const { return model_->getZ(i); }
   std::vector<double>& getVertices() { return model_->getVertices(); }
+  std::vector<double>& getNormals() { return model_->getNormals(); }
   std::vector<uint>& getPolygon(int i) const { return model_->getPolygon(i); }
+  std::vector<uint>& getPolygonNormals(int i) const {
+    return model_->getPolygonNormals(i);
+  }
 
  private:
   Model* model_;

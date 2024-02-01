@@ -43,14 +43,32 @@ void Parser::parseVAndF(std::ifstream &file, data *data) {
       std::stringstream ss(line.substr(2));
       std::string token;
       data->polygons.push_back(std::vector<uint>(0));
+      data->polygons_normals.push_back(std::vector<uint>(0));
       while (ss >> token) {
+        // std::cout << token << " token[" << token.find_last_of("/") << "] "
+        //           << token.substr(token.find_last_of("/") + 1) << std::endl;
         int vertex = std::stoi(token);
-        if (vertex < 0) {
+        if (vertex <= 0) {
           vertex = data->vertices.size() / 3 + vertex + 1;
         } else if (vertex > (int)data->vertices.size() / 3) {
           vertex = vertex - data->vertices.size() / 3;
         }
         data->polygons[data->polygons.size() - 1].push_back(vertex - 1);
+        if (std::count(token.begin(), token.end(), '/') > 1) {
+          int normal = std::stoi(token.substr(token.find_last_of("/") + 1));
+          data->polygons_normals[data->polygons_normals.size() - 1].push_back(
+              normal);
+        } else {
+          data->polygons_normals[data->polygons_normals.size() - 1].push_back(
+              1);
+        }
+      }
+    } else if (line[0] == 'v' && line[1] == 'n' && line[2] == ' ') {
+      std::stringstream ss(line.substr(3));
+      std::string token;
+      for (int j = 0; j < 3; j++) {
+        ss >> token;
+        data->normals.push_back(std::stod(token));
       }
     }
   }

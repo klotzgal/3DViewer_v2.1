@@ -1,6 +1,7 @@
 #ifndef CPP4_3DVIEWER_V2_0_SRC_MODEL_PARSER_H
 #define CPP4_3DVIEWER_V2_0_SRC_MODEL_PARSER_H
 
+#include <algorithm>
 #include <cmath>
 #include <fstream>
 #include <iomanip>
@@ -19,10 +20,18 @@ class Parser {
   ~Parser();
   struct data {
     std::vector<double> vertices;
+    std::vector<double> normals;
     std::vector<std::vector<uint>> polygons;
+    std::vector<std::vector<uint>> polygons_normals;
     double max;
-    data() : vertices(0, 0), polygons(0, std::vector<uint>(0)), max(-1) {}
+    data()
+        : vertices(0, 0),
+          normals(0, 0),
+          polygons(0, std::vector<uint>(0)),
+          polygons_normals(0, std::vector<uint>(0)),
+          max(-1) {}
     bool isEmpty() { return vertices.size() / 3 == 0 || polygons.size() == 0; }
+    bool isHaveNormals() { return !normals.empty(); }
 
     void print() {
       std::cout << std::fixed;
@@ -40,9 +49,19 @@ class Parser {
         for (size_t i = 0; i < polygons.size(); i++) {
           std::cout << polygons[i].size() << " ";
           for (size_t j = 0; j < polygons[i].size(); j++) {
-            std::cout << polygons[i][j] << " ";
+            std::cout << polygons[i][j];
+            if (isHaveNormals()) {
+              std::cout << "/" << polygons_normals[i][j];
+            }
+            std::cout << " ";
           }
           std::cout << std::endl;
+        }
+        std::cout << "normals:" << std::endl;
+        for (size_t i = 0; i < normals.size(); i += 3) {
+          std::cout << i / 3 << " " << std::setprecision(15) << normals[i]
+                    << " " << normals[i + 1] << " " << normals[i + 2]
+                    << std::endl;
         }
       }
     }

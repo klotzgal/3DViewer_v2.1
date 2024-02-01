@@ -1,8 +1,7 @@
 ﻿#include "glwidget.h"
 
 MyGLWidget::MyGLWidget(QWidget *parent, Controller *controller)
-    : QOpenGLWidget{parent}, controller_(controller) {
-}
+    : QOpenGLWidget{parent}, controller_(controller) {}
 
 MyGLWidget::~MyGLWidget() {}
 
@@ -11,28 +10,35 @@ void MyGLWidget::initializeGL() {
   glEnable(GL_DEPTH_TEST);  // depth buffer for z coordinate
 }
 
-void MyGLWidget::resizeGL(int w, int h) {
-  glViewport(0, 0, w, h);
-}
+void MyGLWidget::resizeGL(int w, int h) { glViewport(0, 0, w, h); }
 
 void MyGLWidget::paintGL() {
-  glClearColor(bg_color.redF(), bg_color.greenF(), bg_color.blueF(),
-               1);
+  glClearColor(bg_color.redF(), bg_color.greenF(), bg_color.blueF(), 1);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+  bool isLight = controller_->isHaveNormals();
   setProjection();
-  setLightning();
+  if (isLight) {
+    setLightning();
+  }
 
   if (!controller_->isEmpty()) {
-    glVertexPointer(3, GL_DOUBLE, 0, controller_->getVertices().data());
     glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer(3, GL_DOUBLE, 0, controller_->getVertices().data());
+
+    if (isLight) {
+      glEnableClientState(GL_NORMAL_ARRAY);
+      glNormalPointer(GL_DOUBLE, 0, controller_->getNormals().data());
+    }
+
     if (this->vert_type != 0) {
       buildPoints();
     }
     buildLines();
+    if (isLight) {
+      glDisableClientState(GL_NORMAL_ARRAY);
+    }
     glDisableClientState(GL_VERTEX_ARRAY);
   }
-
 }
 
 void MyGLWidget::setProjection() {

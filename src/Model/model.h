@@ -22,6 +22,7 @@ class Model {
   void parse();
   void print() { data_->print(); }
   bool isEmpty() { return data_->isEmpty(); }
+  bool isHaveNormals() { return data_->isHaveNormals(); }
 
   // Strategy
   void changeModel(IStrategy *strategy, double value) {
@@ -37,6 +38,10 @@ class Model {
   double getZ(int i) const noexcept { return data_->vertices[i * 3 + 2]; }
   std::vector<double> &getVertices() noexcept { return data_->vertices; }
   std::vector<uint> &getPolygon(int i) noexcept { return data_->polygons[i]; }
+  std::vector<double> &getNormals() noexcept { return data_->normals; }
+  std::vector<uint> &getPolygonNormals(int i) noexcept {
+    return data_->polygons_normals[i];
+  }
 
  private:
   std::string filename_;
