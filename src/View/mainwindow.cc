@@ -82,34 +82,38 @@ void MainWindow::saveSettings() {
 }
 
 void MainWindow::paintEvent(QPaintEvent *event) {
-    QStyleOption opt;
-    opt.initFrom(this);
-    QPainter p(this);
-    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
-    QWidget::paintEvent(event);
+  QStyleOption opt;
+  opt.initFrom(this);
+  QPainter p(this);
+  style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+  QWidget::paintEvent(event);
 }
 
 void MainWindow::setStyle() {
-//    setWindowFlags(Qt::WindowType::FramelessWindowHint);
-//    setAttribute(Qt::WA_TranslucentBackground);
-//    setAutoFillBackground(true);
-    setStyleSheet("background-color: qlineargradient(spread:pad, x1:1, y1:0.613636, x2:1, y2:0, stop:0 rgba(11, 14, 17, 255), stop:1 rgba(15, 20, 25, 255));");
-    ui->centralwidget->setStyleSheet(StyleHelper::getCentralWidgetStyle());
+  //    setWindowFlags(Qt::WindowType::FramelessWindowHint);
+  //    setAttribute(Qt::WA_TranslucentBackground);
+  //    setAutoFillBackground(true);
+  setStyleSheet(
+      "background-color: qlineargradient(spread:pad, x1:1, y1:0.613636, x2:1, "
+      "y2:0, stop:0 rgba(11, 14, 17, 255), stop:1 rgba(15, 20, 25, 255));");
+  ui->centralwidget->setStyleSheet(StyleHelper::getCentralWidgetStyle());
 
-    ui->gif->setStyleSheet(StyleHelper::getButtonStyle() % "color: rgb(196, 41, 31);" % "border-image: url(:/res/gif_ico.svg);");
-    ui->foto->setStyleSheet(StyleHelper::getButtonStyle() % "border-image: url(:/res/photo_ico.svg);");
-    ui->open_file->setStyleSheet(StyleHelper::getButtonStyle() % "border-image: url(:/res/open.svg);");
-    ui->render_model->setStyleSheet(StyleHelper::getButtonStyle());
+  ui->gif->setStyleSheet(StyleHelper::getButtonStyle() %
+                         "color: rgb(196, 41, 31);" %
+                         "border-image: url(:/res/gif_ico.svg);");
+  ui->foto->setStyleSheet(StyleHelper::getButtonStyle() %
+                          "border-image: url(:/res/photo_ico.svg);");
+  ui->open_file->setStyleSheet(StyleHelper::getButtonStyle() %
+                               "border-image: url(:/res/open.svg);");
+  ui->render_model->setStyleSheet(StyleHelper::getButtonStyle());
 
+  ui->record_frame->setStyleSheet(StyleHelper::getFrameStyle());
+  ui->open_file_frame->setStyleSheet(StyleHelper::getFrameStyle());
 
-    ui->record_frame->setStyleSheet(StyleHelper::getFrameStyle());
-    ui->open_file_frame->setStyleSheet(StyleHelper::getFrameStyle());
-
-    ui->projection_frame->setStyleSheet(StyleHelper::getFrameStyle());
-    ui->style_frame->setStyleSheet(StyleHelper::getFrameStyle());
-    ui->bg_style_frame->setStyleSheet(StyleHelper::getFrameStyle());
-    ui->manipulation_frame->setStyleSheet(StyleHelper::getFrameStyle());
-
+  ui->view_frame->setStyleSheet(StyleHelper::getFrameStyle());
+  ui->style_frame->setStyleSheet(StyleHelper::getFrameStyle());
+  ui->bg_style_frame->setStyleSheet(StyleHelper::getFrameStyle());
+  ui->manipulation_frame->setStyleSheet(StyleHelper::getFrameStyle());
 }
 
 void MainWindow::on_render_model_clicked() {
@@ -172,7 +176,7 @@ void MainWindow::on_rotate_z_valueChanged(int value) {
 }
 
 void MainWindow::on_move_x_valueChanged(int value) {
-  GLdouble k = ((double)value - ui->GLWidget->move_x) * 0.01;
+  GLdouble k = ((double)value - ui->GLWidget->move_x) * 0.1;
   //  qDebug() << "k =" << k;
   ui->GLWidget->move_x = value;
   controller_->move(k, 0, 0);
@@ -180,7 +184,7 @@ void MainWindow::on_move_x_valueChanged(int value) {
 }
 
 void MainWindow::on_move_y_valueChanged(int value) {
-  GLdouble k = ((double)value - ui->GLWidget->move_y) * 0.01;
+  GLdouble k = ((double)value - ui->GLWidget->move_y) * 0.1;
   //  qDebug() << "k =" << k;
   ui->GLWidget->move_y = value;
   controller_->move(0, k, 0);
@@ -188,7 +192,7 @@ void MainWindow::on_move_y_valueChanged(int value) {
 }
 
 void MainWindow::on_move_z_valueChanged(int value) {
-  GLdouble k = ((double)value - ui->GLWidget->move_z) * 0.01;
+  GLdouble k = ((double)value - ui->GLWidget->move_z) * 0.1;
   //  qDebug() << "k =" << k;
   ui->GLWidget->move_z = value;
   controller_->move(0, 0, k);
@@ -196,11 +200,18 @@ void MainWindow::on_move_z_valueChanged(int value) {
 }
 
 void MainWindow::on_projection_type_currentIndexChanged(int index) {
-  if (index == 0) {
-    ui->GLWidget->projection_type = 0;
-  } else if (index == 1) {
-    ui->GLWidget->projection_type = 1;
-  }
+  ui->GLWidget->projection_type = index;
+  ui->GLWidget->update();
+}
+
+void MainWindow::on_display_type_currentIndexChanged(int index) {
+  ui->GLWidget->display_type = index;
+  ui->GLWidget->update();
+}
+
+void MainWindow::on_cord_mode_currentIndexChanged(int index) {
+  qDebug() << index;
+  ui->GLWidget->cord_mode = index;
   ui->GLWidget->update();
 }
 
@@ -336,4 +347,3 @@ void MainWindow::make_gif() {
     ui->gif->setText(QString::number(frames_counter_ / 10) % "s");
   }
 }
-

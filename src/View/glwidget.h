@@ -37,6 +37,8 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   GLdouble vert_size = 1;
   GLdouble edges_size = 1;
   GLint projection_type = 0;
+  GLint display_type = 0;
+  GLboolean cord_mode = false;
   GLint vert_type = 0;
   GLint edges_type = 0;
   QColor bg_color;
@@ -67,6 +69,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   void setLightning();
   void buildLines();
   void buildPoints();
+  void cordMode();
   Controller *controller_;
 
  signals:

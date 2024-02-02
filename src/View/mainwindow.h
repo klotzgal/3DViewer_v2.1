@@ -3,8 +3,8 @@
 
 #include <QColorDialog>
 #include <QMainWindow>
-#include <QSettings>
 #include <QPainter>
+#include <QSettings>
 #include <QStyleOption>
 
 #include "../Libs/gifimage/qgifimage.h"
@@ -42,6 +42,10 @@ class MainWindow : public QMainWindow {
 
   // Projection
   void on_projection_type_currentIndexChanged(int index);
+
+  // Display
+  void on_display_type_currentIndexChanged(int index);
+  void on_cord_mode_currentIndexChanged(int index);
 
   // Color
   void on_bg_color_clicked();
