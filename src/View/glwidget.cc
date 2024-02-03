@@ -59,28 +59,22 @@ void MyGLWidget::setProjection() {
 void MyGLWidget::setLightning() {
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
+  glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
   glEnable(GL_COLOR_MATERIAL);
   glEnable(GL_NORMALIZE);
 
-  GLfloat light_pos[] = {0, 0, 1, 0};
   glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
 
   if (cord_mode) {
-      glBegin(GL_POINTS);
+      glEnable(GL_POINT_SMOOTH);
+      glEnableClientState(GL_VERTEX_ARRAY);
+      glVertexPointer(3, GL_FLOAT, 0, &light_pos);
       glColor3f(1, 1, 1);
-      glPointSize(10);
-      glVertex3f(light_pos[0], light_pos[1],light_pos[2]);
-      glEnd();
-
-
-//      glEnableClientState(GL_VERTEX_ARRAY);
-//      glVertexPointer(3, GL_FLOAT, 0, &light_pos);
-//      glColor3f(1, 1, 1);
-//            glPointSize(10);
-//      glDrawArrays(GL_POINTS, 0, 1);
-//      glDisableClientState(GL_VERTEX_ARRAY);
+            glPointSize(20);
+      glDrawArrays(GL_POINTS, 0, 1);
+      glDisableClientState(GL_VERTEX_ARRAY);
   }
 }
 

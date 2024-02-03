@@ -47,6 +47,11 @@ class MainWindow : public QMainWindow {
   void on_display_type_currentIndexChanged(int index);
   void on_cord_mode_currentIndexChanged(int index);
 
+  // Light
+  void on_light_move_x_valueChanged(int value);
+  void on_light_move_y_valueChanged(int value);
+  void on_light_move_z_valueChanged(int value);
+
   // Color
   void on_bg_color_clicked();
   void on_vert_color_clicked();

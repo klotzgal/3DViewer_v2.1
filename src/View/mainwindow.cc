@@ -31,7 +31,7 @@ void MainWindow::loadSettings() {
       settings_->value("projection_type", 0).toInt();
   ui->projection_type->setCurrentIndex(ui->GLWidget->projection_type);
   // Colors
-  QColor color = QColor("#1E0F3D");
+  QColor color = QColor("rgb(21, 30, 36)");
   QColor c = settings_->value("bg_color", color).value<QColor>();
   qDebug() << color.name() << color.HexArgb;
   ui->GLWidget->bg_color = c;
@@ -68,10 +68,16 @@ void MainWindow::loadSettings() {
   } else if (ui->GLWidget->edges_type == 1) {
     ui->edges_dashed->setChecked(true);
   }
+  ui->GLWidget->display_type = settings_->value("display_type", 0).toInt();
+  ui->display_type->setCurrentIndex(ui->GLWidget->display_type);
+  ui->GLWidget->cord_mode = settings_->value("cord_mode", 1).toBool();
+  ui->cord_mode->setCurrentIndex(ui->GLWidget->cord_mode);
 }
 
 void MainWindow::saveSettings() {
   settings_->setValue("projection_type", ui->GLWidget->projection_type);
+  settings_->setValue("display_type", ui->GLWidget->display_type);
+  settings_->setValue("cord_mode", ui->GLWidget->cord_mode);
   settings_->setValue("bg_color", ui->GLWidget->bg_color);
   settings_->setValue("vert_color", ui->GLWidget->vert_color);
   settings_->setValue("edges_color", ui->GLWidget->edges_color);
@@ -79,6 +85,7 @@ void MainWindow::saveSettings() {
   settings_->setValue("edges_size", ui->GLWidget->edges_size);
   settings_->setValue("vert_type", ui->GLWidget->vert_type);
   settings_->setValue("edges_type", ui->GLWidget->edges_type);
+
 }
 
 void MainWindow::paintEvent(QPaintEvent *event) {
@@ -212,6 +219,21 @@ void MainWindow::on_display_type_currentIndexChanged(int index) {
 void MainWindow::on_cord_mode_currentIndexChanged(int index) {
   qDebug() << index;
   ui->GLWidget->cord_mode = index;
+  ui->GLWidget->update();
+}
+
+void MainWindow::on_light_move_x_valueChanged(int value) {
+  ui->GLWidget->light_pos[0] = value;
+  ui->GLWidget->update();
+}
+
+void MainWindow::on_light_move_y_valueChanged(int value) {
+  ui->GLWidget->light_pos[1] = value;
+  ui->GLWidget->update();
+}
+
+void MainWindow::on_light_move_z_valueChanged(int value) {
+  ui->GLWidget->light_pos[2] = value;
   ui->GLWidget->update();
 }
 
