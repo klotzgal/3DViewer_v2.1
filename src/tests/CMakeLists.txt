@@ -24,7 +24,6 @@ SET (CMAKE_RUNTIME_OUTPUT_DIRECTORY
   target_link_libraries(unit_tests GTest::gtest_main)
   include(GoogleTest)
   gtest_discover_tests(unit_tests)
-  add_test(NAME unit_tests COMMAND unit_tests)
  
 
 # endif()

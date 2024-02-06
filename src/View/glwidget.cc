@@ -17,10 +17,13 @@ void MyGLWidget::paintGL() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   bool isLight = controller_->isHaveNormals() && display_type == 2;
   setProjection();
+
   if (isLight) {
     setLightning();
   }
-  if (cord_mode) cordMode();
+  if (cord_mode) {
+    cordMode();
+  }
   if (!controller_->isEmpty()) {
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_DOUBLE, 0, controller_->getVertices().data());
@@ -57,6 +60,15 @@ void MyGLWidget::setProjection() {
 }
 
 void MyGLWidget::setLightning() {
+  if (cord_mode) {
+    glEnable(GL_POINT_SMOOTH);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, &light_pos);
+    glColor3f(1, 1, 1);
+    glPointSize(20);
+    glDrawArrays(GL_POINTS, 0, 1);
+    glDisableClientState(GL_VERTEX_ARRAY);
+  }
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   glEnable(GL_DEPTH_TEST);
@@ -66,16 +78,6 @@ void MyGLWidget::setLightning() {
   glEnable(GL_NORMALIZE);
 
   glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
-
-  if (cord_mode) {
-      glEnable(GL_POINT_SMOOTH);
-      glEnableClientState(GL_VERTEX_ARRAY);
-      glVertexPointer(3, GL_FLOAT, 0, &light_pos);
-      glColor3f(1, 1, 1);
-            glPointSize(20);
-      glDrawArrays(GL_POINTS, 0, 1);
-      glDisableClientState(GL_VERTEX_ARRAY);
-  }
 }
 
 void MyGLWidget::buildPoints() {
@@ -103,8 +105,8 @@ void MyGLWidget::buildLines() {
 
   auto type = display_type ? GL_POLYGON : GL_LINE_LOOP;
   for (size_t i = 0; i < controller_->getPolygonsCount(); ++i) {
-    glDrawElements(type, controller_->getPolygon(i).size(),
-                   GL_UNSIGNED_INT, controller_->getPolygon(i).data());
+    glDrawElements(type, controller_->getPolygon(i).size(), GL_UNSIGNED_INT,
+                   controller_->getPolygon(i).data());
   }
 
   if (this->edges_type == 1) {
@@ -113,17 +115,19 @@ void MyGLWidget::buildLines() {
 }
 
 void MyGLWidget::cordMode() {
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-    glRotatef(-10, 0, 1, 0);
-    GLfloat cord_vert[] = {10, 0, 0, -10, 0, 0, 0, 10, 0, 0, -10, 0, 0, 0, 10, 0, 0, -10};
-    GLfloat cord_colors[] = { 1, 0, 0, 1, 0, 0,0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1};
-    glVertexPointer(3, GL_FLOAT, 0, &cord_vert);
-    glColorPointer(3, GL_FLOAT, 0, &cord_colors);
-    glLineWidth(2);
-    glDrawArrays(GL_LINES, 0, 6);
-    glDisableClientState(GL_COLOR_ARRAY);
-    glDisableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_COLOR_ARRAY);
+  glRotatef(-10, 0, 1, 0);
+  GLfloat cord_vert[] = {10, 0,   0, -10, 0, 0,  0, 10, 0,
+                         0,  -10, 0, 0,   0, 10, 0, 0,  -10};
+  GLfloat cord_colors[] = {1, 0, 0, 1, 0, 0, 0, 1, 0,
+                           0, 1, 0, 0, 0, 1, 0, 0, 1};
+  glVertexPointer(3, GL_FLOAT, 0, &cord_vert);
+  glColorPointer(3, GL_FLOAT, 0, &cord_colors);
+  glLineWidth(2);
+  glDrawArrays(GL_LINES, 0, 6);
+  glDisableClientState(GL_COLOR_ARRAY);
+  glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 void MyGLWidget::parseObj() {

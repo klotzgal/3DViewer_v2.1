@@ -33,7 +33,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   GLdouble move_x;
   GLdouble move_y;
   GLdouble move_z;
-  GLfloat light_pos[3] = {2, 2, 0};
+  GLfloat light_pos[3] = {0, 0, 0};
 
   GLdouble vert_size = 1;
   GLdouble edges_size = 1;

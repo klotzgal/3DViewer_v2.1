@@ -7,10 +7,13 @@ void Scale::exec(Parser::data &data, double value) {
   for (size_t i = 0; i < data.vertices.size(); i++) {
     data.vertices[i] *= value;
   }
-  for (size_t i = 0; i < data.polygons_normals.size(); i++) {
-    for (size_t j = 0; j < data.polygons_normals[i].size(); j++) {
-      data.polygons_normals[i][j] *= value;
-    }
+  // for (size_t i = 0; i < data.polygons_normals.size(); i++) {
+  //   for (size_t j = 0; j < data.polygons_normals[i].size(); j++) {
+  //     data.polygons_normals[i][j] *= value;
+  //   }
+  // }
+  for (size_t i = 0; i < data.normals.size(); i++) {
+    data.normals[i] *= value;
   }
 }
 
@@ -18,10 +21,13 @@ void MoveX::exec(Parser::data &data, double value) {
   for (size_t i = 0; i < data.vertices.size(); i += 3) {
     data.vertices[i] += value;
   }
-  for (size_t i = 0; i < data.polygons_normals.size(); i++) {
-    for (size_t j = 0; j < data.polygons_normals[i].size(); j++) {
-      data.polygons_normals[i][j] += value;
-    }
+  // for (size_t i = 0; i < data.polygons_normals.size(); i++) {
+  //   for (size_t j = 0; j < data.polygons_normals[i].size(); j++) {
+  //     data.polygons_normals[i][j] += value;
+  //   }
+  // }
+  for (size_t i = 0; i < data.normals.size(); i += 3) {
+    data.normals[i] += value;
   }
 }
 
@@ -29,10 +35,13 @@ void MoveY::exec(Parser::data &data, double value) {
   for (size_t i = 1; i < data.vertices.size(); i += 3) {
     data.vertices[i] += value;
   }
-  for (size_t i = 0; i < data.polygons_normals.size(); i++) {
-    for (size_t j = 0; j < data.polygons_normals[i].size(); j++) {
-      data.polygons_normals[i][j] += value;
-    }
+  // for (size_t i = 0; i < data.polygons_normals.size(); i++) {
+  //   for (size_t j = 0; j < data.polygons_normals[i].size(); j++) {
+  //     data.polygons_normals[i][j] += value;
+  //   }
+  // }
+  for (size_t i = 1; i < data.normals.size(); i += 3) {
+    data.normals[i] += value;
   }
 }
 
@@ -40,10 +49,13 @@ void MoveZ::exec(Parser::data &data, double value) {
   for (size_t i = 2; i < data.vertices.size(); i += 3) {
     data.vertices[i] += value;
   }
-  for (size_t i = 0; i < data.polygons_normals.size(); i++) {
-    for (size_t j = 0; j < data.polygons_normals[i].size(); j++) {
-      data.polygons_normals[i][j] += value;
-    }
+  // for (size_t i = 0; i < data.polygons_normals.size(); i++) {
+  //   for (size_t j = 0; j < data.polygons_normals[i].size(); j++) {
+  //     data.polygons_normals[i][j] += value;
+  //   }
+  // }
+  for (size_t i = 2; i < data.normals.size(); i += 3) {
+    data.normals[i] += value;
   }
 }
 

@@ -33,6 +33,9 @@ class Model {
   data *getData() const noexcept { return data_; }
 
   size_t getPolygonsCount() const noexcept { return data_->polygons.size(); }
+  size_t getPolygonsNormalsCount() const noexcept {
+    return data_->polygons_normals.size();
+  }
   double getX(int i) const noexcept { return data_->vertices[i * 3]; }
   double getY(int i) const noexcept { return data_->vertices[i * 3 + 1]; }
   double getZ(int i) const noexcept { return data_->vertices[i * 3 + 2]; }
