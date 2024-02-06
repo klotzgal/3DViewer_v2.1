@@ -85,7 +85,6 @@ void MainWindow::saveSettings() {
   settings_->setValue("edges_size", ui->GLWidget->edges_size);
   settings_->setValue("vert_type", ui->GLWidget->vert_type);
   settings_->setValue("edges_type", ui->GLWidget->edges_type);
-
 }
 
 void MainWindow::paintEvent(QPaintEvent *event) {

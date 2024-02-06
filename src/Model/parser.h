@@ -37,6 +37,9 @@ class Parser {
       std::cout << std::fixed;
       std::cout << "vertices_count = " << vertices.size() / 3 << std::endl;
       std::cout << "polygons_count = " << polygons.size() << std::endl;
+      std::cout << "polygons_normals_count = " << polygons_normals.size()
+                << std::endl;
+      std::cout << "normals_count = " << normals.size() / 3 << std::endl;
       if (!isEmpty()) {
         std::cout << "vertices:" << std::endl;
         for (size_t i = 0; i < vertices.size(); i += 3) {

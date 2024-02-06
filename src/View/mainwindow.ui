@@ -328,9 +328,6 @@ border: none;</string>
                   <height>40</height>
                  </size>
                 </property>
-                <property name="styleSheet">
-                 <string notr="true"/>
-                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -792,8 +789,7 @@ border: none;</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">background: transparent;
-color: rgb(255, 255, 0);</string>
+               <string notr="true">color: rgb(255, 255, 255);</string>
               </property>
               <property name="currentIndex">
                <number>2</number>
@@ -931,7 +927,7 @@ color: rgb(255, 255, 0);</string>
               </widget>
               <widget class="QWidget" name="edges_tab">
                <property name="styleSheet">
-                <string notr="true">QFrame {\n	border: 1px solid rgb(255, 255, 255);}</string>
+                <string notr="true"/>
                </property>
                <attribute name="title">
                 <string>Edges</string>
@@ -952,11 +948,6 @@ color: rgb(255, 255, 0);</string>
                 </item>
                 <item>
                  <widget class="QFrame" name="edges_style_frame">
-                  <property name="styleSheet">
-                   <string notr="true">QFrame#edges_style_frame {
-	border: 1px solid rgb(255, 255, 255);
-}</string>
-                  </property>
                   <property name="frameShape">
                    <enum>QFrame::StyledPanel</enum>
                   </property>
@@ -1105,9 +1096,7 @@ color: rgb(255, 255, 0);</string>
                    </sizepolicy>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">QFrame#bg_style_frame {
-	border: 1px solid rgb(255, 255, 255);
-}</string>
+                   <string notr="true"/>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::StyledPanel</enum>
@@ -1202,13 +1191,7 @@ color: rgb(255, 255, 0);</string>
               <item>
                <widget class="QComboBox" name="projection_type">
                 <property name="styleSheet">
-                 <string notr="true">QComboBox {
-	color: rgb(255, 255, 0);
-    border: 1px solid gray;
-    border-radius: 3px;
-    padding: 1px 18px 1px 3px;
-    min-width: 6em;
-}</string>
+                 <string notr="true"/>
                 </property>
                 <item>
                  <property name="text">
@@ -1235,15 +1218,6 @@ color: rgb(255, 255, 0);</string>
               </item>
               <item>
                <widget class="QComboBox" name="display_type">
-                <property name="styleSheet">
-                 <string notr="true">QComboBox {
-	color: rgb(255, 255, 0);
-    border: 1px solid gray;
-    border-radius: 3px;
-    padding: 1px 18px 1px 3px;
-    min-width: 6em;
-}</string>
-                </property>
                 <item>
                  <property name="text">
                   <string>Wireframe</string>
@@ -1274,15 +1248,6 @@ color: rgb(255, 255, 0);</string>
               </item>
               <item>
                <widget class="QComboBox" name="cord_mode">
-                <property name="styleSheet">
-                 <string notr="true">QComboBox {
-	color: rgb(255, 255, 0);
-    border: 1px solid gray;
-    border-radius: 3px;
-    padding: 1px 18px 1px 3px;
-    min-width: 6em;
-}</string>
-                </property>
                 <item>
                  <property name="text">
                   <string>False</string>

@@ -22,6 +22,8 @@ void Parser::parse(const std::string filename, data *data) {
 void Parser::cleanData(data *data) {
   data->vertices.clear();
   data->polygons.clear();
+  data->polygons_normals.clear();
+  data->normals.clear();
   data->max = -1;
 }
 

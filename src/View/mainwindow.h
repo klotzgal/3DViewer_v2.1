@@ -79,7 +79,7 @@ class MainWindow : public QMainWindow {
   Controller *controller_;
   QSettings *settings_;
   QString gif_name_;
-  QGifImage *gif_;
+  QGifImage *gif_ = nullptr;
   QTimer *timer_;
   int frames_counter_ = 0;
 

@@ -1,9 +1,11 @@
-#include "stylehelper.h"
+﻿#include "stylehelper.h"
 
 QString StyleHelper::getButtonStyle() {
-  return "background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:1, "
-         "y2:0, stop:0 rgba(30, 45, 58, 255), stop:1 rgba(49, 74, 95, 255));"
-         "color: rgb(255, 255, 0);"
+  return "background-color:"
+         " qlineargradient(spread:pad, x1:1, y1:1, x2:1, "
+         "y2:0, stop:0 rgba(30, 45, 58, 255), stop:1 "
+         "rgba(49, 74, 95, 255));"
+         "color: rgb(255, 255, 255);"
          "border-radius: 5%;";
 }
 
@@ -24,13 +26,26 @@ QString StyleHelper::getFrameStyle() {
 
 QString StyleHelper::getCentralWidgetStyle() {
   return "QFrame {"
-         "color: rgb(255, 255, 0);"
-         "background-color: rgb(37, 48, 53);"
-         "   border: 1px solid rgb(0, 0, 0);"
-         "   border-radius: 20px;"
+         "    color: rgb(255, 255, 255);"
+         "    background-color: rgb(37, 48, 53);"
+         "    border: 1px solid rgb(0, 0, 0);"
+         "    border-radius: 20px;"
          "}"
          "QLabel {"
          "    background: transparent;"
          "    border: none;"
+         "}"
+         "QSpinBox {"
+         "    color: rgb(255, 255, 255)"
+         "}"
+         "QComboBox {"
+         "color : rgb(255, 255, 255);"
+         "border: 1px solid gray;"
+         "border-radius: 3px;"
+         "padding: 1px 18px 1px 3px;"
+         "min-width: 6em;"
+         "}"
+         "QTableWidget {"
+         "    color: rgb(255, 255, 255);"
          "}";
 }
