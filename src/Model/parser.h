@@ -40,33 +40,33 @@ class Parser {
       std::cout << "polygons_normals_count = " << polygons_normals.size()
                 << std::endl;
       std::cout << "normals_count = " << normals.size() / 3 << std::endl;
-      if (!isEmpty()) {
-        std::cout << "vertices:" << std::endl;
-        for (size_t i = 0; i < vertices.size(); i += 3) {
-          std::cout << i / 3 << " " << std::setprecision(15) << vertices[i]
-                    << " " << vertices[i + 1] << " " << vertices[i + 2]
-                    << std::endl;
-        }
-        std::cout << "polygons.capacity() = " << polygons.capacity()
-                  << std::endl;
-        for (size_t i = 0; i < polygons.size(); i++) {
-          std::cout << polygons[i].size() << " ";
-          for (size_t j = 0; j < polygons[i].size(); j++) {
-            std::cout << polygons[i][j];
-            if (isHaveNormals()) {
-              std::cout << "/" << polygons_normals[i][j];
-            }
-            std::cout << " ";
-          }
-          std::cout << std::endl;
-        }
-        std::cout << "normals:" << std::endl;
-        for (size_t i = 0; i < normals.size(); i += 3) {
-          std::cout << i / 3 << " " << std::setprecision(15) << normals[i]
-                    << " " << normals[i + 1] << " " << normals[i + 2]
-                    << std::endl;
-        }
-      }
+      // if (!isEmpty()) {
+      //   std::cout << "vertices:" << std::endl;
+      //   for (size_t i = 0; i < vertices.size(); i += 3) {
+      //     std::cout << i / 3 << " " << std::setprecision(15) << vertices[i]
+      //               << " " << vertices[i + 1] << " " << vertices[i + 2]
+      //               << std::endl;
+      //   }
+      //   std::cout << "polygons.capacity() = " << polygons.capacity()
+      //             << std::endl;
+      //   for (size_t i = 0; i < polygons.size(); i++) {
+      //     std::cout << polygons[i].size() << " ";
+      //     for (size_t j = 0; j < polygons[i].size(); j++) {
+      //       std::cout << polygons[i][j];
+      //       if (isHaveNormals()) {
+      //         std::cout << "/" << polygons_normals[i][j];
+      //       }
+      //       std::cout << " ";
+      //     }
+      //     std::cout << std::endl;
+      //   }
+      //   std::cout << "normals:" << std::endl;
+      //   for (size_t i = 0; i < normals.size(); i += 3) {
+      //     std::cout << i / 3 << " " << std::setprecision(15) << normals[i]
+      //               << " " << normals[i + 1] << " " << normals[i + 2]
+      //               << std::endl;
+      //   }
+      // }
     }
   };
 

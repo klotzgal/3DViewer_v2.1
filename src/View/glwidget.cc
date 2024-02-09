@@ -15,20 +15,19 @@ void MyGLWidget::resizeGL(int w, int h) { glViewport(0, 0, w, h); }
 void MyGLWidget::paintGL() {
   glClearColor(bg_color.redF(), bg_color.greenF(), bg_color.blueF(), 1);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  bool isLight = controller_->isHaveNormals() && display_type == 2;
+  bool isLight = controller_->isHaveNormals();
   setProjection();
-
-  if (isLight) {
-    setLightning();
-  }
   if (cord_mode) {
     cordMode();
+  }
+  if (isLight || display_type == 1) {
+    setLightning();
   }
   if (!controller_->isEmpty()) {
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_DOUBLE, 0, controller_->getVertices().data());
 
-    if (isLight) {
+    if (isLight && display_type == 2) {
       glEnableClientState(GL_NORMAL_ARRAY);
       glNormalPointer(GL_DOUBLE, 0, controller_->getNormals().data());
     }
@@ -38,7 +37,7 @@ void MyGLWidget::paintGL() {
     }
 
     buildLines();
-    if (isLight) {
+    if (isLight && display_type == 2) {
       glDisableClientState(GL_NORMAL_ARRAY);
     }
     glDisableClientState(GL_VERTEX_ARRAY);
@@ -52,10 +51,9 @@ void MyGLWidget::setProjection() {
   if (this->projection_type == 0) {
     glFrustum(-k, k, -1, 1, 1, 1000);
     glTranslatef(0, 0, -4);
-    glRotatef(30, 1, 0, 0);
   } else {
     glOrtho(-k, k, -1, 1, -5, 1000);
-    glTranslatef(0, -1 / 2, 0);
+    glTranslatef(0, 0, -4);
   }
 }
 
@@ -105,8 +103,11 @@ void MyGLWidget::buildLines() {
 
   auto type = display_type ? GL_POLYGON : GL_LINE_LOOP;
   for (size_t i = 0; i < controller_->getPolygonsCount(); ++i) {
-    glDrawElements(type, controller_->getPolygon(i).size(), GL_UNSIGNED_INT,
-                   controller_->getPolygon(i).data());
+    std::vector<uint> polygon = controller_->getPolygon(i);
+    if (display_type == 1) {
+      setPolygonNormal(polygon);
+    }
+    glDrawElements(type, polygon.size(), GL_UNSIGNED_INT, polygon.data());
   }
 
   if (this->edges_type == 1) {
@@ -114,9 +115,28 @@ void MyGLWidget::buildLines() {
   }
 }
 
+void MyGLWidget::setPolygonNormal(std::vector<uint> &polygon) {
+  std::vector<double>
+      v1 = {controller_->getX(polygon[1]) - controller_->getX(polygon[0]),
+            controller_->getY(polygon[1]) - controller_->getY(polygon[0]),
+            controller_->getZ(polygon[1]) - controller_->getZ(polygon[0])},
+      v2 = {controller_->getX(polygon[2]) - controller_->getX(polygon[1]),
+            controller_->getY(polygon[2]) - controller_->getY(polygon[1]),
+            controller_->getZ(polygon[2]) - controller_->getZ(polygon[1])};
+  GLfloat nx = v1[1] * v2[2] - v1[2] * v2[1];
+  GLfloat ny = v1[2] * v2[0] - v1[0] * v2[2];
+  GLfloat nz = v1[0] * v2[1] - v1[1] * v2[0];
+  GLfloat length = sqrt(nx * nx + ny * ny + nz * nz);
+  nx /= length;
+  ny /= length;
+  nz /= length;
+  glNormal3f(nx, ny, nz);
+}
+
 void MyGLWidget::cordMode() {
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_COLOR_ARRAY);
+  glRotatef(30, 1, 0, 0);
   glRotatef(-10, 0, 1, 0);
   GLfloat cord_vert[] = {10, 0,   0, -10, 0, 0,  0, 10, 0,
                          0,  -10, 0, 0,   0, 10, 0, 0,  -10};

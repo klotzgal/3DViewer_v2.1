@@ -222,17 +222,17 @@ void MainWindow::on_cord_mode_currentIndexChanged(int index) {
 }
 
 void MainWindow::on_light_move_x_valueChanged(int value) {
-  ui->GLWidget->light_pos[0] = value;
+  ui->GLWidget->light_pos[0] = value * 0.1;
   ui->GLWidget->update();
 }
 
 void MainWindow::on_light_move_y_valueChanged(int value) {
-  ui->GLWidget->light_pos[1] = value;
+  ui->GLWidget->light_pos[1] = value * 0.1;
   ui->GLWidget->update();
 }
 
 void MainWindow::on_light_move_z_valueChanged(int value) {
-  ui->GLWidget->light_pos[2] = value;
+  ui->GLWidget->light_pos[2] = value * 0.1;
   ui->GLWidget->update();
 }
 

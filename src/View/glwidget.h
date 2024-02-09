@@ -71,6 +71,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   void buildLines();
   void buildPoints();
   void cordMode();
+  void setPolygonNormal(std::vector<uint> &polygon);
   Controller *controller_;
 
  signals:
