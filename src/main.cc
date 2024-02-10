@@ -22,5 +22,6 @@ int main() {
   } catch (const std::exception& e) {
     std::cerr << e.what() << " Error" << '\n';
   }
+  std::vector<double> normal = model->calcFloatNormal(0);
   return 0;
 }

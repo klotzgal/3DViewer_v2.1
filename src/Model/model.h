@@ -45,6 +45,9 @@ class Model {
   std::vector<uint> &getPolygonNormals(int i) noexcept {
     return data_->polygons_normals[i];
   }
+  std::vector<double> calcFloatNormal(int i);
+  void calcAveragedNormals();
+  std::vector<double> &getAveragedNormals() { return data_->averaged_normals; }
 
  private:
   std::string filename_;

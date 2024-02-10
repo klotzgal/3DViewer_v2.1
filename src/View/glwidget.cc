@@ -15,7 +15,7 @@ void MyGLWidget::resizeGL(int w, int h) { glViewport(0, 0, w, h); }
 void MyGLWidget::paintGL() {
   glClearColor(bg_color.redF(), bg_color.greenF(), bg_color.blueF(), 1);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  bool isLight = controller_->isHaveNormals();
+  bool isLight = true;
   setProjection();
   if (cord_mode) {
     cordMode();
@@ -29,7 +29,7 @@ void MyGLWidget::paintGL() {
 
     if (isLight && display_type == 2) {
       glEnableClientState(GL_NORMAL_ARRAY);
-      glNormalPointer(GL_DOUBLE, 0, controller_->getNormals().data());
+      glNormalPointer(GL_DOUBLE, 0, controller_->getAveragedNormals().data());
     }
 
     if (this->vert_type != 0) {
@@ -58,15 +58,15 @@ void MyGLWidget::setProjection() {
 }
 
 void MyGLWidget::setLightning() {
-  if (cord_mode) {
-    glEnable(GL_POINT_SMOOTH);
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glVertexPointer(3, GL_FLOAT, 0, &light_pos);
-    glColor3f(1, 1, 1);
-    glPointSize(20);
-    glDrawArrays(GL_POINTS, 0, 1);
-    glDisableClientState(GL_VERTEX_ARRAY);
-  }
+  // if (cord_mode) {
+  glEnable(GL_POINT_SMOOTH);
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glVertexPointer(3, GL_FLOAT, 0, &light_pos);
+  glColor3f(1, 1, 1);
+  glPointSize(20);
+  glDrawArrays(GL_POINTS, 0, 1);
+  glDisableClientState(GL_VERTEX_ARRAY);
+  // }
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   glEnable(GL_DEPTH_TEST);
@@ -76,6 +76,9 @@ void MyGLWidget::setLightning() {
   glEnable(GL_NORMALIZE);
 
   glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
+  // glLightfv(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 1.0);
+  // glLightfv(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.0);
+  // glLightfv(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.0);
 }
 
 void MyGLWidget::buildPoints() {
@@ -105,7 +108,8 @@ void MyGLWidget::buildLines() {
   for (size_t i = 0; i < controller_->getPolygonsCount(); ++i) {
     std::vector<uint> polygon = controller_->getPolygon(i);
     if (display_type == 1) {
-      setPolygonNormal(polygon);
+      std::vector<double> normal = controller_->calcFloatNormal(i);
+      glNormal3d(normal[0], normal[1], normal[2]);
     }
     glDrawElements(type, polygon.size(), GL_UNSIGNED_INT, polygon.data());
   }
@@ -113,24 +117,6 @@ void MyGLWidget::buildLines() {
   if (this->edges_type == 1) {
     glDisable(GL_LINE_STIPPLE);
   }
-}
-
-void MyGLWidget::setPolygonNormal(std::vector<uint> &polygon) {
-  std::vector<double>
-      v1 = {controller_->getX(polygon[1]) - controller_->getX(polygon[0]),
-            controller_->getY(polygon[1]) - controller_->getY(polygon[0]),
-            controller_->getZ(polygon[1]) - controller_->getZ(polygon[0])},
-      v2 = {controller_->getX(polygon[2]) - controller_->getX(polygon[1]),
-            controller_->getY(polygon[2]) - controller_->getY(polygon[1]),
-            controller_->getZ(polygon[2]) - controller_->getZ(polygon[1])};
-  GLfloat nx = v1[1] * v2[2] - v1[2] * v2[1];
-  GLfloat ny = v1[2] * v2[0] - v1[0] * v2[2];
-  GLfloat nz = v1[0] * v2[1] - v1[1] * v2[0];
-  GLfloat length = sqrt(nx * nx + ny * ny + nz * nz);
-  nx /= length;
-  ny /= length;
-  nz /= length;
-  glNormal3f(nx, ny, nz);
 }
 
 void MyGLWidget::cordMode() {

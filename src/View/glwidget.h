@@ -33,7 +33,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   GLdouble move_x;
   GLdouble move_y;
   GLdouble move_z;
-  GLfloat light_pos[3] = {0, 0, 0};
+  GLfloat light_pos[4] = {0, 0, 0, 1};
 
   GLdouble vert_size = 1;
   GLdouble edges_size = 1;
@@ -71,7 +71,6 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   void buildLines();
   void buildPoints();
   void cordMode();
-  void setPolygonNormal(std::vector<uint> &polygon);
   Controller *controller_;
 
  signals:

@@ -23,12 +23,14 @@ class Parser {
     std::vector<double> normals;
     std::vector<std::vector<uint>> polygons;
     std::vector<std::vector<uint>> polygons_normals;
+    std::vector<double> averaged_normals;
     double max;
     data()
         : vertices(0, 0),
           normals(0, 0),
           polygons(0, std::vector<uint>(0)),
           polygons_normals(0, std::vector<uint>(0)),
+          averaged_normals(0, 0),
           max(-1) {}
     bool isEmpty() { return vertices.size() / 3 == 0 || polygons.size() == 0; }
     bool isHaveNormals() { return !normals.empty(); }

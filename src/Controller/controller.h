@@ -35,6 +35,12 @@ class Controller {
   std::vector<uint>& getPolygonNormals(int i) const {
     return model_->getPolygonNormals(i);
   }
+  std::vector<double> calcFloatNormal(int i) {
+    return model_->calcFloatNormal(i);
+  }
+  std::vector<double>& getAveragedNormals() {
+    return model_->getAveragedNormals();
+  }
 
  private:
   Model* model_;
