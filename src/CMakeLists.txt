@@ -80,6 +80,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         ${QGIFIMAGE}
+        Libs/stb_image.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET 3DViewer APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -90,6 +91,7 @@ else()
         add_library(3DViewer SHARED
             ${PROJECT_SOURCES}
             ${QGIFIMAGE}
+            Libs/stb_image.h
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
@@ -97,6 +99,7 @@ else()
         add_executable(3DViewer
             ${PROJECT_SOURCES}
             ${QGIFIMAGE}
+            Libs/stb_image.h
         )
     endif()
 endif()

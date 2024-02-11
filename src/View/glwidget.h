@@ -68,6 +68,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
 
   void setProjection();
   void setLightning();
+  void setTextures();
   void buildLines();
   void buildPoints();
   void cordMode();

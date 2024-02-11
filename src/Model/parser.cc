@@ -22,8 +22,8 @@ void Parser::parse(const std::string filename, data *data) {
 void Parser::cleanData(data *data) {
   data->vertices.clear();
   data->polygons.clear();
-  data->polygons_normals.clear();
-  data->normals.clear();
+  data->polygons_textures.clear();
+  data->textures.clear();
   data->max = -1;
 }
 
@@ -45,7 +45,8 @@ void Parser::parseVAndF(std::ifstream &file, data *data) {
       std::stringstream ss(line.substr(2));
       std::string token;
       data->polygons.push_back(std::vector<uint>(0));
-      data->polygons_normals.push_back(std::vector<uint>(0));
+      // data->polygons_normals.push_back(std::vector<uint>(0));
+      data->polygons_textures.push_back(std::vector<uint>(0));
       while (ss >> token) {
         // std::cout << token << " token[" << token.find_last_of("/") << "] "
         //           << token.substr(token.find_last_of("/") + 1) << std::endl;
@@ -56,21 +57,25 @@ void Parser::parseVAndF(std::ifstream &file, data *data) {
           vertex = vertex - data->vertices.size() / 3;
         }
         data->polygons[data->polygons.size() - 1].push_back(vertex - 1);
-        if (std::count(token.begin(), token.end(), '/') > 1) {
-          int normal = std::stoi(token.substr(token.find_last_of("/") + 1));
-          data->polygons_normals[data->polygons_normals.size() - 1].push_back(
-              normal);
+        if (std::count(token.begin(), token.end(), '/') > 0) {
+          int texture = std::stoi(token.substr(token.find("/") + 1));
+          data->polygons_textures[data->polygons_textures.size() - 1].push_back(
+              texture);
         } else {
-          data->polygons_normals[data->polygons_normals.size() - 1].push_back(
+          data->polygons_textures[data->polygons_textures.size() - 1].push_back(
               1);
         }
       }
-    } else if (line[0] == 'v' && line[1] == 'n' && line[2] == ' ') {
+    } else if (line[0] == 'v' && line[1] == 't' && line[2] == ' ') {
       std::stringstream ss(line.substr(3));
       std::string token;
-      for (int j = 0; j < 3; j++) {
+      for (int j = 0; j < 2; j++) {
         ss >> token;
-        data->normals.push_back(std::stod(token));
+        double cord = std::stod(token);
+        if (cord < 0) {
+          cord = 1 + cord;
+        }
+        data->textures.push_back(cord);
       }
     }
   }

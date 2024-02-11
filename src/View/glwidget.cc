@@ -1,5 +1,8 @@
 ﻿#include "glwidget.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "../Libs/stb_image.h"
+
 MyGLWidget::MyGLWidget(QWidget *parent, Controller *controller)
     : QOpenGLWidget{parent}, controller_(controller) {}
 
@@ -25,8 +28,12 @@ void MyGLWidget::paintGL() {
   }
   if (!controller_->isEmpty()) {
     glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    glEnable(GL_TEXTURE_2D);
+    setTextures();
     glVertexPointer(3, GL_DOUBLE, 0, controller_->getVertices().data());
-
+    // GLfloat text_cord[] = {0, 0, 1, 0, 1, 1, 0, 1};
+    glTexCoordPointer(2, GL_FLOAT, 0, controller_->getTextures().data());
     if (isLight && display_type == 2) {
       glEnableClientState(GL_NORMAL_ARRAY);
       glNormalPointer(GL_DOUBLE, 0, controller_->getAveragedNormals().data());
@@ -40,6 +47,8 @@ void MyGLWidget::paintGL() {
     if (isLight && display_type == 2) {
       glDisableClientState(GL_NORMAL_ARRAY);
     }
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
     glDisableClientState(GL_VERTEX_ARRAY);
   }
 }
@@ -79,6 +88,36 @@ void MyGLWidget::setLightning() {
   // glLightfv(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 1.0);
   // glLightfv(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.0);
   // glLightfv(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.0);
+}
+
+void MyGLWidget::setTextures() {
+  // glEnable(GL_TEXTURE_2D);
+  GLuint texture;
+  GLint width = 0, height = 0, cnt = 0;
+  // struct {
+  //   GLchar r, g, b;
+  // } data[2][2];
+  // data[0][0].r = 255;
+  // data[1][0].g = 255;
+  // data[1][1].b = 255;
+  // data[0][1].r = 255;
+  // data[0][1].g = 255;
+  stbi_set_flip_vertically_on_load(true);
+  unsigned char *data2 = stbi_load(
+      "/home/klotzgal/Desktop/kl/S21_CPP/3DViewer_v2.0/src/texture.bmp", &width,
+      &height, &cnt, 0);
+  glGenTextures(1, &texture);
+  glBindTexture(GL_TEXTURE_2D, texture);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+  glTexImage2D(GL_TEXTURE_2D, 0, cnt == 4 ? GL_RGBA : GL_RGB, width, height, 0,
+               GL_RGB, GL_UNSIGNED_BYTE, data2);
+  qDebug() << "glTexImage2D" << width << height << cnt;
+  stbi_image_free(data2);
+
+  // glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void MyGLWidget::buildPoints() {
