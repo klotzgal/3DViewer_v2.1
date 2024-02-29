@@ -3,5 +3,17 @@
         <file>gif_ico.svg</file>
         <file>open.svg</file>
         <file>photo_ico.svg</file>
+        <file>Logo.png</file>
+        <file>update.png</file>
+        <file>capture.png</file>
+        <file>dark-mode.png</file>
+        <file>folder.png</file>
+        <file>gif.png</file>
+        <file>light-mode.png</file>
+        <file>capture-light.png</file>
+        <file>dark-mode-light.png</file>
+        <file>folder-light.png</file>
+        <file>gif-light.png</file>
+        <file>update-light.png</file>
     </qresource>
 </RCC>

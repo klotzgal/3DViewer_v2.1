@@ -26,6 +26,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
 
  private slots:
+  void on_change_theme_clicked();
   void on_render_model_clicked();
   void on_open_file_clicked();
   void on_foto_clicked();
@@ -82,11 +83,14 @@ class MainWindow : public QMainWindow {
   QGifImage *gif_ = nullptr;
   QTimer *timer_;
   int frames_counter_ = 0;
+  bool isDarkTheme;
 
   // Settings
   void loadSettings();
   void saveSettings();
   void setStyle();
+  void setDarkTheme();
+  void setLightTheme();
 };
 
 #endif  // MAINWINDOW_H

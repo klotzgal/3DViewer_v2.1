@@ -2,6 +2,7 @@
 
 #include "glwidget.h"
 #include "ui_mainwindow.h"
+//#include <QFontDatabase>
 
 MainWindow::MainWindow(QWidget *parent, Controller *controller)
     : QMainWindow{parent}, ui(new Ui::MainWindow), controller_(controller) {
@@ -13,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent, Controller *controller)
   connect(timer_, SIGNAL(timeout()), this, SLOT(make_gif()));
   setStyle();
   loadSettings();
+  isDarkTheme = true;
+  connect(ui->change_theme, &QPushButton::clicked, this, &MainWindow::on_change_theme_clicked);
 }
 
 MainWindow::~MainWindow() {
@@ -95,32 +98,86 @@ void MainWindow::paintEvent(QPaintEvent *event) {
   QWidget::paintEvent(event);
 }
 
-void MainWindow::setStyle() {
-  //    setWindowFlags(Qt::WindowType::FramelessWindowHint);
-  //    setAttribute(Qt::WA_TranslucentBackground);
-  //    setAutoFillBackground(true);
-  setStyleSheet(
-      "background-color: qlineargradient(spread:pad, x1:1, y1:0.613636, x2:1, "
-      "y2:0, stop:0 rgba(11, 14, 17, 255), stop:1 rgba(15, 20, 25, 255));");
-  ui->centralwidget->setStyleSheet(StyleHelper::getCentralWidgetStyle());
+void MainWindow::setDarkTheme() {
+    ui->change_theme->setText("Dark");
+    setStyleSheet(
+        "background-color: #1C1D1E;");
+    ui->GLframe->setStyleSheet(StyleHelper::getDarkGLframe());
 
-  ui->gif->setStyleSheet(StyleHelper::getButtonStyle() %
-                         "color: rgb(196, 41, 31);" %
-                         "border-image: url(:/res/gif_ico.svg);");
-  ui->foto->setStyleSheet(StyleHelper::getButtonStyle() %
-                          "border-image: url(:/res/photo_ico.svg);");
-  ui->open_file->setStyleSheet(StyleHelper::getButtonStyle() %
-                               "border-image: url(:/res/open.svg);");
-  ui->render_model->setStyleSheet(StyleHelper::getButtonStyle());
+    ui->gif->setStyleSheet(StyleHelper::getButtonDarkStyle() %
+                            "border-image: url(:/res/gif-light.png);");
+    ui->foto->setStyleSheet(StyleHelper::getButtonDarkStyle() %
+                            "border-image: url(:/res/capture-light.png);");
+    ui->open_file->setStyleSheet(StyleHelper::getButtonDarkStyle() %
+                            "border-image: url(:/res/folder-light.png);");
+    ui->change_theme->setStyleSheet(StyleHelper::getButtonDarkStyle() %
+                            "border-image: url(:/res/dark-mode-light.png);");
+    ui->render_model->setStyleSheet(StyleHelper::getButtonDarkStyle() %
+                            "border-image: url(:/res/update-light.png);");
 
-  ui->record_frame->setStyleSheet(StyleHelper::getFrameStyle());
-  ui->open_file_frame->setStyleSheet(StyleHelper::getFrameStyle());
+    ui->record_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
+    ui->open_file_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
 
-  ui->view_frame->setStyleSheet(StyleHelper::getFrameStyle());
-  ui->style_frame->setStyleSheet(StyleHelper::getFrameStyle());
-  ui->bg_style_frame->setStyleSheet(StyleHelper::getFrameStyle());
-  ui->manipulation_frame->setStyleSheet(StyleHelper::getFrameStyle());
+    ui->view_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
+    ui->style_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
+    ui->vert_style_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
+    ui->edges_style_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
+    ui->bg_style_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
+    ui->manipulation_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
+    ui->light_move_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
+    ui->rotate_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
 }
+
+void MainWindow::setLightTheme() {
+    ui->change_theme->setText("Light");
+    setStyleSheet(
+        "background-color: #EAEBED;"
+        "color: #242424;");
+    ui->GLframe->setStyleSheet(StyleHelper::getLightGLframe());
+
+    ui->gif->setStyleSheet(StyleHelper::getButtonLightStyle() %
+                            "border-image: url(:/res/gif.png);");
+    ui->foto->setStyleSheet(StyleHelper::getButtonLightStyle() %
+                            "border-image: url(:/res/capture.png);");
+    ui->open_file->setStyleSheet(StyleHelper::getButtonLightStyle() %
+                            "border-image: url(:/res/folder.png);");
+    ui->change_theme->setStyleSheet(StyleHelper::getButtonLightStyle() %
+                            "border-image: url(:/res/dark-mode.png);");
+    ui->render_model->setStyleSheet(StyleHelper::getButtonLightStyle() %
+                            "border-image: url(:/res/update.png);");
+
+    ui->record_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
+    ui->open_file_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
+
+    ui->view_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
+    ui->style_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
+    ui->vert_style_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
+    ui->edges_style_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
+    ui->bg_style_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
+    ui->manipulation_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
+    ui->light_move_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
+    ui->rotate_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
+}
+
+void MainWindow::setStyle() {
+//  int id = QFontDatabase::addApplicationFont(":/res/Roboto-Medium.ttf");
+//  QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+//  qDebug() << family;
+    setDarkTheme();
+//    setLightTheme();
+}
+
+void MainWindow::on_change_theme_clicked() {
+    if (isDarkTheme) {
+        setLightTheme();
+        qDebug() << "LightTheme";
+    } else {
+        setDarkTheme();
+        qDebug() << "DarkTheme";
+    }
+    isDarkTheme = !isDarkTheme;
+}
+
 
 void MainWindow::on_render_model_clicked() {
   qDebug() << "Render";

@@ -6,9 +6,12 @@
 class StyleHelper
 {
 public:
-    static QString getButtonStyle();
-    static QString getFrameStyle();
-    static QString getCentralWidgetStyle();
+    static QString getButtonDarkStyle();
+    static QString getFrameDarkStyle();
+    static QString getDarkGLframe();
+    static QString getButtonLightStyle();
+    static QString getFrameLightStyle();
+    static QString getLightGLframe();
 };
 
 #endif // STYLEHELPER_H
