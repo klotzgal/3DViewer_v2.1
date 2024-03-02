@@ -1,9 +1,5 @@
 #include "parser.h"
 
-Parser::Parser() { std::cout << "Parser constructor" << std::endl; }
-
-Parser::~Parser() { std::cout << "Parser destructor" << std::endl; }
-
 void Parser::parse(const std::string filename, data *data) {
   setlocale(LC_NUMERIC, "C");
   std::ifstream file(filename);
@@ -47,8 +43,6 @@ void Parser::parseVAndF(std::ifstream &file, data *data) {
       data->polygons.push_back(std::vector<uint>(0));
       data->polygons_normals.push_back(std::vector<uint>(0));
       while (ss >> token) {
-        // std::cout << token << " token[" << token.find_last_of("/") << "] "
-        //           << token.substr(token.find_last_of("/") + 1) << std::endl;
         int vertex = std::stoi(token);
         if (vertex <= 0) {
           vertex = data->vertices.size() / 3 + vertex + 1;

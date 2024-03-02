@@ -47,6 +47,7 @@ class MainWindow : public QMainWindow {
   // Display
   void on_display_type_currentIndexChanged(int index);
   void on_cord_mode_currentIndexChanged(int index);
+  void on_select_light_stateChanged(int arg1);
 
   // Light
   void on_light_move_x_valueChanged(int value);
@@ -55,6 +56,7 @@ class MainWindow : public QMainWindow {
 
   // Color
   void on_bg_color_clicked();
+  void on_light_color_clicked();
   void on_vert_color_clicked();
   void on_edges_color_clicked();
 
@@ -88,7 +90,6 @@ class MainWindow : public QMainWindow {
   // Settings
   void loadSettings();
   void saveSettings();
-  void setStyle();
   void setDarkTheme();
   void setLightTheme();
 };

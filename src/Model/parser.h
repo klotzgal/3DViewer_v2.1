@@ -11,13 +11,10 @@
 #include <string>
 #include <vector>
 
-// #include "../Libs/omp.h"
-// #include "../Libs/s21_matrix_oop.h"
-
 class Parser {
  public:
-  Parser();
-  ~Parser();
+  Parser() {}
+  ~Parser() {}
   struct data {
     std::vector<double> vertices;
     std::vector<double> normals;

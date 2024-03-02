@@ -8,6 +8,7 @@ MyGLWidget::~MyGLWidget() {}
 void MyGLWidget::initializeGL() {
   initializeOpenGLFunctions();
   glEnable(GL_DEPTH_TEST);  // depth buffer for z coordinate
+  setProjection();
 }
 
 void MyGLWidget::resizeGL(int w, int h) { glViewport(0, 0, w, h); }
@@ -16,6 +17,7 @@ void MyGLWidget::paintGL() {
   glClearColor(bg_color.redF(), bg_color.greenF(), bg_color.blueF(), 1);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   bool isLight = true;
+
   setProjection();
   if (cord_mode) {
     cordMode();
@@ -47,7 +49,7 @@ void MyGLWidget::paintGL() {
 void MyGLWidget::setProjection() {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  GLdouble k = (double)width() / height();
+  k = (double)width() / height();
   if (this->projection_type == 0) {
     glFrustum(-k, k, -1, 1, 1, 1000);
     glTranslatef(0, 0, -4);
@@ -58,15 +60,16 @@ void MyGLWidget::setProjection() {
 }
 
 void MyGLWidget::setLightning() {
-  // if (cord_mode) {
+  glPushMatrix();
+  glDisable(GL_LIGHTING);
   glEnable(GL_POINT_SMOOTH);
   glEnableClientState(GL_VERTEX_ARRAY);
   glVertexPointer(3, GL_FLOAT, 0, &light_pos);
-  glColor3f(1, 1, 1);
+  glColor3f(light_color.redF(), light_color.greenF(), light_color.blueF());
   glPointSize(20);
   glDrawArrays(GL_POINTS, 0, 1);
   glDisableClientState(GL_VERTEX_ARRAY);
-  // }
+  glPopMatrix();
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   glEnable(GL_DEPTH_TEST);
@@ -75,10 +78,14 @@ void MyGLWidget::setLightning() {
   glEnable(GL_COLOR_MATERIAL);
   glEnable(GL_NORMALIZE);
 
+  float color[4] = {light_color.redF(), light_color.greenF(),
+                    light_color.blueF(), 0};
   glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
-  // glLightfv(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 1.0);
-  // glLightfv(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.0);
-  // glLightfv(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.0);
+  glLightfv(GL_LIGHT0, GL_SPECULAR, light_pos);
+  glLightfv(GL_LIGHT0, GL_DIFFUSE, color);
+  GLfloat mat_specular[] = {1, 1, 1, 1};
+  glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+  glMaterialf(GL_FRONT, GL_SHININESS, 128.0);
 }
 
 void MyGLWidget::buildPoints() {
@@ -120,10 +127,13 @@ void MyGLWidget::buildLines() {
 }
 
 void MyGLWidget::cordMode() {
-  glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_COLOR_ARRAY);
   glRotatef(30, 1, 0, 0);
   glRotatef(-10, 0, 1, 0);
+  glPushMatrix();
+  glDisable(GL_LIGHTING);
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_COLOR_ARRAY);
+
   GLfloat cord_vert[] = {10, 0,   0, -10, 0, 0,  0, 10, 0,
                          0,  -10, 0, 0,   0, 10, 0, 0,  -10};
   GLfloat cord_colors[] = {1, 0, 0, 1, 0, 0, 0, 1, 0,
@@ -134,6 +144,7 @@ void MyGLWidget::cordMode() {
   glDrawArrays(GL_LINES, 0, 6);
   glDisableClientState(GL_COLOR_ARRAY);
   glDisableClientState(GL_VERTEX_ARRAY);
+  glPopMatrix();
 }
 
 void MyGLWidget::parseObj() {
@@ -155,28 +166,37 @@ void MyGLWidget::mousePressEvent(QMouseEvent *event) {
 }
 
 void MyGLWidget::mouseMoveEvent(QMouseEvent *event) {
-  if (controller_->isEmpty()) {
-    return;
-  }
   QPoint delta = cur_pos - event->globalPosition().toPoint();
   cur_pos = event->globalPosition().toPoint();
   qDebug() << delta.x() * 0.5 << delta.y() * 0.5;
-  if (event->buttons() & Qt::LeftButton) {
-    controller_->rotate(delta.y() * 0.5, -delta.x() * 0.5, 0);
-  } else if (event->buttons() & Qt::RightButton) {
-    controller_->move(-delta.x() * 0.002, delta.y() * 0.002, 0);
+  if (select_light) {
+    if (event->buttons() & Qt::LeftButton) {
+      light_pos[0] -= delta.x() * 0.002;
+      light_pos[1] += delta.y() * 0.002;
+    }
+  } else if (!controller_->isEmpty()) {
+    if (event->buttons() & Qt::LeftButton) {
+      controller_->rotate(delta.y() * 0.5, -delta.x() * 0.5, 0);
+    } else if (event->buttons() & Qt::RightButton) {
+      controller_->move(-delta.x() * 0.002, delta.y() * 0.002, 0);
+    }
   }
   update();
 }
 
 void MyGLWidget::wheelEvent(QWheelEvent *event) {
-  if (controller_->isEmpty()) {
-    return;
-  }
-  if (event->angleDelta().y() < 0) {
-    controller_->scale(0.9);
-  } else {
-    controller_->scale(1.1);
+  if (select_light) {
+    if (event->angleDelta().y() < 0) {
+      light_pos[2] += 0.1;
+    } else {
+      light_pos[2] -= 0.1;
+    }
+  } else if (!controller_->isEmpty()) {
+    if (event->angleDelta().y() < 0) {
+      controller_->scale(0.9);
+    } else {
+      controller_->scale(1.1);
+    }
   }
 
   update();

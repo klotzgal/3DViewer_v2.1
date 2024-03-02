@@ -39,10 +39,12 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   GLdouble edges_size = 1;
   GLint projection_type = 0;
   GLint display_type = 0;
+  GLint select_light = 0;
   GLboolean cord_mode = false;
   GLint vert_type = 0;
   GLint edges_type = 0;
   QColor bg_color;
+  QColor light_color;
   QColor vert_color;
   QColor edges_color;
   /* 3D MODEL DATA END  */
@@ -65,6 +67,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   ~MyGLWidget() override;
   QPoint cur_pos;
   QPoint new_pos;
+  GLdouble k;
 
   void setProjection();
   void setLightning();

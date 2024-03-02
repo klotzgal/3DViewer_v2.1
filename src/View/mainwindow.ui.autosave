@@ -1970,7 +1970,7 @@ border: 1px solid rgb(255, 255, 255);
             <item>
              <widget class="QCheckBox" name="select_light">
               <property name="text">
-               <string>Move light</string>
+               <string>Mouse move light</string>
               </property>
              </widget>
             </item>
