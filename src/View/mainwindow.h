@@ -76,6 +76,7 @@ class MainWindow : public QMainWindow {
 
  protected:
   void paintEvent(QPaintEvent *event);
+  void keyPressEvent(QKeyEvent *event) override;
 
  private:
   Ui::MainWindow *ui;

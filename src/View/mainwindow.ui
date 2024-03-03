@@ -1469,7 +1469,7 @@ border: none;</string>
                 <string notr="true"/>
                </property>
                <attribute name="title">
-                <string>Background</string>
+                <string>Color</string>
                </attribute>
                <layout class="QVBoxLayout" name="verticalLayout_13">
                 <item>
@@ -1874,7 +1874,7 @@ border: 1px solid rgb(255, 255, 255);
               <item>
                <widget class="QLabel" name="translate_light_title">
                 <property name="text">
-                 <string>Move</string>
+                 <string>Move Light </string>
                 </property>
                </widget>
               </item>
@@ -1970,7 +1970,7 @@ border: 1px solid rgb(255, 255, 255);
             <item>
              <widget class="QCheckBox" name="select_light">
               <property name="text">
-               <string>Move light</string>
+               <string>Mouse Move Light </string>
               </property>
              </widget>
             </item>

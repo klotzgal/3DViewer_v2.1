@@ -54,19 +54,6 @@ endif
 	@echo "» Unit test results:"
 	@ctest --output-on-failure --test-dir ../release-build
 
-gcov_report: $(OBJECTS)
-	@echo "┏=========================================┓"
-	@echo "┃     Generating your html report ...     ┃"
-	@echo "┗=========================================┛"
-	@$(CC) --coverage $(CFLAGS) ./tests/unit_tests.c $(LDLIBS) ./modules/*.c -o ./tests/$(TEST_MODUlES)
-	@./tests/$(TEST_MODUlES)
-	@mkdir -p tests/modules_gcov
-	@mv *.gcno ./tests/modules_gcov/ && mv *.gcda ./tests/modules_gcov/
-	@lcov -t "test_coverage" -o test_coverage.info -c -d .
-	@genhtml -o report test_coverage.info
-	@open report/index.html
-	@rm -rf *.gcda *.gcno report/test_coverage.info tests/modules_gcov
-
 style_check:
 	@echo "┏=========================================┓"
 	@echo "┃  Checking your code for Google Style    ┃"
@@ -83,9 +70,8 @@ format_style:
 	@clang-format -i **/*.cc **/*.h
 	@rm ./.clang-format
 
-valgrind_check: test
-	@CK_FORK=no valgrind --vgdb=no --leak-check=full \
-	--show-leak-kinds=all --track-origins=yes --log-file="unit_tests_vg.log" -v --verbose -q --quiet -s tests/$(TEST_MODUlES)
+valgrind: ../release-build/bin/3DViewer
+	@CK_FORK=no valgrind --trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --verbose --log-file=valgrind.txt ./../release-build/bin/3DViewer
 	@echo "┏=========================================┓"
 	@echo "┃        Valgrind check is over           ┃"
 	@echo "┃       logs have been generated          ┃"
@@ -103,4 +89,4 @@ cmake:
 	@cmake -B ../build -S ..  && make -C ../build && ./../build/bin/main
 
 valgrind:
-	CK_FORK=no valgrind --trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --verbose --log-file=valgrind.txt ./../build/bin/main
+	CK_FORK=no valgrind --trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --verbose --log-file=valgrind.txt ./../release-build/bin/3DViewer

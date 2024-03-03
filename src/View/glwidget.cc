@@ -168,7 +168,7 @@ void MyGLWidget::mousePressEvent(QMouseEvent *event) {
 void MyGLWidget::mouseMoveEvent(QMouseEvent *event) {
   QPoint delta = cur_pos - event->globalPosition().toPoint();
   cur_pos = event->globalPosition().toPoint();
-  qDebug() << delta.x() * 0.5 << delta.y() * 0.5;
+  // qDebug() << delta.x() * 0.5 << delta.y() * 0.5;
   if (select_light) {
     if (event->buttons() & Qt::LeftButton) {
       light_pos[0] -= delta.x() * 0.002;

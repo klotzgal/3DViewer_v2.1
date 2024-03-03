@@ -15,5 +15,9 @@
         <file>folder-light.png</file>
         <file>gif-light.png</file>
         <file>update-light.png</file>
+        <file>toggle_off.png</file>
+        <file>toggle_on.png</file>
+        <file>toggle_off_light.png</file>
+        <file>toggle_on_light.png</file>
     </qresource>
 </RCC>

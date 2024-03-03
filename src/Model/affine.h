@@ -15,36 +15,43 @@ class IStrategy {
 
 class Scale : public IStrategy {
  public:
+  Scale() = default;
   void exec(Parser::data &data, double value) override;
 };
 
 class MoveX : public IStrategy {
  public:
+  MoveX() = default;
   void exec(Parser::data &data, double value) override;
 };
 
 class MoveY : public IStrategy {
  public:
+  MoveY() = default;
   void exec(Parser::data &data, double value) override;
 };
 
 class MoveZ : public IStrategy {
  public:
+  MoveZ() = default;
   void exec(Parser::data &data, double value) override;
 };
 
 class RotateX : public IStrategy {
  public:
+  RotateX() = default;
   void exec(Parser::data &data, double value) override;
 };
 
 class RotateY : public IStrategy {
  public:
+  RotateY() = default;
   void exec(Parser::data &data, double value) override;
 };
 
 class RotateZ : public IStrategy {
  public:
+  RotateZ() = default;
   void exec(Parser::data &data, double value) override;
 };
 

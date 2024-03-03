@@ -12,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent, Controller *controller)
   timer_ = new QTimer(0);
   connect(timer_, SIGNAL(timeout()), this, SLOT(make_gif()));
   loadSettings();
-  isDarkTheme = true;
 }
 
 MainWindow::~MainWindow() {
@@ -80,6 +79,7 @@ void MainWindow::loadSettings() {
   // Theme
   isDarkTheme = settings_->value("theme", true).toBool();
   isDarkTheme ? setDarkTheme() : setLightTheme();
+  // qDebug() << isDarkTheme;
 }
 
 void MainWindow::saveSettings() {
@@ -106,8 +106,9 @@ void MainWindow::paintEvent(QPaintEvent *event) {
 }
 
 void MainWindow::setDarkTheme() {
-  ui->change_theme->setText("Dark");
-  setStyleSheet("background-color: #1C1D1E;");
+  setStyleSheet(
+      "background-color: #1C1D1E;"
+      "color: #ffffff");
   ui->GLframe->setStyleSheet(StyleHelper::getDarkGLframe());
 
   ui->gif->setStyleSheet(StyleHelper::getButtonDarkStyle() %
@@ -130,13 +131,13 @@ void MainWindow::setDarkTheme() {
   ui->vert_style_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
   ui->edges_style_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
   ui->bg_style_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
+  ui->bg_style_frame_2->setStyleSheet(StyleHelper::getFrameDarkStyle());
   ui->manipulation_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
   ui->light_move_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
   ui->rotate_frame->setStyleSheet(StyleHelper::getFrameDarkStyle());
 }
 
 void MainWindow::setLightTheme() {
-  ui->change_theme->setText("Light");
   setStyleSheet(
       "background-color: #EAEBED;"
       "color: #242424;");
@@ -161,24 +162,27 @@ void MainWindow::setLightTheme() {
   ui->vert_style_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
   ui->edges_style_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
   ui->bg_style_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
+  ui->bg_style_frame_2->setStyleSheet(StyleHelper::getFrameLightStyle());
   ui->manipulation_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
   ui->light_move_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
   ui->rotate_frame->setStyleSheet(StyleHelper::getFrameLightStyle());
 }
 
 void MainWindow::on_change_theme_clicked() {
-  if (isDarkTheme) {
-    setLightTheme();
-    qDebug() << "LightTheme";
-  } else {
-    setDarkTheme();
-    qDebug() << "DarkTheme";
-  }
+  isDarkTheme ? setLightTheme() : setDarkTheme();
   isDarkTheme = !isDarkTheme;
 }
 
+void MainWindow::keyPressEvent(QKeyEvent *event) {
+  // qDebug() << event->text() << event->key();
+  if (event->key() == Qt::Key_Shift) {
+    ui->GLWidget->select_light = !ui->GLWidget->select_light;
+    ui->select_light->setChecked(ui->GLWidget->select_light);
+  }
+}
+
 void MainWindow::on_render_model_clicked() {
-  qDebug() << "Render";
+  // qDebug() << "Render";
   ui->GLWidget->parseObj();
   ui->GLWidget->update();
 }
@@ -186,9 +190,9 @@ void MainWindow::on_render_model_clicked() {
 void MainWindow::on_open_file_clicked() {
   QString filename = QFileDialog::getOpenFileName(
       this, tr("Open .obj file:"), "~/", tr("Obj Files (*.obj)"));
-  qDebug() << filename;
+  // qDebug() << filename;
   controller_->setFilename(filename);
-  std::cout << controller_->getFilename() << std::endl;
+  // std::cout << controller_->getFilename() << std::endl;
   ui->label->setText(filename);
   QString name =
       filename.right(filename.size() - filename.lastIndexOf('/') - 1);
@@ -205,6 +209,9 @@ void MainWindow::on_open_file_clicked() {
 }
 
 void MainWindow::on_scale_valueChanged(int value) {
+  if (controller_->isEmpty()) {
+    return;
+  }
   GLdouble k = (double)value / ui->GLWidget->scale_val;
   //  qDebug() << "k =" << k;
   ui->GLWidget->scale_val = value;
@@ -213,6 +220,9 @@ void MainWindow::on_scale_valueChanged(int value) {
 }
 
 void MainWindow::on_rotate_x_valueChanged(int value) {
+  if (controller_->isEmpty()) {
+    return;
+  }
   GLdouble k = (double)value - ui->GLWidget->rotate_x;
   //  qDebug() << "k =" << k;
   ui->GLWidget->rotate_x = value;
@@ -221,6 +231,9 @@ void MainWindow::on_rotate_x_valueChanged(int value) {
 }
 
 void MainWindow::on_rotate_y_valueChanged(int value) {
+  if (controller_->isEmpty()) {
+    return;
+  }
   GLdouble k = (double)value - ui->GLWidget->rotate_y;
   //  qDebug() << "k =" << k;
   ui->GLWidget->rotate_y = value;
@@ -229,6 +242,9 @@ void MainWindow::on_rotate_y_valueChanged(int value) {
 }
 
 void MainWindow::on_rotate_z_valueChanged(int value) {
+  if (controller_->isEmpty()) {
+    return;
+  }
   GLdouble k = (double)value - ui->GLWidget->rotate_z;
   //  qDebug() << "k =" << k;
   ui->GLWidget->rotate_z = value;
@@ -237,6 +253,9 @@ void MainWindow::on_rotate_z_valueChanged(int value) {
 }
 
 void MainWindow::on_move_x_valueChanged(int value) {
+  if (controller_->isEmpty()) {
+    return;
+  }
   GLdouble k = ((double)value - ui->GLWidget->move_x) * 0.1;
   //  qDebug() << "k =" << k;
   ui->GLWidget->move_x = value;
@@ -245,6 +264,9 @@ void MainWindow::on_move_x_valueChanged(int value) {
 }
 
 void MainWindow::on_move_y_valueChanged(int value) {
+  if (controller_->isEmpty()) {
+    return;
+  }
   GLdouble k = ((double)value - ui->GLWidget->move_y) * 0.1;
   //  qDebug() << "k =" << k;
   ui->GLWidget->move_y = value;
@@ -253,6 +275,9 @@ void MainWindow::on_move_y_valueChanged(int value) {
 }
 
 void MainWindow::on_move_z_valueChanged(int value) {
+  if (controller_->isEmpty()) {
+    return;
+  }
   GLdouble k = ((double)value - ui->GLWidget->move_z) * 0.1;
   //  qDebug() << "k =" << k;
   ui->GLWidget->move_z = value;
@@ -271,12 +296,12 @@ void MainWindow::on_display_type_currentIndexChanged(int index) {
 }
 
 void MainWindow::on_cord_mode_currentIndexChanged(int index) {
-  qDebug() << (index ? "cord_mode" : "no cord_mode");
+  // qDebug() << (index ? "cord_mode" : "no cord_mode");
   ui->GLWidget->cord_mode = index;
   ui->GLWidget->update();
 }
 void MainWindow::on_select_light_stateChanged(int arg1) {
-  qDebug() << (arg1 ? "select light" : "select model");
+  // qDebug() << (arg1 ? "select light" : "select model");
   ui->GLWidget->select_light = arg1;
   ui->GLWidget->update();
 }
@@ -297,7 +322,7 @@ void MainWindow::on_light_move_z_valueChanged(int value) {
 }
 
 void MainWindow::on_bg_color_clicked() {
-  qDebug() << "bg_color";
+  // qDebug() << "bg_color";
   QColor bg_color =
       QColorDialog::getColor(Qt::white, ui->bg_tab, "Choose background color");
   if (bg_color.isValid()) {
@@ -310,7 +335,7 @@ void MainWindow::on_bg_color_clicked() {
   }
 }
 void MainWindow::on_light_color_clicked() {
-  qDebug() << "light_color";
+  // qDebug() << "light_color";
   QColor light_color =
       QColorDialog::getColor(Qt::white, ui->bg_tab, "Choose light color");
   if (light_color.isValid()) {
@@ -325,7 +350,7 @@ void MainWindow::on_light_color_clicked() {
 }
 
 void MainWindow::on_vert_color_clicked() {
-  qDebug() << "vert_color";
+  // qDebug() << "vert_color";
   QColor vert_color = QColorDialog::getColor(Qt::white, ui->vert_tab,
                                              "Choose background color");
   if (vert_color.isValid()) {
@@ -339,7 +364,7 @@ void MainWindow::on_vert_color_clicked() {
 }
 
 void MainWindow::on_edges_color_clicked() {
-  qDebug() << "edges_color";
+  // qDebug() << "edges_color";
   QColor edges_color =
       QColorDialog::getColor(Qt::white, ui->edges_tab, "Choose edges color");
   if (edges_color.isValid()) {
@@ -363,19 +388,19 @@ void MainWindow::on_edges_size_valueChanged(int value) {
 }
 
 void MainWindow::on_vert_none_clicked() {
-  qDebug() << "vert_none";
+  // qDebug() << "vert_none";
   ui->GLWidget->vert_type = 0;
   ui->GLWidget->update();
 }
 
 void MainWindow::on_vert_circle_clicked() {
-  qDebug() << "vert_circle";
+  // qDebug() << "vert_circle";
   ui->GLWidget->vert_type = 1;
   ui->GLWidget->update();
 }
 
 void MainWindow::on_vert_square_clicked() {
-  qDebug() << "vert_square";
+  // qDebug() << "vert_square";
   ui->GLWidget->vert_type = 2;
   ui->GLWidget->update();
 }
