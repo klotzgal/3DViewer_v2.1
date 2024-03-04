@@ -6,6 +6,8 @@
 #include "../Model/model.h"
 // #include "../Model/affine.h"
 
+namespace s21 {
+
 class Controller {
  public:
   explicit Controller(Model* model) : model_(model) {}
@@ -45,5 +47,7 @@ class Controller {
  private:
   Model* model_;
 };
+
+}  // namespace s21
 
 #endif  // CPP4_3DVIEWER_V2_0_SRC_MODEL_CONTROLLER_H

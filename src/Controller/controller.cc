@@ -1,5 +1,7 @@
 #include "controller.h"
 
+namespace s21 {
+
 void Controller::scale(double k) {
   Scale s;
   model_->changeModel(&s, k);
@@ -42,3 +44,5 @@ void Controller::rotate(double x, double y, double z) {
     delete m;
   }
 }
+
+}  // namespace s21

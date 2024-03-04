@@ -4,7 +4,7 @@
 #include "ui_mainwindow.h"
 // #include <QFontDatabase>
 
-MainWindow::MainWindow(QWidget *parent, Controller *controller)
+MainWindow::MainWindow(QWidget *parent, s21::Controller *controller)
     : QMainWindow{parent}, ui(new Ui::MainWindow), controller_(controller) {
   ui->setupUi(this);
   ui->GLWidget->setController(controller_);

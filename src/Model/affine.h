@@ -7,6 +7,7 @@
 #define M_PI 3.14159265358979323846
 #endif  // M_PI
 
+namespace s21 {
 class IStrategy {
  public:
   virtual ~IStrategy() = default;
@@ -54,5 +55,7 @@ class RotateZ : public IStrategy {
   RotateZ() = default;
   void exec(Parser::data &data, double value) override;
 };
+
+}  // namespace s21
 
 #endif  // CPP4_3DVIEWER_V2_0_SRC_MODEL_AFFINE_H

@@ -1,6 +1,6 @@
 ﻿#include "glwidget.h"
 
-MyGLWidget::MyGLWidget(QWidget *parent, Controller *controller)
+MyGLWidget::MyGLWidget(QWidget *parent, s21::Controller *controller)
     : QOpenGLWidget{parent}, controller_(controller) {}
 
 MyGLWidget::~MyGLWidget() {}
@@ -150,7 +150,7 @@ void MyGLWidget::cordMode() {
 void MyGLWidget::parseObj() {
   try {
     controller_->parse();
-    controller_->print();
+    // controller_->print();
   } catch (const std::exception &e) {
     std::cerr << e.what() << "parse Error" << '\n';
     QMessageBox warning = QMessageBox();
@@ -171,8 +171,8 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *event) {
   // qDebug() << delta.x() * 0.5 << delta.y() * 0.5;
   if (select_light) {
     if (event->buttons() & Qt::LeftButton) {
-      light_pos[0] -= delta.x() * 0.002;
-      light_pos[1] += delta.y() * 0.002;
+      light_pos[0] -= delta.x() * 0.005;
+      light_pos[1] += delta.y() * 0.005;
     }
   } else if (!controller_->isEmpty()) {
     if (event->buttons() & Qt::LeftButton) {

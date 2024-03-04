@@ -1,4 +1,4 @@
-.PHONY: all install uninstall dvi dist test gcov_report valgrind_check style_check format_style fonts clean fclean
+.PHONY: all install uninstall dvi dist test style_check format_style valgrind clean fclean
 TARGET = 3DViewer
 
 CC = gcc
@@ -36,14 +36,15 @@ uninstall:
 	@echo "Uninstall completed successfully"
 
 dvi:
-	@open ../README_RUS.md
+	@open ../../README.md
 
 dist:
+ifeq ("", "$(wildcard ../release-build)")
+	@mkdir ../release-build
+	@cmake -B ../release-build -S . && make -C ../release-build
+endif
 	@mkdir -p ../dist
-	@cp -R ../release-build/bin/$(TARGET)* ../dist
-# @cp ../README_RUS.md ../dist && cp ../README.md ../dist
-	@cd ../dist && tar cvzf $(TARGET)_v2.0.tgz *
-	@cd ../dist && rm -rf $(TARGET)* README.md README_RUS.md
+	@cd ../dist && tar cvzf $(TARGET)_v2.0.tgz ../release-build/bin/$(TARGET)*
 	@echo "The build was successfully archived"
 
 test:
@@ -83,10 +84,3 @@ clean:
 
 fclean: clean
 	@rm -rf ../build ../dist ~/Desktop/$(TARGET).app unit_tests_vg.log 
-
-cmake:
-	@mkdir -p ../build
-	@cmake -B ../build -S ..  && make -C ../build && ./../build/bin/main
-
-valgrind:
-	CK_FORK=no valgrind --trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --verbose --log-file=valgrind.txt ./../release-build/bin/3DViewer

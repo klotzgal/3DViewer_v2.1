@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 
+namespace s21 {
 class Parser {
  public:
   Parser() {}
@@ -76,5 +77,7 @@ class Parser {
   void cleanData(data *data);
   void normalizeVertices(data *data);
 };
+
+}  // namespace s21
 
 #endif  // CPP4_3DVIEWER_V2_0_SRC_MODEL_PARSER_H

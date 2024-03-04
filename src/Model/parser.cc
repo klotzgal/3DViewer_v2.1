@@ -1,5 +1,7 @@
 #include "parser.h"
 
+namespace s21 {
+
 void Parser::parse(const std::string filename, data *data) {
   setlocale(LC_NUMERIC, "C");
   std::ifstream file(filename);
@@ -77,3 +79,5 @@ void Parser::normalizeVertices(data *data) {
     }
   }
 }
+
+}  // namespace s21

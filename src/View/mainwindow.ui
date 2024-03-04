@@ -1469,7 +1469,7 @@ border: none;</string>
                 <string notr="true"/>
                </property>
                <attribute name="title">
-                <string>Color</string>
+                <string>Scene</string>
                </attribute>
                <layout class="QVBoxLayout" name="verticalLayout_13">
                 <item>

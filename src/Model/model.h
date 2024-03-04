@@ -6,6 +6,7 @@
 #include "affine.h"
 #include "parser.h"
 
+namespace s21 {
 class Model {
  public:
   using data = Parser::data;
@@ -59,5 +60,7 @@ class Model {
   Model(const Model &) = delete;
   Model &operator=(const Model &) = delete;
 };
+
+}  // namespace s21
 
 #endif  // CPP4_3DVIEWER_V2_0_SRC_MODEL_MODEL_H

@@ -23,7 +23,7 @@
 class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
  public:
   explicit MyGLWidget(QWidget *parent = Q_NULLPTR,
-                      Controller *controller = nullptr);
+                      s21::Controller *controller = nullptr);
 
   /* 3D MODEL DATA START */
   GLdouble scale_val = 1;
@@ -49,7 +49,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   QColor edges_color;
   /* 3D MODEL DATA END  */
 
-  void setController(Controller *controller) { controller_ = controller; }
+  void setController(s21::Controller *controller) { controller_ = controller; }
 
   // OPENGL
   void initializeGL() override;
@@ -74,7 +74,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
   void buildLines();
   void buildPoints();
   void cordMode();
-  Controller *controller_;
+  s21::Controller *controller_;
 
  signals:
 };

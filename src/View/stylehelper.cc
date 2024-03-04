@@ -1,9 +1,9 @@
 ﻿#include "stylehelper.h"
 
 QString StyleHelper::getButtonDarkStyle() {
-  return  "border-radius: 5%;"
-          "color: transparent;"
-          "background-color: #222324;";
+  return "border-radius: 5%;"
+         "color: transparent;"
+         "background-color: #222324;";
 }
 
 QString StyleHelper::getFrameDarkStyle() {
@@ -64,9 +64,9 @@ QString StyleHelper::getDarkGLframe() {
 }
 
 QString StyleHelper::getButtonLightStyle() {
-  return  "border-radius: 5%;"
-          "color: transparent;"
-          "background-color: #E2E3E5;";
+  return "border-radius: 5%;"
+         "color: transparent;"
+         "background-color: #E2E3E5;";
 }
 
 QString StyleHelper::getFrameLightStyle() {

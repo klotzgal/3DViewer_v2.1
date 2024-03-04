@@ -1,5 +1,7 @@
 #include "affine.h"
 
+namespace s21 {
+
 void Scale::exec(Parser::data &data, double value) {
   if (value == 0) {
     return;
@@ -74,3 +76,5 @@ void RotateZ::exec(Parser::data &data, double value) {
     data.averaged_normals[i + 1] = -X * sinl(value) + Y * cosl(value);
   }
 }
+
+}  // namespace s21

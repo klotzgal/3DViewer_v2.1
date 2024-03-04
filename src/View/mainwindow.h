@@ -21,7 +21,7 @@ class MainWindow : public QMainWindow {
   Q_OBJECT
  public:
   explicit MainWindow(QWidget *parent = nullptr,
-                      Controller *controller = nullptr);
+                      s21::Controller *controller = nullptr);
 
   ~MainWindow();
 
@@ -80,7 +80,7 @@ class MainWindow : public QMainWindow {
 
  private:
   Ui::MainWindow *ui;
-  Controller *controller_;
+  s21::Controller *controller_;
   QSettings *settings_;
   QString gif_name_;
   QGifImage *gif_ = nullptr;

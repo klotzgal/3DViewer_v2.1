@@ -5,6 +5,7 @@
 #include "../Model/affine.h"
 #include "../Model/model.h"
 
+namespace s21 {
 Model *Model::instance_ = nullptr;
 #ifdef __APPLE__
 namespace fs = std::__fs::filesystem;
@@ -274,3 +275,4 @@ int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
+}  // namespace
