@@ -1,4 +1,4 @@
-# 3DViewer v2.0
+# 3DViewer v2.1
 
 This project is part of the curriculum of [School 21](https://21-school.ru/). Based on the task, a 3DViewer program was implemented to view 3D wireframes, as well as various transformations and movements using affine transformations. The program was written in pure C++, following the principles of OOP, and the Qt framework was used for the user interface (UI).
 
