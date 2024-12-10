@@ -63,16 +63,20 @@ void MyGLWidget::setLightning() {
   glPushMatrix();
   glDisable(GL_LIGHTING);
   glEnable(GL_POINT_SMOOTH);
+
   glEnableClientState(GL_VERTEX_ARRAY);
   glVertexPointer(3, GL_FLOAT, 0, &light_pos);
   glColor3f(light_color.redF(), light_color.greenF(), light_color.blueF());
   glPointSize(20);
+
   glDrawArrays(GL_POINTS, 0, 1);
   glDisableClientState(GL_VERTEX_ARRAY);
+  glDisable(GL_POINT_SMOOTH);
   glPopMatrix();
+
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  glEnable(GL_DEPTH_TEST);
+
   glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
   glEnable(GL_COLOR_MATERIAL);
@@ -97,7 +101,7 @@ void MyGLWidget::buildPoints() {
 
   glDrawArrays(GL_POINTS, 0, controller_->getVertices().size() / 3);
 
-  if (this->vert_type == 1) {
+  if (vert_type == 1) {
     glDisable(GL_POINT_SMOOTH);
   }
 }

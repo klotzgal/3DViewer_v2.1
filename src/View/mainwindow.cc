@@ -388,19 +388,19 @@ void MainWindow::on_edges_size_valueChanged(int value) {
 }
 
 void MainWindow::on_vert_none_clicked() {
-  // qDebug() << "vert_none";
+  // std::cout << "vert_none\n";
   ui->GLWidget->vert_type = 0;
   ui->GLWidget->update();
 }
 
 void MainWindow::on_vert_circle_clicked() {
-  // qDebug() << "vert_circle";
+  // std::cout << "vert_circle\n";
   ui->GLWidget->vert_type = 1;
   ui->GLWidget->update();
 }
 
 void MainWindow::on_vert_square_clicked() {
-  // qDebug() << "vert_square";
+  // std::cout << "vert_square\n";
   ui->GLWidget->vert_type = 2;
   ui->GLWidget->update();
 }

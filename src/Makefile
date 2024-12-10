@@ -55,7 +55,7 @@ endif
 	@echo "» Unit test results:"
 	@ctest --output-on-failure --test-dir ../release-build
 
-style_check:
+check:
 	@echo "┏=========================================┓"
 	@echo "┃  Checking your code for Google Style    ┃"
 	@echo "┗=========================================┛"
@@ -63,7 +63,7 @@ style_check:
 	@clang-format -n **/*.cc **/*.h 
 	@rm ./.clang-format
 
-format_style:
+format:
 	@echo "┏=========================================┓"
 	@echo "┃  Formatting your code for Google Style  ┃"
 	@echo "┗=========================================┛"
@@ -80,7 +80,7 @@ valgrind: ../release-build/bin/3DViewer
 
 clean:
 	@rm -rf tests/logs/*.log tests/$(TEST_MODUlES) *.dSYM **/*.dSYM report test_coverage.info
-	@cmake --build ../build/ --target clean
+	@cmake --build ../release-build/ --target clean
 
 fclean: clean
-	@rm -rf ../build ../dist ~/Desktop/$(TARGET).app unit_tests_vg.log 
+	@rm -rf ../release-build ../dist ~/Desktop/$(TARGET).app unit_tests_vg.log 
