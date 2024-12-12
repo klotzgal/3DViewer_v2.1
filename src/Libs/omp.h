@@ -381,7 +381,7 @@ typedef enum {
   omp_atv_blocked = 17,
   omp_atv_interleaved = 18
 } omp_alloctrait_value_t;
-#define omp_atv_default ((omp_uintptr_t)-1)
+#define omp_atv_default ((omp_uintptr_t) - 1)
 
 typedef struct {
   omp_alloctrait_key_t key;
